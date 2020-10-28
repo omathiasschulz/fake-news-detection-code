@@ -4,19 +4,13 @@ import pandas as pd
 from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
 from gensim import utils
-import nltk
-nltk.download('stopwords')
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import seaborn as sns
 from wordcloud import WordCloud
 
 VECTOR_DIMENSION = 300
 
 def constructSentences(data):
     '''
-    Método que realiza a construção do array de sentenças que será utilizado no gensim doc2vec
+    Método que realiza a construção do array de sentenças que será utilizado no doc2vec
     '''
     sentences = []
     for index, row in data.iteritems():
@@ -24,23 +18,19 @@ def constructSentences(data):
         sentences.append(TaggedDocument(utils.to_unicode(row).split(), [str(index)]))
     return sentences
 
-def dataProcessing(data, vector_dimension=300):
+def dataProcessing(data):
     '''
     Método responsável por realizar o processamento dos textos convertendo o texto para o formato numérico
     '''
-    # Realiza a limpeza de cada registro
-    for i in range(len(data)):
-        data.loc[i, 'text'] = textClean(data.loc[i,'text'])
-
     # Realiza a construção das sentenças
     x = constructSentences(data['text'])
-    y = data['label'].values
+    y = data['fake_news'].values
 
     # Modelo Doc2Vec
     model = Doc2Vec (
         min_count=1, 
         window=5, 
-        vector_size=vector_dimension, 
+        vector_size=VECTOR_DIMENSION, 
         sample=1e-4, 
         negative=5, 
         workers=7, 
@@ -48,10 +38,11 @@ def dataProcessing(data, vector_dimension=300):
         seed=1
     )
     model.build_vocab(x)
-    model.train(x, total_examples=model.corpus_count, epochs=model.iter)
+    model.train(x, total_examples=model.corpus_count, epochs=model.epochs)
 
     # Converte os dados numéricos para um array numpy
-    x = np.zeros((len(model.docvecs), vector_dimension), dtype=float)
+    # TODO ajustar o x
+    x = np.zeros((len(model.docvecs), VECTOR_DIMENSION), dtype=float)
     for i in range(len(model.docvecs)):
         x[i] = model.docvecs[str(i)]
 
@@ -62,15 +53,32 @@ try:
     inicio = time.time()
 
     # Realiza a leitura do CSV
-    df = pd.read_csv('dataset_text.csv', index_col=0)
+    # df = pd.read_csv('dataset_text.csv', index_col=0)
+    df = pd.read_csv('dataset_text_10_news.csv', index_col=0)
 
-    # x, y = dataProcessing(data, VECTOR_DIMENSION)
+    x, y = dataProcessing(df)
 
+    print('\nx')
+    print(x)
 
+    print('\ny')
+    print(y)
+    
+    columns = ['fake_news', 'text']
+    df = pd.DataFrame(columns = columns)
+
+    # df.append()
+    # news = {**{'ID': i, 'fake_news': fake_news, 'text': text}, **metadata}
+
+    # for news, key in x.items():
+    #     print(key)
+    #     # df.append(news)
+
+    # df = df.append(dict(zip(df.columns, x)), ignore_index=True)
+
+    print(df.head())
 
     # https://www.kaggle.com/atishadhikari/fake-news-cleaning-word2vec-lstm-99-accuracy
-
-
 
     # # Realiza a criação do novo CSV
     # df.to_csv('dataset_processed.csv')
