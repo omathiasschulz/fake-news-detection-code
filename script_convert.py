@@ -4,7 +4,6 @@ import pandas as pd
 from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
 from gensim import utils
-from wordcloud import WordCloud
 
 VECTOR_DIMENSION = 300
 
@@ -45,15 +44,20 @@ def generateCSV(df, model):
     '''
     Método responsável por realizar a geração do CSV com os textos em representação numérica
     '''
+    words = {}
     # Cria o novo dataframe
     df_converted = pd.DataFrame()
-
     # Itera em cada notícia e realiza a inserção no CSV
     for i in range(len(model.docvecs)):
+        # Converte o array de palavras do texto para um dicionário
+
+        words = { f'word_{j}' : model.docvecs.vectors_docs[i][j] for j in range(VECTOR_DIMENSION) }
+        # Adicionado o dicionário junto com as outras props
         df_converted = df_converted.append(
-            {'ID': df['ID'][i], 'fake_news': df['fake_news'][i], 'text': model.docvecs[i]}, 
+            {'ID': df['ID'][i], 'fake_news': df['fake_news'][i], **words},
             ignore_index=True,
         )
+        words = {}
 
     # Realiza a criação do novo CSV
     df_converted.to_csv('dataset_converted.csv')
