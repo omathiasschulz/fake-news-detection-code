@@ -45,19 +45,25 @@ def generateCSV(df, model):
     Método responsável por realizar a geração do CSV com os textos em representação numérica
     '''
     words = {}
+    # Realiza a criação das colunas do novo CSV
+    columns = ['ID', 'fake_news', *[f'word_{i}' for i in range(VECTOR_DIMENSION)]]
+
     # Cria o novo dataframe
-    df_converted = pd.DataFrame()
+    df_converted = pd.DataFrame(columns = columns)
     # Itera em cada notícia e realiza a inserção no CSV
     for i in range(len(model.docvecs)):
         # Converte o array de palavras do texto para um dicionário
-
         words = { f'word_{j}' : model.docvecs.vectors_docs[i][j] for j in range(VECTOR_DIMENSION) }
+
         # Adicionado o dicionário junto com as outras props
         df_converted = df_converted.append(
             {'ID': df['ID'][i], 'fake_news': df['fake_news'][i], **words},
             ignore_index=True,
         )
         words = {}
+
+    # Realiza as conversão de algumas colunas para valores inteiros
+    df_converted[['ID', 'fake_news']] = df_converted[['ID', 'fake_news']].astype('int64')
 
     # Realiza a criação do novo CSV
     df_converted.to_csv('dataset_converted.csv')
@@ -67,8 +73,7 @@ try:
     inicio = time.time()
 
     # Realiza a leitura do CSV
-    # df = pd.read_csv('dataset_text.csv', index_col=0)
-    df = pd.read_csv('dataset_text_10_news.csv', index_col=0)
+    df = pd.read_csv('dataset_text.csv', index_col=0)
 
     # Realiza o conversão dos textos para representação numérica
     print('Realizando a conversão dos textos para representação numérica... ')
