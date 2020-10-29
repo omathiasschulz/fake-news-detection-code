@@ -18,15 +18,14 @@ def constructSentences(data):
         sentences.append(TaggedDocument(utils.to_unicode(row).split(), [str(index)]))
     return sentences
 
-def dataProcessing(data):
+def dataProcessing(df):
     '''
     Método responsável por realizar o processamento dos textos convertendo o texto para o formato numérico
     '''
     # Realiza a construção das sentenças
-    x = constructSentences(data['text'])
-    y = data['fake_news'].values
+    x = constructSentences(df['text'])
 
-    # Modelo Doc2Vec
+    # Monta o modelo Doc2Vec
     model = Doc2Vec (
         min_count=1, 
         window=5, 
@@ -40,13 +39,24 @@ def dataProcessing(data):
     model.build_vocab(x)
     model.train(x, total_examples=model.corpus_count, epochs=model.epochs)
 
-    # Converte os dados numéricos para um array numpy
-    # TODO ajustar o x
-    x = np.zeros((len(model.docvecs), VECTOR_DIMENSION), dtype=float)
-    for i in range(len(model.docvecs)):
-        x[i] = model.docvecs[str(i)]
+    return model
 
-    return x, y
+def generateCSV(df, model):
+    '''
+    Método responsável por realizar a geração do CSV com os textos em representação numérica
+    '''
+    # Cria o novo dataframe
+    df_converted = pd.DataFrame()
+
+    # Itera em cada notícia e realiza a inserção no CSV
+    for i in range(len(model.docvecs)):
+        df_converted = df_converted.append(
+            {'ID': df['ID'][i], 'fake_news': df['fake_news'][i], 'text': model.docvecs[i]}, 
+            ignore_index=True,
+        )
+
+    # Realiza a criação do novo CSV
+    df_converted.to_csv('dataset_converted.csv')
 
 try:
     print('Iniciando a conversão do dataset para representação numérica')
@@ -56,32 +66,13 @@ try:
     # df = pd.read_csv('dataset_text.csv', index_col=0)
     df = pd.read_csv('dataset_text_10_news.csv', index_col=0)
 
-    x, y = dataProcessing(df)
+    # Realiza o conversão dos textos para representação numérica
+    print('Realizando a conversão dos textos para representação numérica... ')
+    model = dataProcessing(df)
 
-    print('\nx')
-    print(x)
-
-    print('\ny')
-    print(y)
-    
-    columns = ['fake_news', 'text']
-    df = pd.DataFrame(columns = columns)
-
-    # df.append()
-    # news = {**{'ID': i, 'fake_news': fake_news, 'text': text}, **metadata}
-
-    # for news, key in x.items():
-    #     print(key)
-    #     # df.append(news)
-
-    # df = df.append(dict(zip(df.columns, x)), ignore_index=True)
-
-    print(df.head())
-
-    # https://www.kaggle.com/atishadhikari/fake-news-cleaning-word2vec-lstm-99-accuracy
-
-    # # Realiza a criação do novo CSV
-    # df.to_csv('dataset_processed.csv')
+    # Realiza a geração do CSV
+    print('Realizando a geração do CSV... ')
+    generateCSV(df, model)
 
     fim = time.time()
     print('CSV com o texto formatado criado com sucesso! ')
