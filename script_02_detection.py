@@ -140,6 +140,7 @@ def mlp(x_train, x_val, x_test, y_train, y_val, y_test):
     plt.ylabel('RMSE')
     plt.legend(['Treinamento', 'Validação'], loc='upper left')
     plt.savefig('graphics/mlp_rmse.png')
+    plt.close()
 
     plt.plot(history.history['mape'])
     plt.plot(history.history['val_mape'])
@@ -148,6 +149,7 @@ def mlp(x_train, x_val, x_test, y_train, y_val, y_test):
     plt.ylabel('MAPE')
     plt.legend(['Treinamento', 'Validação'], loc='upper left')
     plt.savefig('graphics/mlp_mape.png')
+    plt.close()
 
     plt.plot(history.history['accuracy'])
     plt.plot(history.history['val_accuracy'])
@@ -156,6 +158,7 @@ def mlp(x_train, x_val, x_test, y_train, y_val, y_test):
     plt.ylabel('R2')
     plt.legend(['Treinamento', 'Validação'], loc='upper left')
     plt.savefig('graphics/mlp_r2.png')
+    plt.close()
 
 def lstm():
     # LSTM

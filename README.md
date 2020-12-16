@@ -1,4 +1,4 @@
-# fake-news-detection-code
+# fake-news-detection-code :newspaper:
 
 Detecção de Fake News utilizando os modelos de Redes Neurais Artificiais MLP (Multilayer perceptron) e LSTM (Long short-term memory)
 
@@ -38,14 +38,16 @@ Tempo de execução: 1.10 minutos
 
 ## Detection
 
-The detection of false and true news is carried out using script `script_detection.py`
+A detecção das falsas e verdadeiras notícias é realizado utilizando o script `script_02_detection.py`
 
-To create the detection, in the project folder type:
+Para criar a detecção do dataset, na pasta raiz do projeto digite:
 
-`python3 script_detection.py`
+`python3 script_02_detection.py`
 
-**Time to generate the detection:**
+Esse script também realiza a criação das imagems da pasta `graphics`
 
-Runtime: XXXX minutes
+As imagems são gráficos de métricas para avaliar o desempenho da detecção
 
-The script also creates the images in the `grapihcs` folder, the images are graphics of the quality detection metrics of the model detection
+**Resultados**
+
+Tempo de execução: 0.88 minutos
