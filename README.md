@@ -1,36 +1,40 @@
 # fake-news-detection-code
 
-Fake News detection using MLP (Multilayer perceptron) and LSTM (Long short-term memory) Artificial Neural Networks
+Detecção de Fake News utilizando os modelos de Redes Neurais Artificiais MLP (Multilayer perceptron) e LSTM (Long short-term memory)
 
-## Install dependencies
+## Instalar as dependências
 
-To install the dependencies, in the project folder just type
+**Obs:** Para rodar os scripts utilize o Python 3
+
+Para instalar as dependências do projeto, na pasta raiz do projeto digite:
 
 `pip3 install -r requirements.txt`
 
 ## Datasets
 
-This project has two datasets
+O projeto possui dois datasets, apresentados abaixo:
 
-### Dataset text
+### Dataset em formato de texto
 
-The `dataset_text.csv` is the dataset with news in text format and is available at [fake-new-dataset](https://github.com/mathiasarturschulz/fake-news-dataset)
+O `dataset.csv` é um dataset com as notícias em formato de texto
 
-### Dataset Converted
+O dataset está disponível em [fake-new-dataset](https://github.com/mathiasarturschulz/fake-news-dataset)
 
-The `dataset_converted.csv` is the dataset with the news converted to numerical representation
+### Dataset em formato numérico
 
-Neural network models work only with numbers, this was the reason for the conversion
+O `dataset_converted.csv` é um dataset com as notícias convertidas para representação numérica gerado a partir do script `script_01_convert.py`
 
-The conversion is performed through the Gensim library using the Doc2Vec model
+Os modelos de Redes Neurais Artificiais apenas trabalham com números, por isso deve ser realizado a conversão
 
-To create the dataset, in the project folder type:
+O conversão é realizada com o auxílio da biblioteca [Gensim](https://radimrehurek.com/gensim/) utilizando o modelo Doc2Vec
 
-`python3 script_convert.py`
+Para criar o dataset, na pasta raiz do projeto digite:
 
-**Time to generate the CSV:**
+`python3 script_01_convert.py`
 
-Runtime: XXXX minutes
+**Resultados**
+
+Tempo de execução: 1.10 minutos
 
 ## Detection
 

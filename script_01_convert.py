@@ -1,5 +1,4 @@
 import time
-import numpy as np
 import pandas as pd
 from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
@@ -73,7 +72,7 @@ try:
     inicio = time.time()
 
     # Realiza a leitura do CSV
-    df = pd.read_csv('dataset_text.csv', index_col=0)
+    df = pd.read_csv('dataset.csv', index_col=0)
 
     # Realiza o conversão dos textos para representação numérica
     print('Realizando a conversão dos textos para representação numérica... ')
