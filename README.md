@@ -34,7 +34,7 @@ Para criar o dataset, na pasta raiz do projeto digite:
 
 **Resultados**
 
-Tempo de execução: 1.10 minutos
+Tempo de execução: 0.61 minutos
 
 ## Detection
 
@@ -50,4 +50,4 @@ As imagems são gráficos de métricas para avaliar o desempenho da detecção
 
 **Resultados**
 
-Tempo de execução: 0.88 minutos
+Tempo de execução: 0.46 minutos
