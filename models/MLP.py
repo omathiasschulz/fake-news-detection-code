@@ -2,11 +2,18 @@ import time
 import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.metrics import mean_squared_error
 from keras.models import Sequential
 from keras.layers import Dense
 from pathlib import Path
+from keras import backend
 matplotlib.use('Agg')
+
+
+def rmseMetric(y_true, y_pred):
+    """
+    Método responsável por realizar o cálculo do RMSE
+    """
+    return backend.sqrt(backend.mean(backend.square(y_pred - y_true), axis=-1))
 
 
 class MLP:
@@ -75,7 +82,7 @@ class MLP:
         self.model.compile(
             loss='binary_crossentropy',
             optimizer='adam',
-            metrics=['accuracy', mean_squared_error, 'mape'],
+            metrics=['accuracy', rmseMetric, 'mape'],
         )
 
     def __train(self):
@@ -87,7 +94,8 @@ class MLP:
             self.data['y_train'],
             epochs=self.epochs,
             batch_size=self.batch_size,
-            validation_data=(self.data['x_val'], self.data['y_val'])),
+            validation_data=(self.data['x_val'], self.data['y_val'])
+        )
         return history
 
     def __test(self):
@@ -98,11 +106,11 @@ class MLP:
         loss, accuracy_model, rmse, mape = self.model.evaluate(self.data['x_test'], self.data['y_test'])
 
         # gera as detecções se cada notícia é fake ou não
-        detections = self.model.predict(self.data['x_data'])
+        detections = self.model.predict(self.data['x'])
 
         # ajusta as detecções
         rounded = [round(x[0]) for x in detections]
-        accuracy_detection = np.mean(rounded == self.data['y_data'])
+        accuracy_detection = np.mean(rounded == self.data['y'])
 
         return loss, accuracy_model, rmse, mape, accuracy_detection
 
@@ -152,8 +160,8 @@ class MLP:
         # Apresentação dos gráficos de treinamento e validação da rede
         Path('graphics').mkdir(parents=True, exist_ok=True)
 
-        plt.plot(history.history['rmse'])
-        plt.plot(history.history['val_rmse'])
+        plt.plot(history.history['rmseMetric'])
+        plt.plot(history.history['val_rmseMetric'])
         plt.title('RMSE - Treinamento e validação')
         plt.xlabel('Épocas')
         plt.ylabel('RMSE')
@@ -192,11 +200,11 @@ class MLP:
         print('Treinando e validando o modelo o modelo... ')
         history = self.__train()
 
-        # print('Testando o modelo o modelo... ')
-        # loss, accuracy_model, rmse, mape, accuracy_detection = self.__test()
-        #
-        # print('Resultados: ')
-        # self.__result(history, loss, accuracy_model, rmse, mape, accuracy_detection)
+        print('Testando o modelo o modelo... ')
+        loss, accuracy_model, rmse, mape, accuracy_detection = self.__test()
+
+        print('Resultados: ')
+        self.__result(history, loss, accuracy_model, rmse, mape, accuracy_detection)
 
         fim = time.time()
         print('Detecção de fake news realizada com sucesso! ')
