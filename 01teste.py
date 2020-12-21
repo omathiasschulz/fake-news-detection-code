@@ -1,6 +1,7 @@
 from models.MLP import MLP
 
 VECTOR_DIMENSION = 300
+EPOCHS = 150
 
 # monta o modelo MLP
 layers = [
@@ -21,5 +22,17 @@ layers = [
     },
 ]
 
-model_mlp = MLP(VECTOR_DIMENSION, layers)
-model_mlp.predict()
+# model_mlp = MLP(VECTOR_DIMENSION, EPOCHS, layers)
+
+data = {
+    x,
+    x_train,
+    x_val,
+    x_test,
+    y,
+    y_train,
+    y_val,
+    y_test,
+}
+
+# model_mlp.predict()
