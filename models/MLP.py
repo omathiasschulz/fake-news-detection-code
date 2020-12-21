@@ -3,6 +3,17 @@ from keras.models import Sequential
 from keras.layers import Dense
 from sklearn.metrics import mean_squared_error
 
+import time
+import matplotlib
+import pandas as pd
+import matplotlib.pyplot as plt
+from keras import backend
+from keras.models import Sequential
+from keras.layers import Dense
+from sklearn.model_selection import train_test_split
+from pathlib import Path
+matplotlib.use('Agg')
+
 
 class MLP:
     """
@@ -101,13 +112,85 @@ class MLP:
 
         return loss, accuracy_model, rmse, mape, accuracy_detection
 
+    def __result(self, history, loss, accuracy_model, rmse, mape, accuracy_detection):
+
+        # Quanto menor a perda, mais próximas nossas previsões são dos rótulos verdadeiros.
+        print('## Métricas')
+        print('Loss: %.2f' % loss)
+        print('R2: %.2f%%' % (accuracy_model * 100))
+        print('R2 Detecções: %.2f%%' % (accuracy_detection * 100))
+        print('MAPE: %.2f' % mape)
+        print('RMSE: %.2f' % rmse)
+
+        print('## Quantidades')
+        print('QTD registros: %i ' % len(self.data['x']))
+        print('QTD registros treino: %i ' % len(self.data['x_train']))
+        print('QTD registros validação: %i ' % len(self.data['x_val']))
+        print('QTD registros teste: %i ' % len(self.data['x_test']))
+        print('QTD Épocas: %i' % self.epochs)
+
+        # print('QTD neurônios camada de entrada: %i' % model_mlp['input_layer_quantity_neuron'])
+        # print('QTD neurônios camadas intermediárias: %i' % model_mlp['hidden_layer_quantity_neuron'])
+        # print('QTD de camadas intermediárias: %i' % model_mlp['hidden_layer_quantity'])
+        # print('QTD de camadas intermediárias: %i' % model_mlp['hidden_layer_quantity'])
+        #
+        # print('## Funções de ativação ')
+        # print('Camada de entrada: %s' % model_mlp['activation_function_input'])
+        # print('Camada intermediária 01: %s' % model_mlp['activation_function_intermediary_01'])
+        # print('Camada de saída: %s' % model_mlp['activation_function_output'])
+
+        # Apresentação dos gráficos de treinamento e validação da rede
+        Path('graphics').mkdir(parents=True, exist_ok=True)
+
+        plt.plot(history.history['rmse'])
+        plt.plot(history.history['val_rmse'])
+        plt.title('RMSE - Treinamento e validação')
+        plt.xlabel('Épocas')
+        plt.ylabel('RMSE')
+        plt.legend(['Treinamento', 'Validação'], loc='upper left')
+        plt.savefig('graphics/mlp_rmse.png')
+        plt.close()
+
+        plt.plot(history.history['mape'])
+        plt.plot(history.history['val_mape'])
+        plt.title('MAPE')
+        plt.xlabel('Épocas')
+        plt.ylabel('MAPE')
+        plt.legend(['Treinamento', 'Validação'], loc='upper left')
+        plt.savefig('graphics/mlp_mape.png')
+        plt.close()
+
+        plt.plot(history.history['accuracy'])
+        plt.plot(history.history['val_accuracy'])
+        plt.title('R2 - Treinamento e validação')
+        plt.xlabel('Épocas')
+        plt.ylabel('R2')
+        plt.legend(['Treinamento', 'Validação'], loc='upper left')
+        plt.savefig('graphics/mlp_r2.png')
+        plt.close()
+
     def predict(self):
+        """
+        Método que realiza todas as etapas para detecção de Fake News com o modelo MLP
+        """
         try:
-            # cria o modelo
+            print('Iniciando a detecção de fake news com o modelo MLP... ')
+            inicio = time.time()
+
+            print('Criando o modelo... ')
             self.__create_model()
-            # treina e valida o modelo
+
+            print('Treinando e validando o modelo o modelo... ')
             history = self.__train()
-            # testa o modelo
+
+            print('Testando o modelo o modelo... ')
             loss, accuracy_model, rmse, mape, accuracy_detection = self.__test()
+
+            print('Resultados: ')
+            self.__result(history, loss, accuracy_model, rmse, mape, accuracy_detection)
+
+            fim = time.time()
+            print('Detecção de fake news realizada com sucesso! ')
+            print('Tempo de execução: %f minutos' % ((fim - inicio) / 60))
         except Exception as e:
-            print('Falha ao realizar o predict! \n%s' % str(e))
+            print('Falha ao realizar o predict com o modelo MLP! \n%s' % str(e))
