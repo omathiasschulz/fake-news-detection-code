@@ -183,24 +183,21 @@ class MLP:
         """
         Método que realiza todas as etapas para detecção de Fake News com o modelo MLP
         """
-        try:
-            print('Iniciando a detecção de fake news com o modelo MLP... ')
-            inicio = time.time()
+        print('Iniciando a detecção de fake news com o modelo MLP... ')
+        inicio = time.time()
 
-            print('Criando o modelo... ')
-            self.__create_model()
+        print('Criando o modelo... ')
+        self.__create_model()
 
-            print('Treinando e validando o modelo o modelo... ')
-            history = self.__train()
+        print('Treinando e validando o modelo o modelo... ')
+        history = self.__train()
 
-            print('Testando o modelo o modelo... ')
-            loss, accuracy_model, rmse, mape, accuracy_detection = self.__test()
+        # print('Testando o modelo o modelo... ')
+        # loss, accuracy_model, rmse, mape, accuracy_detection = self.__test()
+        #
+        # print('Resultados: ')
+        # self.__result(history, loss, accuracy_model, rmse, mape, accuracy_detection)
 
-            print('Resultados: ')
-            self.__result(history, loss, accuracy_model, rmse, mape, accuracy_detection)
-
-            fim = time.time()
-            print('Detecção de fake news realizada com sucesso! ')
-            print('Tempo de execução: %f minutos' % ((fim - inicio) / 60))
-        except Exception as e:
-            print('Falha ao realizar o predict com o modelo MLP! \n%s' % str(e))
+        fim = time.time()
+        print('Detecção de fake news realizada com sucesso! ')
+        print('Tempo de execução: %f minutos' % ((fim - inicio) / 60))
