@@ -1,16 +1,10 @@
-import numpy as np
-from keras.models import Sequential
-from keras.layers import Dense
-from sklearn.metrics import mean_squared_error
-
 import time
 import matplotlib
-import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
-from keras import backend
+from sklearn.metrics import mean_squared_error
 from keras.models import Sequential
 from keras.layers import Dense
-from sklearn.model_selection import train_test_split
 from pathlib import Path
 matplotlib.use('Agg')
 
@@ -113,6 +107,22 @@ class MLP:
         return loss, accuracy_model, rmse, mape, accuracy_detection
 
     def __result(self, history, loss, accuracy_model, rmse, mape, accuracy_detection):
+        """
+        Método responsável por apresentar os resultados
+
+        :param history: Histórico da detecção
+        :type history: Tuple[Any]
+        :param loss: Perca
+        :type loss: float
+        :param accuracy_model: Acurácia do modelo
+        :type accuracy_model: float
+        :param rmse: RMSE
+        :type rmse: float
+        :param mape: MAPE
+        :type mape: float
+        :param accuracy_detection: Acurácia da detecção
+        :type accuracy_detection: ndarray
+        """
 
         # Quanto menor a perda, mais próximas nossas previsões são dos rótulos verdadeiros.
         print('## Métricas')
