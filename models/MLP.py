@@ -52,7 +52,8 @@ class MLP:
         """
         Método responsável por realizar a criação do modelo
         """
-        layers = self.layers
+        # passa as camadas para uma nova variável sem ser por referência
+        layers = self.layers[:]
 
         # valida se foram informados pelo menos 3 camadas: entrada, intermediária 01 e saída
         if len(layers) < 3:
@@ -131,31 +132,26 @@ class MLP:
         :param accuracy_detection: Acurácia da detecção
         :type accuracy_detection: ndarray
         """
+        print('=> Modelo MLP')
+        for key, layer in enumerate(self.layers):
+            print('Camada %i: ' % (key + 1), end='')
+            print('QTD Neurônios: %i; ' % layer['qtd_neurons'], end='')
+            print('Função de Ativação: %s; ' % layer['activation'])
 
-        # Quanto menor a perda, mais próximas nossas previsões são dos rótulos verdadeiros.
-        print('## Métricas')
-        print('Loss: %.2f' % loss)
-        print('R2: %.2f%%' % (accuracy_model * 100))
-        print('R2 Detecções: %.2f%%' % (accuracy_detection * 100))
-        print('MAPE: %.2f' % mape)
-        print('RMSE: %.2f' % rmse)
+        print('=> Métricas')
+        # quanto menor a perda, mais próximas nossas previsões são dos rótulos verdadeiros.
+        print('Loss: %.2f; ' % loss, end='')
+        print('R2: %.2f%%; ' % (accuracy_model * 100), end='')
+        print('R2 Detecções: %.2f%%; ' % (accuracy_detection * 100), end='')
+        print('MAPE: %.2f; ' % mape, end='')
+        print('RMSE: %.2f; ' % rmse)
 
-        print('## Quantidades')
-        print('QTD registros: %i ' % len(self.data['x']))
-        print('QTD registros treino: %i ' % len(self.data['x_train']))
-        print('QTD registros validação: %i ' % len(self.data['x_val']))
-        print('QTD registros teste: %i ' % len(self.data['x_test']))
-        print('QTD Épocas: %i' % self.epochs)
-
-        # print('QTD neurônios camada de entrada: %i' % model_mlp['input_layer_quantity_neuron'])
-        # print('QTD neurônios camadas intermediárias: %i' % model_mlp['hidden_layer_quantity_neuron'])
-        # print('QTD de camadas intermediárias: %i' % model_mlp['hidden_layer_quantity'])
-        # print('QTD de camadas intermediárias: %i' % model_mlp['hidden_layer_quantity'])
-        #
-        # print('## Funções de ativação ')
-        # print('Camada de entrada: %s' % model_mlp['activation_function_input'])
-        # print('Camada intermediária 01: %s' % model_mlp['activation_function_intermediary_01'])
-        # print('Camada de saída: %s' % model_mlp['activation_function_output'])
+        print('=> Quantidades')
+        print('Registros: %i; ' % len(self.data['x']), end='')
+        print('Registros treino: %i; ' % len(self.data['x_train']), end='')
+        print('Registros validação: %i; ' % len(self.data['x_val']), end='')
+        print('Registros teste: %i; ' % len(self.data['x_test']), end='')
+        print('Épocas: %i;' % self.epochs)
 
         # Apresentação dos gráficos de treinamento e validação da rede
         Path('graphics').mkdir(parents=True, exist_ok=True)
