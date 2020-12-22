@@ -37,6 +37,12 @@ data = {
     'y_test': y_test,
 }
 
+print('Quantidade de registros: %i ' % len(x))
+print('Quantidade de registros para treino: %i ' % len(x_train))
+print('Quantidade de registros para validação: %i ' % len(x_val))
+print('Quantidade de registros para teste: %i ' % len(x_test))
+print('Quantidade de épocas: %i' % EPOCHS)
+
 # monta o modelo MLP
 layers = [
     # camada de entrada
@@ -62,4 +68,4 @@ model_mlp.predict()
 
 fim = time.time()
 print('Modelos para detecção de fake news criados com sucesso! ')
-print('Tempo de execução: %f minutos' % ((fim - inicio) / 60))
+print('Tempo de execução: %.2f minutos' % ((fim - inicio) / 60))

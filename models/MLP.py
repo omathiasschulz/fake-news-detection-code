@@ -135,23 +135,16 @@ class MLP:
         print('=> Modelo MLP')
         for key, layer in enumerate(self.layers):
             print('Camada %i: ' % (key + 1), end='')
-            print('QTD Neurônios: %i; ' % layer['qtd_neurons'], end='')
-            print('Função de Ativação: %s; ' % layer['activation'])
+            print('qtd_neurons: %i; ' % layer['qtd_neurons'], end='')
+            print('activation_fn: %s; ' % layer['activation'])
 
         print('=> Métricas')
         # quanto menor a perda, mais próximas nossas previsões são dos rótulos verdadeiros.
-        print('Loss: %.2f; ' % loss, end='')
-        print('R2: %.2f%%; ' % (accuracy_model * 100), end='')
-        print('R2 Detecções: %.2f%%; ' % (accuracy_detection * 100), end='')
+        print('loss: %.2f; ' % loss, end='')
+        print('R2_model: %.2f%%; ' % (accuracy_model * 100), end='')
+        print('R2_detection: %.2f%%; ' % (accuracy_detection * 100), end='')
         print('MAPE: %.2f; ' % mape, end='')
-        print('RMSE: %.2f; ' % rmse)
-
-        print('=> Quantidades')
-        print('Registros: %i; ' % len(self.data['x']), end='')
-        print('Registros treino: %i; ' % len(self.data['x_train']), end='')
-        print('Registros validação: %i; ' % len(self.data['x_val']), end='')
-        print('Registros teste: %i; ' % len(self.data['x_test']), end='')
-        print('Épocas: %i;' % self.epochs)
+        print('RMSE: %.2f; \n' % rmse)
 
         # Apresentação dos gráficos de treinamento e validação da rede
         Path('graphics').mkdir(parents=True, exist_ok=True)
@@ -188,7 +181,6 @@ class MLP:
         Método que realiza todas as etapas para detecção de Fake News com o modelo MLP
         """
         print('Iniciando a detecção de fake news com o modelo MLP... ')
-        inicio = time.time()
 
         print('Criando o modelo... ')
         self.__create_model()
@@ -199,9 +191,6 @@ class MLP:
         print('Testando o modelo o modelo... ')
         loss, accuracy_model, rmse, mape, accuracy_detection = self.__test()
 
-        print('Resultados: ')
-        self.__result(history, loss, accuracy_model, rmse, mape, accuracy_detection)
-
-        fim = time.time()
         print('Detecção de fake news realizada com sucesso! ')
-        print('Tempo de execução: %f minutos' % ((fim - inicio) / 60))
+        print('\nResultados: ')
+        self.__result(history, loss, accuracy_model, rmse, mape, accuracy_detection)
