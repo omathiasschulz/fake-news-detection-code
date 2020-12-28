@@ -73,7 +73,7 @@ def main():
     # monta o predict e apresenta os resultados
     previsao = model.predict(x, verbose=0)
     print(previsao)
-    # info(y, previsao)
+    info(y, previsao)
 
     fim = time.time()
     print('Tempo de execução: %.2f minutos' % ((fim - inicio) / 60))
