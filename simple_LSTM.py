@@ -68,7 +68,7 @@ def main():
 
     # compila e fita o modelo
     model.compile(loss='mse', optimizer='adam')
-    model.fit(x, y, epochs=10)
+    model.fit(x, y, epochs=300)
 
     # monta o predict e apresenta os resultados
     previsao = model.predict(x, verbose=0)
