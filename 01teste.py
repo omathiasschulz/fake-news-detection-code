@@ -63,13 +63,13 @@ layers = [
     },
 ]
 
-# cria o modelo e inicia a detecção
-model_mlp = MLP(VECTOR_DIMENSION, EPOCHS, layers, data)
-model_mlp.predict()
-
 # # cria o modelo e inicia a detecção
-# model_lstm = ModelLSTM(VECTOR_DIMENSION, EPOCHS, layers, data)
-# model_lstm.predict()
+# model_mlp = MLP(VECTOR_DIMENSION, EPOCHS, layers, data)
+# model_mlp.predict()
+
+# cria o modelo e inicia a detecção
+model_lstm = ModelLSTM(VECTOR_DIMENSION, EPOCHS, layers, data)
+model_lstm.predict()
 
 fim = time.time()
 print('Modelos para detecção de fake news criados com sucesso! ')

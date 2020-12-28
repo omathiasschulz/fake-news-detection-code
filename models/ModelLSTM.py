@@ -90,12 +90,22 @@ class ModelLSTM:
         # self.model.add(Dense(1))
         # self.model.compile(loss='mean_squared_error', optimizer='adam')
 
-        self.data['x_train'] = np.expand_dims(self.data['x_train'], 1)
-        self.data['y_train'] = np.expand_dims(self.data['y_train'], 1)
+        print('=> SHAPE ORIGINAL: ')
+        print(self.data['x_train'].shape)
+        print(self.data['y_train'].shape)
+
+        # realiza o reshape
+        self.data['x_train'] = self.data['x_train'].reshape(
+            self.data['x_train'].shape[0], self.data['x_train'].shape[1], 1
+        )
+
+        print('=> SHAPE NOVO: ')
+        print(self.data['x_train'].shape)
+        print(self.data['y_train'].shape)
 
         # # create and fit the LSTM network
         self.model = Sequential()
-        self.model.add(LSTM(4, input_shape=(self.data['x_train'].shape[1:])))
+        self.model.add(LSTM(4, input_shape=(300, 1)))
         # self.model.add(Dense(1))
 
         self.model.compile(loss='mean_squared_error', optimizer='adam')

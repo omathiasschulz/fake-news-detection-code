@@ -1,0 +1,146 @@
+
+
+
+Work cloud of fake news
+Work cloud of true news
+
+
+
+Mostrar exemplos de stopwords
+stopwords_list = stopwords.words('english')
+len(stopwords_list)
+
+
+
+
+Top 25 words in text
+from collections import Counter 
+counter = Counter(all_words)
+counter.most_common(25)
+
+counted_words = Counter(all_words)
+
+words = []
+counts = []
+for letter, count in counted_words.most_common(25):
+    words.append(letter)
+    counts.append(count)
+
+colors = cm.rainbow(np.linspace(0, 1, 10))
+rcParams['figure.figsize'] = 20, 10
+
+plt.title('Top words in Text')
+plt.xlabel('Count')
+plt.ylabel('Words')
+plt.barh(words, counts, color=colors)
+
+Precision, Recall, F1, Confusion Matrix => https://www.kaggle.com/imranzaman5202/fake-news-detection-with-nlp-ensemble-learning
+
+w2v_model.wv.most_similar("fbi")
+
+
+
+
+Você também pode recuperar um resumo da configuração do modelo usando a função get_config (), por exemplo:
+model.get_config()
+
+
+
+
+Adicionei uma camada de Dropout para mitigar problemas de sobreajuste
+
+
+
+Uma adição à configuração necessária é que uma camada LSTM antes de cada camada LSTM subsequente retorne a sequência, o que pode ser feito definindo o parâmetro “return_sequences = True” na(s) camada(s) anterior(es).
+
+
+
+
+
+
+        # model.summary()
+
+
+
+LSTM EXEMPLOS
+
+        # # Create model
+        # model = Sequential()
+        # model.add(LSTM(units=32, activation='relu',
+        #                input_shape=(100, 1000))  # the batch size is neglected!
+        # model.add(Dense(3, activation='softmax'))
+        #
+        # model.compile(loss='categorical_crossentropy', optimizer='adam',
+        #               metrics=['accuracy'])
+        #
+        # # EXEMPLO
+        # model = Sequential()
+        # model.add(Embedding(vocabulary, hidden_size, input_length=num_steps))
+        # model.add(LSTM(hidden_size, return_sequences=True))
+        # model.add(LSTM(hidden_size, return_sequences=True))
+        # if use_dropout:
+        #     model.add(Dropout(0.5))
+        # model.add(TimeDistributed(Dense(vocabulary)))
+        # model.add(Activation('softmax'))
+        #
+        # # EXEMPLO
+        # NUM_NEURONS_FirstLayer = 128
+        # NUM_NEURONS_SecondLayer = 64
+        # EPOCHS = 220
+        # # Build the model
+        # model = Sequential()
+        # model.add(LSTM(NUM_NEURONS_FirstLayer, input_shape=(look_back, 1), return_sequences=True))
+        # model.add(LSTM(NUM_NEURONS_SecondLayer, input_shape=(NUM_NEURONS_FirstLayer, 1)))
+        # model.add(Dense(foward_days))
+        # model.compile(loss='mean_squared_error', optimizer='adam')
+        # history = model.fit(X_train, y_train, epochs=EPOCHS, validation_data=(X_validate, y_validate), shuffle=True,
+        #                     batch_size=2, verbose=2)
+        #
+        # # EXEMPLO
+        # input = Input(shape=(1, 58))
+        # x = LSTM(200, dropout=.0)(input)
+        # x = Dropout(.5)(x)
+        # activation = Dense(1, activation='linear')(x)
+        # model = Model(inputs=input, outputs=activation)
+        #
+        # optimizer = keras.optimizers.Adam(lr=0.01,
+        #                                   beta_1=0.9,
+        #                                   beta_2=0.999,
+        #                                   epsilon=None,
+        #                                   decay=0.001,
+        #                                   amsgrad=False)
+        #
+        # model.compile(loss='mean_absolute_error', optimizer=optimizer)
+        # model.summary()
+
+
+
+SAVE MODEL
+#
+# # Definir modelo
+# model = Sequential()
+# model.add(LSTM(...))
+# # Compilar modelo
+# model.compile(...)
+# # Ajustar modelo
+# model.fit(...)
+# # Salvar modelo em arquivo
+# model.save('nome_arquivo.h5')
+#
+# from keras.models import load_model
+# # Carregar modelo de arquivo
+# model = load_model('nome_arquivo.h5')
+
+
+
+=> SHAPE ORIGINAL: 
+(2211, 300)
+(2211,)
+
+
+
+
+
+
+
+
