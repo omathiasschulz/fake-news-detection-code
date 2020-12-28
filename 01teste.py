@@ -5,7 +5,7 @@ from models.ModelLSTM import ModelLSTM
 from sklearn.model_selection import train_test_split
 
 VECTOR_DIMENSION = 300
-EPOCHS = 150
+EPOCHS = 5
 
 print('Iniciando a construção dos modelos para detecção de fake news')
 inicio = time.time()

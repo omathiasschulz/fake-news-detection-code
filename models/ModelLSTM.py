@@ -99,13 +99,9 @@ class ModelLSTM:
             self.data['x_train'].shape[0], self.data['x_train'].shape[1], 1
         )
 
-        print('=> SHAPE NOVO: ')
-        print(self.data['x_train'].shape)
-        print(self.data['y_train'].shape)
-
-        # # create and fit the LSTM network
+        # create and fit the LSTM network
         self.model = Sequential()
-        self.model.add(LSTM(4, input_shape=(300, 1)))
+        self.model.add(LSTM(4, input_shape=(self.data['x_train'].shape[1], self.data['x_train'].shape[2])))
         # self.model.add(Dense(1))
 
         self.model.compile(loss='mean_squared_error', optimizer='adam')
@@ -122,13 +118,18 @@ class ModelLSTM:
         # self.data['x_train'] = self.data['x_train'].reshape(self.data['x_train'].shape[0], self.data['x_train'].shape[1], 1)
         # print(self.data['x_train'])
         # print(self.data['x_train'].shape)
+
         history = self.model.fit(
             self.data['x_train'],
             self.data['y_train'],
             epochs=self.epochs,
-            batch_size=self.batch_size,
-            validation_data=(self.data['x_val'], self.data['y_val'])
         )
+
+        # TODO - ajustar os dados de validação
+        # history = self.model.fit(
+        #     batch_size=self.batch_size,
+        #     validation_data=(self.data['x_val'], self.data['y_val'])
+        # )
         return history
 
     def __test(self):
