@@ -1,9 +1,9 @@
 import time
 import numpy as np
+import matplotlib.pyplot as plt
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
-import matplotlib.pyplot as plt
 
 
 def getData():
@@ -11,14 +11,14 @@ def getData():
     Método responsável por montar os dados fake para previsão
     """
     seq = np.array([
-        # [x1, x2,  x3,  x4,   y],
-        [0.0, 0.1, 0.4],
-        [0.1, 0.2, 0.5],
-        [0.2, 0.3, 0.6],
-        [0.3, 0.4, 0.7],
-        [0.4, 0.5, 0.8],
+        # [x1, x2,  x3,  x4,  x5,  x6,   y],
+        [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.5],
+        [0.1, 1.1, 2.1, 3.1, 4.1, 5.1, 6.6],
+        [0.2, 1.2, 2.2, 3.2, 4.2, 5.2, 6.7],
+        [0.3, 1.3, 2.3, 3.3, 4.3, 5.3, 6.8],
+        [0.4, 1.4, 2.4, 3.4, 4.4, 5.4, 6.9],
     ])
-    x, y = seq[:, :2], seq[:, 2]
+    x, y = seq[:, :6], seq[:, 6]
     print(x)
     print(y)
 
