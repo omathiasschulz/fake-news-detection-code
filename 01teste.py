@@ -1,6 +1,7 @@
 import time
 import pandas as pd
 from models.MLP import MLP
+from models.ModelLSTM import ModelLSTM
 from sklearn.model_selection import train_test_split
 
 VECTOR_DIMENSION = 300
@@ -65,6 +66,10 @@ layers = [
 # cria o modelo e inicia a detecção
 model_mlp = MLP(VECTOR_DIMENSION, EPOCHS, layers, data)
 model_mlp.predict()
+
+# # cria o modelo e inicia a detecção
+# model_lstm = ModelLSTM(VECTOR_DIMENSION, EPOCHS, layers, data)
+# model_lstm.predict()
 
 fim = time.time()
 print('Modelos para detecção de fake news criados com sucesso! ')

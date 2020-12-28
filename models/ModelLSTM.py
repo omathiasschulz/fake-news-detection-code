@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.layers import LSTM
 from pathlib import Path
 from keras import backend
 matplotlib.use('Agg')
@@ -15,7 +16,7 @@ def rmseMetric(y_true, y_pred):
     return backend.sqrt(backend.mean(backend.square(y_pred - y_true), axis=-1))
 
 
-class MLP:
+class ModelLSTM:
     """
     Classe que representa o modelo MLP
     """
@@ -61,34 +62,56 @@ class MLP:
         # instacia o modelo
         self.model = Sequential()
 
-        # insere a camada de entrada
-        input_layer = layers.pop(0)
-        self.model.add(Dense(
-            input_layer['qtd_neurons'],
-            kernel_initializer='uniform',
-            activation=input_layer['activation'],
-            input_dim=self.input_dimension,
-        ))
+        # # insere a camada de entrada
+        # input_layer = layers.pop(0)
+        # self.model.add(Dense(
+        #     input_layer['qtd_neurons'],
+        #     kernel_initializer='uniform',
+        #     activation=input_layer['activation'],
+        #     input_dim=self.input_dimension,
+        # ))
+        #
+        # # insere as camadas intermediárias e de saída
+        # for layer in layers:
+        #     self.model.add(Dense(
+        #         layer['qtd_neurons'],
+        #         kernel_initializer='uniform',
+        #         activation=layer['activation'],
+        #     ))
+        #
+        # # Compilação do modelo com as métricas: R2, RMSE e MAPE
+        # self.model.compile(
+        #     loss='binary_crossentropy',
+        #     optimizer='adam',
+        #     metrics=['accuracy', rmseMetric, 'mape'],
+        # )
 
-        # insere as camadas intermediárias e de saída
-        for layer in layers:
-            self.model.add(Dense(
-                layer['qtd_neurons'],
-                kernel_initializer='uniform',
-                activation=layer['activation'],
-            ))
+        # self.model.add(LSTM(4, input_shape=(1, self.input_dimension)))
+        # self.model.add(Dense(1))
+        # self.model.compile(loss='mean_squared_error', optimizer='adam')
 
-        # Compilação do modelo com as métricas: R2, RMSE e MAPE
-        self.model.compile(
-            loss='binary_crossentropy',
-            optimizer='adam',
-            metrics=['accuracy', rmseMetric, 'mape'],
-        )
+        self.data['x_train'] = np.expand_dims(self.data['x_train'], 1)
+        self.data['y_train'] = np.expand_dims(self.data['y_train'], 1)
+
+        # # create and fit the LSTM network
+        self.model = Sequential()
+        self.model.add(LSTM(4, input_shape=(self.data['x_train'].shape[1:])))
+        # self.model.add(Dense(1))
+
+        self.model.compile(loss='mean_squared_error', optimizer='adam')
+
+        # model.fit(trainX, trainY, epochs=100, batch_size=1, verbose=2)
 
     def __train(self):
         """
         Método responsável por realizar o treinamento e validação do modelo
         """
+        # print(len(self.data['x_train']))
+        # print(self.data['x_train'].shape)
+        # print(self.data['y_train'].shape)
+        # self.data['x_train'] = self.data['x_train'].reshape(self.data['x_train'].shape[0], self.data['x_train'].shape[1], 1)
+        # print(self.data['x_train'])
+        # print(self.data['x_train'].shape)
         history = self.model.fit(
             self.data['x_train'],
             self.data['y_train'],
@@ -148,32 +171,32 @@ class MLP:
         # Apresentação dos gráficos de treinamento e validação da rede
         Path('graphics').mkdir(parents=True, exist_ok=True)
 
-        plt.plot(history.history['rmseMetric'])
-        plt.plot(history.history['val_rmseMetric'])
-        plt.title('RMSE - Treinamento e validação')
-        plt.xlabel('Épocas')
-        plt.ylabel('RMSE')
-        plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        plt.savefig('graphics/mlp_rmse.png')
-        plt.close()
-
-        plt.plot(history.history['mape'])
-        plt.plot(history.history['val_mape'])
-        plt.title('MAPE')
-        plt.xlabel('Épocas')
-        plt.ylabel('MAPE')
-        plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        plt.savefig('graphics/mlp_mape.png')
-        plt.close()
-
-        plt.plot(history.history['accuracy'])
-        plt.plot(history.history['val_accuracy'])
-        plt.title('R2 - Treinamento e validação')
-        plt.xlabel('Épocas')
-        plt.ylabel('R2')
-        plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        plt.savefig('graphics/mlp_r2.png')
-        plt.close()
+        # plt.plot(history.history['rmseMetric'])
+        # plt.plot(history.history['val_rmseMetric'])
+        # plt.title('RMSE - Treinamento e validação')
+        # plt.xlabel('Épocas')
+        # plt.ylabel('RMSE')
+        # plt.legend(['Treinamento', 'Validação'], loc='upper left')
+        # plt.savefig('graphics/mlp_rmse.png')
+        # plt.close()
+        #
+        # plt.plot(history.history['mape'])
+        # plt.plot(history.history['val_mape'])
+        # plt.title('MAPE')
+        # plt.xlabel('Épocas')
+        # plt.ylabel('MAPE')
+        # plt.legend(['Treinamento', 'Validação'], loc='upper left')
+        # plt.savefig('graphics/mlp_mape.png')
+        # plt.close()
+        #
+        # plt.plot(history.history['accuracy'])
+        # plt.plot(history.history['val_accuracy'])
+        # plt.title('R2 - Treinamento e validação')
+        # plt.xlabel('Épocas')
+        # plt.ylabel('R2')
+        # plt.legend(['Treinamento', 'Validação'], loc='upper left')
+        # plt.savefig('graphics/mlp_r2.png')
+        # plt.close()
 
     def predict(self):
         """
