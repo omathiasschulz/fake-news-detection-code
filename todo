@@ -1,66 +1,41 @@
 
 
 
-Work cloud of fake news
-Work cloud of true news
++++ ANALISE DE DADOS
 
+- Work cloud of fake news
 
+- Work cloud of true news
 
-Mostrar exemplos de stopwords
-stopwords_list = stopwords.words('english')
-len(stopwords_list)
+- Exemplos de stopwords
 
-
-
-
-Top 25 words in text
+- Listar o top 25 palavras nos textos: Todos, true e false
 from collections import Counter 
 counter = Counter(all_words)
 counter.most_common(25)
-
 counted_words = Counter(all_words)
-
 words = []
 counts = []
 for letter, count in counted_words.most_common(25):
     words.append(letter)
     counts.append(count)
-
 colors = cm.rainbow(np.linspace(0, 1, 10))
 rcParams['figure.figsize'] = 20, 10
-
 plt.title('Top words in Text')
 plt.xlabel('Count')
 plt.ylabel('Words')
 plt.barh(words, counts, color=colors)
 
-Precision, Recall, F1, Confusion Matrix => https://www.kaggle.com/imranzaman5202/fake-news-detection-with-nlp-ensemble-learning
-
+- Exemplos de palavras semelhantes
 w2v_model.wv.most_similar("fbi")
 
 
 
-
-Você também pode recuperar um resumo da configuração do modelo usando a função get_config (), por exemplo:
-model.get_config()
-
-
-
-
++++ MODELO LSTM
 Adicionei uma camada de Dropout para mitigar problemas de sobreajuste
 
-
-
-Uma adição à configuração necessária é que uma camada LSTM antes de cada camada LSTM subsequente retorne a sequência, o que pode ser feito definindo o parâmetro “return_sequences = True” na(s) camada(s) anterior(es).
-
-
-
-
-
-
-        # model.summary()
-
-
+Uma adição à configuração necessária é que uma camada LSTM antes de cada camada LSTM subsequente retorne a sequência,
+o que pode ser feito definindo o parâmetro “return_sequences = True” na(s) camada(s) anterior(es).
 
 LSTM EXEMPLOS
 
@@ -115,7 +90,7 @@ LSTM EXEMPLOS
 
 
 
-SAVE MODEL
++++ SAVE MODEL
 #
 # # Definir modelo
 # model = Sequential()
@@ -133,45 +108,55 @@ SAVE MODEL
 
 
 
-=> SHAPE ORIGINAL: 
-(2211, 300)
-(2211,)
++++ Funções de Ativação
+Começar com a função ReLU e depois passar para outras funções de ativação no caso da ReLU não forneça resultados ótimos
+De uma forma geral devemos preferir ELU > leaky ReLU > ReLU >> tanh > sigmoide
+As funções ReLU, Leaky ReLU e ELU são muito melhores do que as funções sigmoidais
+Quanto às ativações sigmoidais, a função TanH é significantemente melhor do que a Sigmoide
+-- Sigmóide
+Funciona melhor no caso de classificadores
+Às vezes é evitada devido ao problema de Vanishing Gradient
+-- Tanh
+Às vezes é evitada devido ao problema de Vanishing Gradient
+-- ReLU
+Função de ativação geral, utilizada na maioria dos casos atualmente
+Deve ser usada apenas nas camadas ocultas
+-- Leaky ReLU
+Boa para casos com neurônios deficientes nas redes
 
 
 
-=> DATASET SIMPLES PARA O LSTM
-x - shape: (5, 6, 1)
-[[[0. ]
-  [1. ]
-  [2. ]
-  [3. ]
-  [4. ]
-  [5. ]]
- [[0.1]
-  [1.1]
-  [2.1]
-  [3.1]
-  [4.1]
-  [5.1]]
- [[0.2]
-  [1.2]
-  [2.2]
-  [3.2]
-  [4.2]
-  [5.2]]
- [[0.3]
-  [1.3]
-  [2.3]
-  [3.3]
-  [4.3]
-  [5.3]]
- [[0.4]
-  [1.4]
-  [2.4]
-  [3.4]
-  [4.4]
-  [5.4]]]
-y - shape: (5,)
-[6.5 6.6 6.7 6.8 6.9]
++++ Métricas
+
+Precision, Recall, F1, Confusion Matrix => https://www.kaggle.com/imranzaman5202/fake-news-detection-with-nlp-ensemble-learning
+
+- Precision
+
+- Recall
+A recuperação, também conhecida como sensibilidade, é a fração de ocorrências significativas que foram recuperadas sobre a quantidade total de ocorrências relevantes.
+
+- F1-Score
+Pontuação F também pontuação F ou medida F é uma medida da precisão de um teste para classificação binária.
+
+- Accuracy
+
+- Matriz de Confusão
+0 é negativo e 1 é positivo.
+Verdadeiro Negativo (TN): A previsão foi negativa e os casos de teste também foram negativos;
+Verdadeiro Positivo (TP): A previsão foi positiva e os casos de teste também foram positivos;
+Falso negativo (FN): A previsão foi negativa, mas os casos de teste foram realmente positivos;
+Falso Positivo (FP): A previsão foi positiva, mas os casos de teste foram realmente negativos;
+
+
+
++++ Montagem dos modelos
+Utilizaram bastante a função de ativação ReLU
+- 1
+A saída do LSTM bidirecional passou por três camadas densas (512, 128, 4 unidades) separadas por um dropout.
+Usando a função de ativação soft-max na camada de saída, o resultado é uma classificação de postura (não relacionada, concordar, discordar ou discutir)
+Adam optimizer
+- 2
+Utilizou ativação RELU em algumas camadas, quais não deu pra entender
+Camada de saída, Sigmóide, com otimizador Adam
 
 

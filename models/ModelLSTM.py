@@ -41,6 +41,7 @@ class ModelLSTM:
         :param data: Dados utilizados na detecção
         :type data: dict
         """
+        self.path_graphics = 'graphics/lstm/'
         self.input_dimension = input_dimension
         self.epochs = epochs
         self.layers = layers
@@ -108,28 +109,27 @@ class ModelLSTM:
         # gera as detecções se cada notícia é fake ou não
         detections = self.model.predict(self.data['x'])
 
-        # ajusta as detecções
+        # valida a acurácia das detecções
         rounded = [round(x[0]) for x in detections]
         accuracy_detection = np.mean(rounded == self.data['y'])
 
-        return loss, accuracy_model, rmse, mape, accuracy_detection
+        # monta um dict das métricas e retorna
+        return {
+            'loss': loss,
+            'accuracy_model': accuracy_model,
+            'accuracy_detection': accuracy_detection,
+            'rmse': rmse,
+            'mape': mape,
+        }
 
-    def __result(self, history, loss, accuracy_model, rmse, mape, accuracy_detection):
+    def __result(self, history, metrics):
         """
         Método responsável por apresentar os resultados
 
-        :param history: Histórico da detecção
+        :param history: Histórico das métricas da detecção
         :type history: Tuple[Any]
-        :param loss: Perca
-        :type loss: float
-        :param accuracy_model: Acurácia do modelo
-        :type accuracy_model: float
-        :param rmse: RMSE
-        :type rmse: float
-        :param mape: MAPE
-        :type mape: float
-        :param accuracy_detection: Acurácia da detecção
-        :type accuracy_detection: ndarray
+        :param metrics: Resultado obtido pelas métricas
+        :type metrics: dict
         """
         print('=> Modelo LSTM')
         for key, layer in enumerate(self.layers):
@@ -139,14 +139,14 @@ class ModelLSTM:
 
         print('=> Métricas')
         # quanto menor a perda, mais próximas nossas previsões são dos rótulos verdadeiros.
-        print('loss: %.2f; ' % loss, end='')
-        print('R2_model: %.2f%%; ' % (accuracy_model * 100), end='')
-        print('R2_detection: %.2f%%; ' % (accuracy_detection * 100), end='')
-        print('MAPE: %.2f; ' % mape, end='')
-        print('RMSE: %.2f; \n' % rmse)
+        print('loss: %.2f; ' % metrics['loss'], end='')
+        print('R2_model: %.2f%%; ' % (metrics['accuracy_model'] * 100), end='')
+        print('R2_detection: %.2f%%; ' % (metrics['accuracy_detection'] * 100), end='')
+        print('MAPE: %.2f; ' % metrics['mape'], end='')
+        print('RMSE: %.2f; \n' % metrics['rmse'])
 
         # Apresentação dos gráficos de treinamento e validação da rede
-        Path('graphics').mkdir(parents=True, exist_ok=True)
+        Path(self.path_graphics).mkdir(parents=True, exist_ok=True)
 
         plt.plot(history.history['rmseMetric'])
         plt.plot(history.history['val_rmseMetric'])
@@ -154,7 +154,7 @@ class ModelLSTM:
         plt.xlabel('Épocas')
         plt.ylabel('RMSE')
         plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        plt.savefig('graphics/mlp_rmse.png')
+        plt.savefig(self.path_graphics + 'rmse.png')
         plt.close()
 
         plt.plot(history.history['mape'])
@@ -163,7 +163,7 @@ class ModelLSTM:
         plt.xlabel('Épocas')
         plt.ylabel('MAPE')
         plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        plt.savefig('graphics/mlp_mape.png')
+        plt.savefig(self.path_graphics + 'mape.png')
         plt.close()
 
         plt.plot(history.history['accuracy'])
@@ -172,7 +172,7 @@ class ModelLSTM:
         plt.xlabel('Épocas')
         plt.ylabel('R2')
         plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        plt.savefig('graphics/mlp_r2.png')
+        plt.savefig(self.path_graphics + 'r2.png')
         plt.close()
 
     def predict(self):
@@ -188,8 +188,8 @@ class ModelLSTM:
         history = self.__train()
 
         print('Testando o modelo o modelo... ')
-        loss, accuracy_model, rmse, mape, accuracy_detection = self.__test()
+        metrics = self.__test()
 
         print('Detecção de fake news realizada com sucesso! ')
         print('\nResultados: ')
-        self.__result(history, loss, accuracy_model, rmse, mape, accuracy_detection)
+        self.__result(history, metrics)
