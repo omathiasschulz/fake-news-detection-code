@@ -3,6 +3,8 @@
 
 +++ ANALISE DE DADOS
 
+- Tamanho dos textos por tipo de notícia fake/true
+
 - Work cloud of fake news
 
 - Work cloud of true news
@@ -146,6 +148,21 @@ Verdadeiro Negativo (TN): A previsão foi negativa e os casos de teste também f
 Verdadeiro Positivo (TP): A previsão foi positiva e os casos de teste também foram positivos;
 Falso negativo (FN): A previsão foi negativa, mas os casos de teste foram realmente positivos;
 Falso Positivo (FP): A previsão foi positiva, mas os casos de teste foram realmente negativos;
+
+from sklearn.metrics import classification_report
+print(classification_report(y_test, y_pred))
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99      5899
+           1       0.99      0.99      0.99      5326
+
+    accuracy                           0.99     11225
+   macro avg       0.99      0.99      0.99     11225
+weighted avg       0.99      0.99      0.99     11225
+
+
+
+
 
 
 

@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 
 VECTOR_DIMENSION = 300
 EPOCHS = 2
+BATCH_SIZE = 10
 
 print('Iniciando a construção dos modelos para detecção de fake news')
 inicio = time.time()
@@ -68,7 +69,7 @@ layers = [
 # model_mlp.predict()
 
 # cria o modelo e inicia a detecção
-model_lstm = ModelLSTM(VECTOR_DIMENSION, EPOCHS, layers, data)
+model_lstm = ModelLSTM(VECTOR_DIMENSION, EPOCHS, BATCH_SIZE, layers, data)
 model_lstm.predict()
 
 fim = time.time()
