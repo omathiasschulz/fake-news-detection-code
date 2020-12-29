@@ -45,12 +45,12 @@ class Model:
         :param path_graphics: Diretório para salvar os gráficos gerados
         :type path_graphics: str
         """
-        self.path_graphics = path_graphics
         self.input_dimension = input_dimension
         self.epochs = epochs
         self.batch_size = batch_size
         self.layers = layers
         self.data = data
+        self.path_graphics = path_graphics
 
     def _updateData(self):
         """
@@ -175,8 +175,6 @@ class Model:
         """
         Método que realiza todas as etapas para detecção de Fake News com o modelo
         """
-        print('Iniciando a detecção de fake news com o modelo... ')
-
         print('Criando o modelo... ')
         self._updateData()
         self.__create_model()
@@ -187,5 +185,5 @@ class Model:
         print('Testando o modelo... ')
         metrics = self.__test()
 
-        print('\nResultados: ')
+        print('Resultados: ')
         self.__result(history, metrics)

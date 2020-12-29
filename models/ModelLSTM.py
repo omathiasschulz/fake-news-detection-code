@@ -41,3 +41,10 @@ class ModelLSTM(Model):
         self.data['x_val'] = self.data['x_val'].reshape(
             self.data['x_val'].shape[0], self.data['x_val'].shape[1], 1
         )
+
+    def predict(self):
+        """
+        Método que realiza todas as etapas para detecção de Fake News com o modelo
+        """
+        print('\n=> Modelo LSTM')
+        super().predict()
