@@ -104,6 +104,9 @@ class ModelLSTM:
         self.data['x_test'] = self.data['x_test'].reshape(
             self.data['x_test'].shape[0], self.data['x_test'].shape[1], 1
         )
+        self.data['x'] = self.data['x'].reshape(
+            self.data['x'].shape[0], self.data['x'].shape[1], 1
+        )
 
         # create and fit the LSTM network
         self.model = Sequential()
@@ -139,8 +142,18 @@ class ModelLSTM:
         """
         Método responsável por realizar o teste do modelo
         """
+        print('passou 1 ... ')
+
+        print(self.data['x_test'])
+        print(self.data['y_test'])
+
         # avalia o modelo com os dados de teste
-        loss, accuracy_model, rmse, mape = self.model.evaluate(self.data['x_test'], self.data['y_test'])
+        # loss, accuracy_model, rmse, mape = self.model.evaluate(self.data['x_test'], self.data['y_test'])
+        a = self.model.evaluate(self.data['x_test'], self.data['y_test'])
+
+        print(a)
+
+        print('passou 2 ... ')
 
         # gera as detecções se cada notícia é fake ou não
         detections = self.model.predict(self.data['x'])
@@ -149,7 +162,8 @@ class ModelLSTM:
         rounded = [round(x[0]) for x in detections]
         accuracy_detection = np.mean(rounded == self.data['y'])
 
-        return loss, accuracy_model, rmse, mape, accuracy_detection
+        # return loss, accuracy_model, rmse, mape, accuracy_detection
+        return a
 
     def __result(self, history, loss, accuracy_model, rmse, mape, accuracy_detection):
         """
@@ -225,8 +239,9 @@ class ModelLSTM:
         history = self.__train()
 
         print('Testando o modelo o modelo... ')
-        loss, accuracy_model, rmse, mape, accuracy_detection = self.__test()
+        # loss, accuracy_model, rmse, mape, accuracy_detection = self.__test()
+        a = self.__test()
 
         print('Detecção de fake news realizada com sucesso! ')
         print('\nResultados: ')
-        self.__result(history, loss, accuracy_model, rmse, mape, accuracy_detection)
+        # self.__result(history, loss, accuracy_model, rmse, mape, accuracy_detection)
