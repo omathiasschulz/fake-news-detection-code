@@ -127,7 +127,7 @@ class Model:
         :param metrics: Resultado obtido pelas métricas
         :type metrics: dict
         """
-        print('=> Modelo LSTM')
+        print('=> Modelo')
         for key, layer in enumerate(self.layers):
             print('Camada %i: ' % (key + 1), end='')
             print('qtd_neurons: %i; ' % layer['qtd_neurons'], end='')
@@ -136,10 +136,10 @@ class Model:
         print('=> Métricas')
         # quanto menor a perda, mais próximas nossas previsões são dos rótulos verdadeiros.
         print('loss: %.2f; ' % metrics['loss'], end='')
-        print('R2_model: %.2f%%; ' % (metrics['accuracy_model'] * 100), end='')
-        print('R2_detection: %.2f%%; ' % (metrics['accuracy_detection'] * 100), end='')
-        print('MAPE: %.2f; ' % metrics['mape'], end='')
-        print('RMSE: %.2f; \n' % metrics['rmse'])
+        print('accuracy_model(%%): %.2f; ' % (metrics['accuracy_model'] * 100), end='')
+        print('accuracy_detection(%%): %.2f; ' % (metrics['accuracy_detection'] * 100), end='')
+        print('mape: %.2f; ' % metrics['mape'], end='')
+        print('rmse: %.2f; \n' % metrics['rmse'])
 
         # Apresentação dos gráficos de treinamento e validação da rede
         Path(self.path_graphics).mkdir(parents=True, exist_ok=True)
