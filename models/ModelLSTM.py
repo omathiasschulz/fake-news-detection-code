@@ -98,6 +98,12 @@ class ModelLSTM:
         self.data['x_train'] = self.data['x_train'].reshape(
             self.data['x_train'].shape[0], self.data['x_train'].shape[1], 1
         )
+        self.data['x_val'] = self.data['x_val'].reshape(
+            self.data['x_val'].shape[0], self.data['x_val'].shape[1], 1
+        )
+        self.data['x_test'] = self.data['x_test'].reshape(
+            self.data['x_test'].shape[0], self.data['x_test'].shape[1], 1
+        )
 
         # create and fit the LSTM network
         self.model = Sequential()
@@ -123,13 +129,10 @@ class ModelLSTM:
             self.data['x_train'],
             self.data['y_train'],
             epochs=self.epochs,
+            batch_size=self.batch_size,
+            validation_data=(self.data['x_val'], self.data['y_val'])
         )
 
-        # TODO - ajustar os dados de validação
-        # history = self.model.fit(
-        #     batch_size=self.batch_size,
-        #     validation_data=(self.data['x_val'], self.data['y_val'])
-        # )
         return history
 
     def __test(self):
