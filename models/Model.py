@@ -136,35 +136,35 @@ class Model:
         print('mape: %.2f; ' % metrics['mape'], end='')
         print('rmse: %.2f; \n' % metrics['rmse'])
 
-        # Apresentação dos gráficos de treinamento e validação da rede
-        Path(self.path_graphics).mkdir(parents=True, exist_ok=True)
-
-        plt.plot(history.history['rmseMetric'])
-        plt.plot(history.history['val_rmseMetric'])
-        plt.title(self.model_name + ' - RMSE')
-        plt.xlabel('Épocas')
-        plt.ylabel('RMSE')
-        plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        plt.savefig(self.path_graphics + 'rmse.png')
-        plt.close()
-
-        plt.plot(history.history['mape'])
-        plt.plot(history.history['val_mape'])
-        plt.title(self.model_name + ' - MAPE')
-        plt.xlabel('Épocas')
-        plt.ylabel('MAPE')
-        plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        plt.savefig(self.path_graphics + 'mape.png')
-        plt.close()
-
-        plt.plot(history.history['accuracy'])
-        plt.plot(history.history['val_accuracy'])
-        plt.title(self.model_name + ' - Acurácia')
-        plt.xlabel('Épocas')
-        plt.ylabel('Acurácia')
-        plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        plt.savefig(self.path_graphics + 'acuracia.png')
-        plt.close()
+        # # Apresentação dos gráficos de treinamento e validação da rede
+        # Path(self.path_graphics).mkdir(parents=True, exist_ok=True)
+        #
+        # plt.plot(history.history['rmseMetric'])
+        # plt.plot(history.history['val_rmseMetric'])
+        # plt.title(self.model_name + ' - RMSE')
+        # plt.xlabel('Épocas')
+        # plt.ylabel('RMSE')
+        # plt.legend(['Treinamento', 'Validação'], loc='upper left')
+        # plt.savefig(self.path_graphics + 'rmse.png')
+        # plt.close()
+        #
+        # plt.plot(history.history['mape'])
+        # plt.plot(history.history['val_mape'])
+        # plt.title(self.model_name + ' - MAPE')
+        # plt.xlabel('Épocas')
+        # plt.ylabel('MAPE')
+        # plt.legend(['Treinamento', 'Validação'], loc='upper left')
+        # plt.savefig(self.path_graphics + 'mape.png')
+        # plt.close()
+        #
+        # plt.plot(history.history['accuracy'])
+        # plt.plot(history.history['val_accuracy'])
+        # plt.title(self.model_name + ' - Acurácia')
+        # plt.xlabel('Épocas')
+        # plt.ylabel('Acurácia')
+        # plt.legend(['Treinamento', 'Validação'], loc='upper left')
+        # plt.savefig(self.path_graphics + 'acuracia.png')
+        # plt.close()
 
     def predict(self):
         """

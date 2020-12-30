@@ -1,6 +1,6 @@
 from keras.models import Sequential
+from models.Model import Model
 from keras.layers import Dense
-from models.Model import Model, rmseMetric
 
 
 class ModelMLP(Model):
@@ -54,10 +54,3 @@ class ModelMLP(Model):
                 kernel_initializer='uniform',
                 activation=layer['activation'],
             ))
-
-        # Compilação do modelo com as métricas: R2, RMSE e MAPE
-        self.model.compile(
-            loss='binary_crossentropy',
-            optimizer='adam',
-            metrics=['accuracy', rmseMetric, 'mape'],
-        )

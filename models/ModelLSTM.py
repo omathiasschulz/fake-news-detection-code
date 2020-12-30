@@ -1,18 +1,6 @@
-import numpy as np
-import matplotlib.pyplot as plt
-from pathlib import Path
-from keras import backend
-from models.Model import Model
-import matplotlib
-import numpy as np
-import matplotlib.pyplot as plt
 from keras.models import Sequential
+from models.Model import Model
 from keras.layers import Dense, LSTM, Dropout
-from pathlib import Path
-from keras import backend
-from models.Model import Model, rmseMetric
-matplotlib.use('Agg')
-
 
 
 class ModelLSTM(Model):
