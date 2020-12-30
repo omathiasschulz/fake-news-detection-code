@@ -1,4 +1,18 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from pathlib import Path
+from keras import backend
 from models.Model import Model
+import matplotlib
+import numpy as np
+import matplotlib.pyplot as plt
+from keras.models import Sequential
+from keras.layers import Dense, LSTM
+from pathlib import Path
+from keras import backend
+from models.Model import Model, rmseMetric
+matplotlib.use('Agg')
+
 
 
 class ModelLSTM(Model):
@@ -40,9 +54,45 @@ class ModelLSTM(Model):
             self.data['x_val'].shape[0], self.data['x_val'].shape[1], 1
         )
 
-    def predict(self):
+    def _create_model(self):
         """
-        Método que realiza todas as etapas para detecção de Fake News com o modelo
+        Método responsável por realizar a criação do modelo
         """
-        print('\n=> Modelo LSTM')
-        super().predict()
+        # passa as camadas para uma nova variável sem ser por referência
+        layers = self.layers[:]
+        # valida se foram informados pelo menos 3 camadas: entrada, intermediária 01 e saída
+        if len(layers) < 3:
+            raise Exception('Informe pelo menos três camadas! ')
+        # instacia o modelo
+        self.model = Sequential()
+
+        # insere a camada de entrada
+        input_layer = layers.pop(0)
+        if input_layer['type'] == self.LAYER_MLP:
+            self.model.add(Dense(
+                input_layer['qtd_neurons'],
+                kernel_initializer='uniform',
+                activation=input_layer['activation'],
+                input_dim=self.data['x_train'].shape[1],
+            ))
+        elif input_layer['type'] == self.LAYER_LSTM:
+            print('return_sequences')
+            print(True if input_layer['return_sequences'] else False)
+            self.model.add(LSTM(
+                input_layer['qtd_neurons'],
+                kernel_initializer='uniform',
+                activation=input_layer['activation'],
+                # input_shape=(NUM_ENTRADAS, QTD_INFO_POR_ENTRADA)
+                input_shape=(self.data['x_train'].shape[1], self.data['x_train'].shape[2]),
+                return_sequences=True if input_layer['return_sequences'] else False
+            ))
+        else:
+            raise Exception('Camada de entrada inválida! ')
+
+        # insere as camadas intermediárias e de saída
+        for layer in layers:
+            self.model.add(Dense(
+                layer['qtd_neurons'],
+                kernel_initializer='uniform',
+                activation=layer['activation'],
+            ))

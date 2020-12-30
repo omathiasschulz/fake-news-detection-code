@@ -1,8 +1,6 @@
 import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
-from keras.models import Sequential
-from keras.layers import LSTM
 from pathlib import Path
 from keras import backend
 matplotlib.use('Agg')
@@ -20,12 +18,17 @@ class Model:
     Classe que representa um modelo genérico não funcional
     """
 
-    # constantes das funções de ativação
-    SIGMOID = 'sigmoid'
-    TANH = 'tanh'
-    RELU = 'relu'
-    LEAKY_RELU = 'leaky relu'
-    ELU = 'elu'
+    # tipos de camadas
+    LAYER_MLP = 'dense'
+    LAYER_LSTM = 'lstm'
+    LAYER_DROPOUT = 'dropout'
+
+    # funções de ativação
+    ATIVACAO_SIGMOID = 'sigmoid'
+    ATIVACAO_TANH = 'tanh'
+    ATIVACAO_RELU = 'relu'
+    ATIVACAO_LEAKY_RELU = 'leaky relu'
+    ATIVACAO_ELU = 'elu'
 
     def __init__(self, model_name, epochs, batch_size, layers, data, path_graphics):
         """
@@ -37,14 +40,14 @@ class Model:
         :type epochs: int
         :param batch_size: Número de exemplos de treinamento usados em uma iteração
         :type batch_size: int
-        :param layers: Camadas para montar o modelo no formato:
-            [{'qtd_neurons': qtd_neuronios, 'activation': 'funcao_ativacao',}]
+        :param layers: Array de camadas que possui diferentes formatos de acordo com o modelo
         :type layers: list
         :param data: Dados utilizados na detecção
         :type data: dict
         :param path_graphics: Diretório para salvar os gráficos gerados
         :type path_graphics: str
         """
+        self.model = None
         self.model_name = model_name
         self.epochs = epochs
         self.batch_size = batch_size
@@ -58,24 +61,16 @@ class Model:
         """
         return
 
-    def __create_model(self):
+    def _create_model(self):
         """
-        Método responsável por realizar a criação do modelo
+        Método para sobreescrever e realizar a construção do modelo
         """
-        # passa as camadas para uma nova variável sem ser por referência
-        layers = self.layers[:]
+        return
 
-        # valida se foram informados pelo menos 3 camadas: entrada, intermediária 01 e saída
-        if len(layers) < 3:
-            raise Exception('Informe pelo menos três camadas! ')
-
-        # instacia o modelo
-        self.model = Sequential()
-
-        # input_shape=(NUM_ENTRADAS, QTD_INFO_POR_ENTRADA)
-        self.model.add(LSTM(4, input_shape=(self.data['x_train'].shape[1], self.data['x_train'].shape[2])))
-
-        # compilação do modelo com as métricas: Acurácia, RMSE e MAPE
+    def __compile(self):
+        """
+        Método responsável por compilar o modelo com as métricas: Acurácia, RMSE e MAPE
+        """
         self.model.compile(
             loss='binary_crossentropy',
             optimizer='adam',
@@ -93,7 +88,6 @@ class Model:
             batch_size=self.batch_size,
             validation_data=(self.data['x_val'], self.data['y_val'])
         )
-
         return history
 
     def __test(self):
@@ -176,15 +170,19 @@ class Model:
         """
         Método que realiza todas as etapas para detecção de Fake News com o modelo
         """
-        print('Criando o modelo... ')
-        self._updateData()
-        self.__create_model()
+        try:
+            print('Criando o modelo %s... ' % self.model_name)
+            self._updateData()
+            self._create_model()
+            self.__compile()
 
-        print('Treinando e validando o modelo... ')
-        history = self.__train()
+            print('Treinando e validando o modelo... ')
+            history = self.__train()
 
-        print('Testando o modelo... ')
-        metrics = self.__test()
+            print('Testando o modelo... ')
+            metrics = self.__test()
 
-        print('Resultados: ')
-        self.__result(history, metrics)
+            print('Resultados: ')
+            self.__result(history, metrics)
+        except Exception as e:
+            print('Erro! %s' % str(e))

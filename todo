@@ -177,3 +177,11 @@ Utilizou ativação RELU em algumas camadas, quais não deu pra entender
 Camada de saída, Sigmóide, com otimizador Adam
 
 
+
++++ Dúvidas
+- keras Dense é o modelo MLP?
+- Dropout se encaixa como uma camada ou não seria bem isso, é algo mais simples?
+- Outra coisa que achei estranho, posso misturar camadas Dense com LSTM, os exemplo de modelos LSTM que achei utilizam Dense
+- O que eu achei estranho, eu posso criar um modelo keras que tem só uma camada, mas na teoria deveria existir pelo menos três, entrada, uma intermediária e saída
+
+
