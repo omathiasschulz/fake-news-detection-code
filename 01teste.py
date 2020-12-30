@@ -5,14 +5,17 @@ from models.ModelMLP import ModelMLP
 from models.ModelLSTM import ModelLSTM
 from sklearn.model_selection import train_test_split
 
-EPOCHS = 2
-BATCH_SIZE = 100
+EPOCHS = 150
+BATCH_SIZE = 2211
 
 
-def main():
-    print('Iniciando a detecção de fake news')
-    inicio = time.time()
+def generateData():
+    """
+    Busca os dados e organiza para utilização nos modelos
 
+    :return: Retorna um dict com os dados
+    :rtype: dict
+    """
     # realiza a leitura do CSV
     df = pd.read_csv('dataset_converted.csv', index_col=0)
     print('Dataset: ')
@@ -44,29 +47,44 @@ def main():
     print('Quantidade de registros para validação: %i ' % len(x_val))
     print('Quantidade de registros para teste: %i ' % len(x_test))
     print('Quantidade de épocas: %i' % EPOCHS)
+    return data
 
-    # # Exemplo MLP
-    # layers = [
-    #     # camada de entrada
-    #     {
-    #         'qtd_neurons': 12,
-    #         'activation': Model.ATIVACAO_RELU,
-    #     },
-    #     # camada intermediária 01
-    #     {
-    #         'qtd_neurons': 8,
-    #         'activation': Model.ATIVACAO_RELU,
-    #     },
-    #     # camada de saída
-    #     {
-    #         'qtd_neurons': 1,
-    #         'activation': Model.ATIVACAO_SIGMOID,
-    #     },
-    # ]
-    # model_mlp = ModelMLP(EPOCHS, BATCH_SIZE, layers, data)
-    # model_mlp.predict()
 
-    # Exemplo LSTM
+def generateMLP(data):
+    """
+    Realiza a detecção de fake news com o modelo MLP
+
+    :param data: Dados utilizados no modelo
+    :type data: dict
+    """
+    layers = [
+        # camada de entrada
+        {
+            'qtd_neurons': 12,
+            'activation': Model.ATIVACAO_RELU,
+        },
+        # camada intermediária 01
+        {
+            'qtd_neurons': 8,
+            'activation': Model.ATIVACAO_RELU,
+        },
+        # camada de saída
+        {
+            'qtd_neurons': 1,
+            'activation': Model.ATIVACAO_SIGMOID,
+        },
+    ]
+    model_mlp = ModelMLP(EPOCHS, BATCH_SIZE, layers, data)
+    model_mlp.predict()
+
+
+def generateLSTM(data):
+    """
+    Realiza a detecção de fake news com o modelo LSTM
+
+    :param data: Dados utilizados no modelo
+    :type data: dict
+    """
     layers = [
         # camada de entrada
         {
@@ -95,6 +113,15 @@ def main():
     ]
     model_lstm = ModelLSTM(EPOCHS, BATCH_SIZE, layers, data)
     model_lstm.predict()
+
+
+def main():
+    print('Iniciando a detecção de fake news')
+    inicio = time.time()
+
+    data = generateData()
+    generateMLP(data)
+    generateLSTM(data)
 
     fim = time.time()
     print('Detecção de fake news realizada com sucesso! ')
