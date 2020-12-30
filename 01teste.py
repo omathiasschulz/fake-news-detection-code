@@ -1,10 +1,9 @@
 import time
 import pandas as pd
-from models.MLP import MLP
+from models.ModelMLP import ModelMLP
 from models.ModelLSTM import ModelLSTM
 from sklearn.model_selection import train_test_split
 
-VECTOR_DIMENSION = 300
 EPOCHS = 2
 BATCH_SIZE = 10
 
@@ -50,26 +49,26 @@ layers = [
     # camada de entrada
     {
         'qtd_neurons': 12,
-        'activation': MLP.RELU,
+        'activation': ModelMLP.RELU,
     },
     # camada intermediária 01
     {
         'qtd_neurons': 8,
-        'activation': MLP.RELU,
+        'activation': ModelMLP.RELU,
     },
     # camada de saída
     {
         'qtd_neurons': 1,
-        'activation': MLP.SIGMOID,
+        'activation': ModelMLP.SIGMOID,
     },
 ]
 
 # # cria o modelo e inicia a detecção
-# model_mlp = MLP(VECTOR_DIMENSION, EPOCHS, layers, data)
+# model_mlp = ModelMLP(VECTOR_DIMENSION, EPOCHS, layers, data)
 # model_mlp.predict()
 
 # cria o modelo e inicia a detecção
-model_lstm = ModelLSTM(VECTOR_DIMENSION, EPOCHS, BATCH_SIZE, layers, data)
+model_lstm = ModelLSTM(EPOCHS, BATCH_SIZE, layers, data)
 model_lstm.predict()
 
 fim = time.time()

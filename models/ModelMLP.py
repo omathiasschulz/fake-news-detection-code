@@ -15,7 +15,7 @@ def rmseMetric(y_true, y_pred):
     return backend.sqrt(backend.mean(backend.square(y_pred - y_true), axis=-1))
 
 
-class MLP:
+class ModelMLP:
     """
     Classe que representa o modelo MLP
     """
@@ -67,7 +67,7 @@ class MLP:
             input_layer['qtd_neurons'],
             kernel_initializer='uniform',
             activation=input_layer['activation'],
-            input_dim=self.input_dimension,
+            input_dim=self.data['x_train'].shape[1],
         ))
 
         # insere as camadas intermediárias e de saída

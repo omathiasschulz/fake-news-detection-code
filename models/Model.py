@@ -27,12 +27,12 @@ class Model:
     LEAKY_RELU = 'leaky relu'
     ELU = 'elu'
 
-    def __init__(self, input_dimension, epochs, batch_size, layers, data, path_graphics):
+    def __init__(self, model_name, epochs, batch_size, layers, data, path_graphics):
         """
         Construtor da classe
 
-        :param input_dimension: Quantidade de parâmetros de entrada para o modelo
-        :type input_dimension: int
+        :param model_name: Nome do modelo que foi instanciado
+        :type model_name: str
         :param epochs: Número de épocas para realizar o treinamento
         :type epochs: int
         :param batch_size: Número de exemplos de treinamento usados em uma iteração
@@ -45,7 +45,7 @@ class Model:
         :param path_graphics: Diretório para salvar os gráficos gerados
         :type path_graphics: str
         """
-        self.input_dimension = input_dimension
+        self.model_name = model_name
         self.epochs = epochs
         self.batch_size = batch_size
         self.layers = layers
@@ -72,9 +72,10 @@ class Model:
         # instacia o modelo
         self.model = Sequential()
 
+        # input_shape=(NUM_ENTRADAS, QTD_INFO_POR_ENTRADA)
         self.model.add(LSTM(4, input_shape=(self.data['x_train'].shape[1], self.data['x_train'].shape[2])))
 
-        # compilação do modelo com as métricas: R2, RMSE e MAPE
+        # compilação do modelo com as métricas: Acurácia, RMSE e MAPE
         self.model.compile(
             loss='binary_crossentropy',
             optimizer='adam',
@@ -127,9 +128,9 @@ class Model:
         :param metrics: Resultado obtido pelas métricas
         :type metrics: dict
         """
-        print('=> Modelo')
+        print('=> Modelo ' + self.model_name)
         for key, layer in enumerate(self.layers):
-            print('Camada %i: ' % (key + 1), end='')
+            print('camada_%i: ' % (key + 1), end='')
             print('qtd_neurons: %i; ' % layer['qtd_neurons'], end='')
             print('activation_fn: %s; ' % layer['activation'])
 
@@ -146,7 +147,7 @@ class Model:
 
         plt.plot(history.history['rmseMetric'])
         plt.plot(history.history['val_rmseMetric'])
-        plt.title('RMSE - Treinamento e validação')
+        plt.title(self.model_name + ' - RMSE')
         plt.xlabel('Épocas')
         plt.ylabel('RMSE')
         plt.legend(['Treinamento', 'Validação'], loc='upper left')
@@ -155,7 +156,7 @@ class Model:
 
         plt.plot(history.history['mape'])
         plt.plot(history.history['val_mape'])
-        plt.title('MAPE')
+        plt.title(self.model_name + ' - MAPE')
         plt.xlabel('Épocas')
         plt.ylabel('MAPE')
         plt.legend(['Treinamento', 'Validação'], loc='upper left')
@@ -164,11 +165,11 @@ class Model:
 
         plt.plot(history.history['accuracy'])
         plt.plot(history.history['val_accuracy'])
-        plt.title('R2 - Treinamento e validação')
+        plt.title(self.model_name + ' - Acurácia')
         plt.xlabel('Épocas')
-        plt.ylabel('R2')
+        plt.ylabel('Acurácia')
         plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        plt.savefig(self.path_graphics + 'r2.png')
+        plt.savefig(self.path_graphics + 'acuracia.png')
         plt.close()
 
     def predict(self):

@@ -6,12 +6,10 @@ class ModelLSTM(Model):
     Classe que representa o modelo LSTM
     """
 
-    def __init__(self, input_dimension, epochs, batch_size, layers, data):
+    def __init__(self, epochs, batch_size, layers, data):
         """
         Construtor da classe
 
-        :param input_dimension: Quantidade de parâmetros de entrada para o modelo
-        :type input_dimension: int
         :param epochs: Número de épocas para realizar o treinamento
         :type epochs: int
         :param batch_size: Número de exemplos de treinamento usados em uma iteração
@@ -22,7 +20,7 @@ class ModelLSTM(Model):
         :param data: Dados utilizados na detecção
         :type data: dict
         """
-        super().__init__(input_dimension, epochs, batch_size, layers, data, 'graphics/lstm/')
+        super().__init__('LSTM', epochs, batch_size, layers, data, 'graphics/lstm/')
 
     def _updateData(self):
         """
