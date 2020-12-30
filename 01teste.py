@@ -116,6 +116,9 @@ def generateLSTM(data):
 
 
 def main():
+    """
+    Método main do script
+    """
     print('Iniciando a detecção de fake news')
     inicio = time.time()
 
