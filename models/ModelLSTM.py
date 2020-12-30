@@ -7,7 +7,7 @@ import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 from keras.models import Sequential
-from keras.layers import Dense, LSTM
+from keras.layers import Dense, LSTM, Dropout
 from pathlib import Path
 from keras import backend
 from models.Model import Model, rmseMetric
@@ -68,31 +68,37 @@ class ModelLSTM(Model):
 
         # insere a camada de entrada
         input_layer = layers.pop(0)
-        if input_layer['type'] == self.LAYER_MLP:
-            self.model.add(Dense(
-                input_layer['qtd_neurons'],
-                kernel_initializer='uniform',
-                activation=input_layer['activation'],
-                input_dim=self.data['x_train'].shape[1],
-            ))
-        elif input_layer['type'] == self.LAYER_LSTM:
-            print('return_sequences')
-            print(True if input_layer['return_sequences'] else False)
-            self.model.add(LSTM(
-                input_layer['qtd_neurons'],
-                kernel_initializer='uniform',
-                activation=input_layer['activation'],
-                # input_shape=(NUM_ENTRADAS, QTD_INFO_POR_ENTRADA)
-                input_shape=(self.data['x_train'].shape[1], self.data['x_train'].shape[2]),
-                return_sequences=True if input_layer['return_sequences'] else False
-            ))
-        else:
-            raise Exception('Camada de entrada inválida! ')
+        self.model.add(LSTM(
+            input_layer['qtd_neurons'],
+            kernel_initializer='uniform',
+            activation=input_layer['activation'],
+            # input_shape=(NUM_ENTRADAS, QTD_INFO_POR_ENTRADA)
+            input_shape=(self.data['x_train'].shape[1], self.data['x_train'].shape[2]),
+            return_sequences=True if input_layer.get('return_sequences') else False
+        ))
 
         # insere as camadas intermediárias e de saída
         for layer in layers:
-            self.model.add(Dense(
-                layer['qtd_neurons'],
-                kernel_initializer='uniform',
-                activation=layer['activation'],
-            ))
+            # valida se é uma camada LSTM
+            if layer['type'] == Model.LAYER_LSTM:
+                self.model.add(LSTM(
+                    layer['qtd_neurons'],
+                    kernel_initializer='uniform',
+                    activation=layer['activation'],
+                    # input_shape=(NUM_ENTRADAS, QTD_INFO_POR_ENTRADA)
+                    return_sequences=True if layer.get('return_sequences') else False
+                ))
+                continue
+            # valida se é uma camada MLP
+            if layer['type'] == Model.LAYER_MLP:
+                self.model.add(Dense(
+                    layer['qtd_neurons'],
+                    kernel_initializer='uniform',
+                    activation=layer['activation'],
+                ))
+                continue
+            # valida se é uma camada de DROPOUT
+            if layer['type'] == Model.LAYER_DROPOUT:
+                self.model.add(Dropout(layer['value']))
+                continue
+            raise Exception('Camada inválida! ')

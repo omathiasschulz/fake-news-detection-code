@@ -125,8 +125,7 @@ class Model:
         print('=> Modelo ' + self.model_name)
         for key, layer in enumerate(self.layers):
             print('camada_%i: ' % (key + 1), end='')
-            print('qtd_neurons: %i; ' % layer['qtd_neurons'], end='')
-            print('activation_fn: %s; ' % layer['activation'])
+            print(layer)
 
         print('=> Métricas')
         # quanto menor a perda, mais próximas nossas previsões são dos rótulos verdadeiros.

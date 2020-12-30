@@ -6,7 +6,7 @@ from models.ModelLSTM import ModelLSTM
 from sklearn.model_selection import train_test_split
 
 EPOCHS = 2
-BATCH_SIZE = 1
+BATCH_SIZE = 100
 
 
 def main():
@@ -45,30 +45,56 @@ def main():
     print('Quantidade de registros para teste: %i ' % len(x_test))
     print('Quantidade de épocas: %i' % EPOCHS)
 
-    # Exemplo MLP
+    # # Exemplo MLP
+    # layers = [
+    #     # camada de entrada
+    #     {
+    #         'qtd_neurons': 12,
+    #         'activation': Model.ATIVACAO_RELU,
+    #     },
+    #     # camada intermediária 01
+    #     {
+    #         'qtd_neurons': 8,
+    #         'activation': Model.ATIVACAO_RELU,
+    #     },
+    #     # camada de saída
+    #     {
+    #         'qtd_neurons': 1,
+    #         'activation': Model.ATIVACAO_SIGMOID,
+    #     },
+    # ]
+    # model_mlp = ModelMLP(EPOCHS, BATCH_SIZE, layers, data)
+    # model_mlp.predict()
+
+    # Exemplo LSTM
     layers = [
         # camada de entrada
         {
+            # a primeira camada sempre é LSTM
             'qtd_neurons': 12,
             'activation': Model.ATIVACAO_RELU,
+            'return_sequences': True,
         },
         # camada intermediária 01
         {
+            'type': Model.LAYER_DROPOUT,
+            'value': 0.2,
+        },
+        # camada intermediária 02
+        {
+            'type': Model.LAYER_LSTM,
             'qtd_neurons': 8,
             'activation': Model.ATIVACAO_RELU,
         },
         # camada de saída
         {
+            'type': Model.LAYER_MLP,
             'qtd_neurons': 1,
             'activation': Model.ATIVACAO_SIGMOID,
         },
     ]
-    model_mlp = ModelMLP(EPOCHS, BATCH_SIZE, layers, data)
-    model_mlp.predict()
-
-    # # cria o modelo e inicia a detecção
-    # model_lstm = ModelLSTM(EPOCHS, BATCH_SIZE, layers, data)
-    # model_lstm.predict()
+    model_lstm = ModelLSTM(EPOCHS, BATCH_SIZE, layers, data)
+    model_lstm.predict()
 
     fim = time.time()
     print('Detecção de fake news realizada com sucesso! ')
