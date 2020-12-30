@@ -13,7 +13,7 @@ def constructSentences(data):
     """
     sentences = []
     for index, row in data.iteritems():
-        # Converte para um formato legível para o computador
+        # converte para um formato legível para o computador
         sentences.append(TaggedDocument(utils.to_unicode(row).split(), [str(index)]))
     return sentences
 

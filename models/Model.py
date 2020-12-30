@@ -85,7 +85,8 @@ class Model:
             self.data['x_train'],
             self.data['y_train'],
             epochs=self.epochs,
-            batch_size=self.batch_size,
+            # TODO - batch_size comentado pois ainda será analisado se é realmente necessário
+            # batch_size=None,
             validation_data=(self.data['x_val'], self.data['y_val'])
         )
         return history

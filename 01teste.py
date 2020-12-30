@@ -5,8 +5,8 @@ from models.ModelMLP import ModelMLP
 from models.ModelLSTM import ModelLSTM
 from sklearn.model_selection import train_test_split
 
-EPOCHS = 150
-BATCH_SIZE = 2211
+EPOCHS = 6
+BATCH_SIZE = 1
 
 
 def generateData():
