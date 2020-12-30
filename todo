@@ -1,0 +1,187 @@
+
+
+
++++ ANALISE DE DADOS
+
+- Tamanho dos textos por tipo de notícia fake/true
+
+- Work cloud of fake news
+
+- Work cloud of true news
+
+- Exemplos de stopwords
+
+- Listar o top 25 palavras nos textos: Todos, true e false
+from collections import Counter 
+counter = Counter(all_words)
+counter.most_common(25)
+counted_words = Counter(all_words)
+words = []
+counts = []
+for letter, count in counted_words.most_common(25):
+    words.append(letter)
+    counts.append(count)
+colors = cm.rainbow(np.linspace(0, 1, 10))
+rcParams['figure.figsize'] = 20, 10
+plt.title('Top words in Text')
+plt.xlabel('Count')
+plt.ylabel('Words')
+plt.barh(words, counts, color=colors)
+
+- Exemplos de palavras semelhantes
+w2v_model.wv.most_similar("fbi")
+
+
+
++++ MODELO LSTM
+Adicionei uma camada de Dropout para mitigar problemas de sobreajuste
+
+Uma adição à configuração necessária é que uma camada LSTM antes de cada camada LSTM subsequente retorne a sequência,
+o que pode ser feito definindo o parâmetro “return_sequences = True” na(s) camada(s) anterior(es).
+
+LSTM EXEMPLOS
+
+        # # Create model
+        # model = Sequential()
+        # model.add(LSTM(units=32, activation='relu',
+        #                input_shape=(100, 1000))  # the batch size is neglected!
+        # model.add(Dense(3, activation='softmax'))
+        #
+        # model.compile(loss='categorical_crossentropy', optimizer='adam',
+        #               metrics=['accuracy'])
+        #
+        # # EXEMPLO
+        # model = Sequential()
+        # model.add(Embedding(vocabulary, hidden_size, input_length=num_steps))
+        # model.add(LSTM(hidden_size, return_sequences=True))
+        # model.add(LSTM(hidden_size, return_sequences=True))
+        # if use_dropout:
+        #     model.add(Dropout(0.5))
+        # model.add(TimeDistributed(Dense(vocabulary)))
+        # model.add(Activation('softmax'))
+        #
+        # # EXEMPLO
+        # NUM_NEURONS_FirstLayer = 128
+        # NUM_NEURONS_SecondLayer = 64
+        # EPOCHS = 220
+        # # Build the model
+        # model = Sequential()
+        # model.add(LSTM(NUM_NEURONS_FirstLayer, input_shape=(look_back, 1), return_sequences=True))
+        # model.add(LSTM(NUM_NEURONS_SecondLayer, input_shape=(NUM_NEURONS_FirstLayer, 1)))
+        # model.add(Dense(foward_days))
+        # model.compile(loss='mean_squared_error', optimizer='adam')
+        # history = model.fit(X_train, y_train, epochs=EPOCHS, validation_data=(X_validate, y_validate), shuffle=True,
+        #                     batch_size=2, verbose=2)
+        #
+        # # EXEMPLO
+        # input = Input(shape=(1, 58))
+        # x = LSTM(200, dropout=.0)(input)
+        # x = Dropout(.5)(x)
+        # activation = Dense(1, activation='linear')(x)
+        # model = Model(inputs=input, outputs=activation)
+        #
+        # optimizer = keras.optimizers.Adam(lr=0.01,
+        #                                   beta_1=0.9,
+        #                                   beta_2=0.999,
+        #                                   epsilon=None,
+        #                                   decay=0.001,
+        #                                   amsgrad=False)
+        #
+        # model.compile(loss='mean_absolute_error', optimizer=optimizer)
+        # model.summary()
+
+
+
++++ SAVE MODEL
+#
+# # Definir modelo
+# model = Sequential()
+# model.add(LSTM(...))
+# # Compilar modelo
+# model.compile(...)
+# # Ajustar modelo
+# model.fit(...)
+# # Salvar modelo em arquivo
+# model.save('nome_arquivo.h5')
+#
+# from keras.models import load_model
+# # Carregar modelo de arquivo
+# model = load_model('nome_arquivo.h5')
+
+
+
++++ Funções de Ativação
+Começar com a função ReLU e depois passar para outras funções de ativação no caso da ReLU não forneça resultados ótimos
+De uma forma geral devemos preferir ELU > leaky ReLU > ReLU >> tanh > sigmoide
+As funções ReLU, Leaky ReLU e ELU são muito melhores do que as funções sigmoidais
+Quanto às ativações sigmoidais, a função TanH é significantemente melhor do que a Sigmoide
+-- Sigmóide
+Funciona melhor no caso de classificadores
+Às vezes é evitada devido ao problema de Vanishing Gradient
+-- Tanh
+Às vezes é evitada devido ao problema de Vanishing Gradient
+-- ReLU
+Função de ativação geral, utilizada na maioria dos casos atualmente
+Deve ser usada apenas nas camadas ocultas
+-- Leaky ReLU
+Boa para casos com neurônios deficientes nas redes
+
+
+
++++ Métricas
+
+Precision, Recall, F1, Confusion Matrix => https://www.kaggle.com/imranzaman5202/fake-news-detection-with-nlp-ensemble-learning
+
+- Precision
+
+- Recall
+A recuperação, também conhecida como sensibilidade, é a fração de ocorrências significativas que foram recuperadas sobre a quantidade total de ocorrências relevantes.
+
+- F1-Score
+Pontuação F também pontuação F ou medida F é uma medida da precisão de um teste para classificação binária.
+
+- Accuracy
+
+- Matriz de Confusão
+0 é negativo e 1 é positivo.
+Verdadeiro Negativo (TN): A previsão foi negativa e os casos de teste também foram negativos;
+Verdadeiro Positivo (TP): A previsão foi positiva e os casos de teste também foram positivos;
+Falso negativo (FN): A previsão foi negativa, mas os casos de teste foram realmente positivos;
+Falso Positivo (FP): A previsão foi positiva, mas os casos de teste foram realmente negativos;
+
+from sklearn.metrics import classification_report
+print(classification_report(y_test, y_pred))
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99      5899
+           1       0.99      0.99      0.99      5326
+
+    accuracy                           0.99     11225
+   macro avg       0.99      0.99      0.99     11225
+weighted avg       0.99      0.99      0.99     11225
+
+
+
+
+
+
+
++++ Montagem dos modelos
+Utilizaram bastante a função de ativação ReLU
+- 1
+A saída do LSTM bidirecional passou por três camadas densas (512, 128, 4 unidades) separadas por um dropout.
+Usando a função de ativação soft-max na camada de saída, o resultado é uma classificação de postura (não relacionada, concordar, discordar ou discutir)
+Adam optimizer
+- 2
+Utilizou ativação RELU em algumas camadas, quais não deu pra entender
+Camada de saída, Sigmóide, com otimizador Adam
+
+
+
++++ Dúvidas
+- keras Dense é o modelo MLP?
+- Dropout se encaixa como uma camada ou não seria bem isso, é algo mais simples?
+- Outra coisa que achei estranho, posso misturar camadas Dense com LSTM, os exemplo de modelos LSTM que achei utilizam Dense
+- O que eu achei estranho, eu posso criar um modelo keras que tem só uma camada, mas na teoria deveria existir pelo menos três, entrada, uma intermediária e saída
+
+
