@@ -30,18 +30,14 @@ class Model:
     ATIVACAO_LEAKY_RELU = 'leaky relu'
     ATIVACAO_ELU = 'elu'
 
-    def __init__(self, model_name, epochs, batch_size, layers, data, path_graphics):
+    def __init__(self, model_name, info, data, path_graphics):
         """
         Construtor da classe
 
         :param model_name: Nome do modelo que foi instanciado
         :type model_name: str
-        :param epochs: Número de épocas para realizar o treinamento
-        :type epochs: int
-        :param batch_size: Número de exemplos de treinamento usados em uma iteração
-        :type batch_size: int
-        :param layers: Array de camadas que possui diferentes formatos de acordo com o modelo
-        :type layers: list
+        :param info: Dict com as informações epochs, batch_size e layers para montar o modelo
+        :type info: dict
         :param data: Dados utilizados na detecção
         :type data: dict
         :param path_graphics: Diretório para salvar os gráficos gerados
@@ -49,9 +45,9 @@ class Model:
         """
         self.model = None
         self.model_name = model_name
-        self.epochs = epochs
-        self.batch_size = batch_size
-        self.layers = layers
+        self.epochs = info['epochs']
+        self.batch_size = info['batch_size'] if info.get('batch_size') else None
+        self.layers = info['layers']
         self.data = data
         self.path_graphics = path_graphics
 
@@ -85,8 +81,7 @@ class Model:
             self.data['x_train'],
             self.data['y_train'],
             epochs=self.epochs,
-            # TODO - batch_size comentado pois ainda será analisado se é realmente necessário
-            # batch_size=None,
+            batch_size=self.batch_size,
             validation_data=(self.data['x_val'], self.data['y_val'])
         )
         return history

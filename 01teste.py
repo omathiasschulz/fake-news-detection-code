@@ -5,9 +5,6 @@ from models.ModelMLP import ModelMLP
 from models.ModelLSTM import ModelLSTM
 from sklearn.model_selection import train_test_split
 
-EPOCHS = 6
-BATCH_SIZE = 1
-
 
 def generateData():
     """
@@ -46,7 +43,6 @@ def generateData():
     print('Quantidade de registros para treino: %i ' % len(x_train))
     print('Quantidade de registros para validação: %i ' % len(x_val))
     print('Quantidade de registros para teste: %i ' % len(x_test))
-    print('Quantidade de épocas: %i' % EPOCHS)
     return data
 
 
@@ -57,24 +53,28 @@ def generateMLP(data):
     :param data: Dados utilizados no modelo
     :type data: dict
     """
-    layers = [
-        # camada de entrada
-        {
-            'qtd_neurons': 12,
-            'activation': Model.ATIVACAO_RELU,
-        },
-        # camada intermediária 01
-        {
-            'qtd_neurons': 8,
-            'activation': Model.ATIVACAO_RELU,
-        },
-        # camada de saída
-        {
-            'qtd_neurons': 1,
-            'activation': Model.ATIVACAO_SIGMOID,
-        },
-    ]
-    model_mlp = ModelMLP(EPOCHS, BATCH_SIZE, layers, data)
+    model = {
+        'epochs': 6,
+        'batch_size': 1,
+        'layers': [
+            # camada de entrada
+            {
+                'qtd_neurons': 12,
+                'activation': Model.ATIVACAO_RELU,
+            },
+            # camada intermediária 01
+            {
+                'qtd_neurons': 8,
+                'activation': Model.ATIVACAO_RELU,
+            },
+            # camada de saída
+            {
+                'qtd_neurons': 1,
+                'activation': Model.ATIVACAO_SIGMOID,
+            },
+        ]
+    }
+    model_mlp = ModelMLP(model, data)
     model_mlp.predict()
 
 
@@ -85,33 +85,36 @@ def generateLSTM(data):
     :param data: Dados utilizados no modelo
     :type data: dict
     """
-    layers = [
-        # camada de entrada
-        {
-            # a primeira camada sempre é LSTM
-            'qtd_neurons': 12,
-            'activation': Model.ATIVACAO_RELU,
-            'return_sequences': True,
-        },
-        # camada intermediária 01
-        {
-            'type': Model.LAYER_DROPOUT,
-            'value': 0.2,
-        },
-        # camada intermediária 02
-        {
-            'type': Model.LAYER_LSTM,
-            'qtd_neurons': 8,
-            'activation': Model.ATIVACAO_RELU,
-        },
-        # camada de saída
-        {
-            'type': Model.LAYER_MLP,
-            'qtd_neurons': 1,
-            'activation': Model.ATIVACAO_SIGMOID,
-        },
-    ]
-    model_lstm = ModelLSTM(EPOCHS, BATCH_SIZE, layers, data)
+    model = {
+        'epochs': 6,
+        'layers': [
+            # camada de entrada
+            {
+                # a primeira camada sempre é LSTM
+                'qtd_neurons': 12,
+                'activation': Model.ATIVACAO_RELU,
+                'return_sequences': True,
+            },
+            # camada intermediária 01
+            {
+                'type': Model.LAYER_DROPOUT,
+                'value': 0.2,
+            },
+            # camada intermediária 02
+            {
+                'type': Model.LAYER_LSTM,
+                'qtd_neurons': 8,
+                'activation': Model.ATIVACAO_RELU,
+            },
+            # camada de saída
+            {
+                'type': Model.LAYER_MLP,
+                'qtd_neurons': 1,
+                'activation': Model.ATIVACAO_SIGMOID,
+            },
+        ]
+    }
+    model_lstm = ModelLSTM(model, data)
     model_lstm.predict()
 
 
@@ -124,7 +127,7 @@ def main():
 
     data = generateData()
     generateMLP(data)
-    # generateLSTM(data)
+    generateLSTM(data)
 
     fim = time.time()
     print('Detecção de fake news realizada com sucesso! ')

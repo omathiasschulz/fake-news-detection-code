@@ -8,21 +8,18 @@ class ModelMLP(Model):
     Classe que representa o modelo MLP
     """
 
-    def __init__(self, epochs, batch_size, layers, data):
+    def __init__(self, info, data):
         """
         Construtor da classe
 
-        :param epochs: Número de épocas para realizar o treinamento
-        :type epochs: int
-        :param batch_size: Número de exemplos de treinamento usados em uma iteração
-        :type batch_size: int
-        :param layers: Camadas para montar o modelo no formato:
+        :param info: Dict com as informações epochs, batch_size e layers para montar o modelo
+            As camadas para montar o modelo estão no formato:
             [{'qtd_neurons': qtd_neuronios, 'activation': 'funcao_ativacao',}]
-        :type layers: list
+        :type info: dict
         :param data: Dados utilizados na detecção
         :type data: dict
         """
-        super().__init__('MLP', epochs, batch_size, layers, data, 'graphics/mlp/')
+        super().__init__('MLP', info, data, 'graphics/mlp/')
 
     def _create_model(self):
         """
