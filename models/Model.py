@@ -1,9 +1,13 @@
 import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 from pathlib import Path
 from keras import backend
+from sklearn.metrics import classification_report, confusion_matrix
 matplotlib.use('Agg')
+# setando um estilo padrão
+sns.set_style('darkgrid')
 
 
 def rmseMetric(y_true, y_pred):
@@ -94,11 +98,11 @@ class Model:
         loss, accuracy_model, rmse, mape = self.model.evaluate(self.data['x_test'], self.data['y_test'])
 
         # gera as detecções se cada notícia é fake ou não
-        detections = self.model.predict(self.data['x'])
+        predict = self.model.predict(self.data['x'])
 
         # valida a acurácia das detecções
-        rounded = [round(x[0]) for x in detections]
-        accuracy_detection = np.mean(rounded == self.data['y'])
+        self.predictRounded = [round(x[0]) for x in predict]
+        accuracy_detection = np.mean(self.predictRounded == self.data['y'])
 
         # monta um dict das métricas e retorna
         return {
@@ -129,11 +133,21 @@ class Model:
         print('accuracy_model(%%): %.2f; ' % (metrics['accuracy_model'] * 100), end='')
         print('accuracy_detection(%%): %.2f; ' % (metrics['accuracy_detection'] * 100), end='')
         print('mape: %.2f; ' % metrics['mape'], end='')
-        print('rmse: %.2f; \n' % metrics['rmse'])
+        print('rmse: %.2f; \n' % metrics['rmse'], end='')
+        print('confusion_matrix:')
+        cm = confusion_matrix(self.data['y'], self.predictRounded)
+        print(cm)
 
-        # # Apresentação dos gráficos de treinamento e validação da rede
-        # Path(self.path_graphics).mkdir(parents=True, exist_ok=True)
-        #
+        # Apresentação dos gráficos de treinamento e validação da rede
+        Path(self.path_graphics).mkdir(parents=True, exist_ok=True)
+
+        sns_plot = sns.heatmap(cm, annot=True)
+        sns_plot.set_title('Matriz de Confusão')
+        sns_plot.set_xlabel('Valores Preditos')
+        sns_plot.set_ylabel('Valores Reais')
+        plt.savefig(self.path_graphics + 'cm.png')
+        plt.close()
+
         # plt.plot(history.history['rmseMetric'])
         # plt.plot(history.history['val_rmseMetric'])
         # plt.title(self.model_name + ' - RMSE')
