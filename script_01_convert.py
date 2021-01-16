@@ -115,7 +115,7 @@ def main():
 
         fim = time.time()
         print('CSVs com os textos formatados criados com sucesso! ')
-        print('Tempo de execução: %f minutos' % ((fim - inicio) / 60))
+        print('Tempo de execução: %.2f minutos' % ((fim - inicio) / 60))
     except Exception as e:
         print('Falha ao gerar CSV: %s' % str(e))
 
