@@ -5,7 +5,7 @@ from gensim.models import Doc2Vec
 from gensim.models.doc2vec import TaggedDocument
 
 # lista de CSVs com os tamanhos correspondentes que serão convertidos
-TEXT_LENGTH = [0, 50, 100, 150, 200]
+TEXT_LENGTH = [50, 100, 150, 200]
 PATH_DATASETS_FORMATTED = 'datasets/formatted/'
 PATH_DATASETS_CONVERTED = 'datasets/converted/'
 
