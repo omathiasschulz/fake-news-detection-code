@@ -1,0 +1,16 @@
+
+# Teste MLP 2021-01-18 09:09:34.329177
+camadas: 1: {"qtd_neurons": 12, "activation": "relu"} 2: {"qtd_neurons": 8, "activation": "relu"} 3: {"qtd_neurons": 1, "activation": "sigmoid"}
+métricas: loss: 0.19; accuracy_model(%): 93.84; accuracy_detection(%): 96.47; mape: 42779976.00; rmse: 0.07; confusion_matrix: 3430-169-73-3181;
+
+# Teste MLP 2021-01-18 09:11:30.471965
+camadas: 1: {"qtd_neurons": 12, "activation": "relu"} 2: {"qtd_neurons": 8, "activation": "relu"} 3: {"qtd_neurons": 1, "activation": "sigmoid"}
+métricas: loss: 0.20; accuracy_model(%): 91.61; accuracy_detection(%): 95.39; mape: 57022300.00; rmse: 0.09; confusion_matrix: 3423-153-85-1505;
+
+# Teste MLP 2021-01-18 09:13:04.087999
+camadas: 1: {"qtd_neurons": 12, "activation": "relu"} 2: {"qtd_neurons": 8, "activation": "relu"} 3: {"qtd_neurons": 1, "activation": "sigmoid"}
+métricas: loss: 0.17; accuracy_model(%): 94.68; accuracy_detection(%): 95.76; mape: 40792128.00; rmse: 0.08; confusion_matrix: 3424-96-81-569;
+
+# Teste MLP 2021-01-18 09:14:29.014998
+camadas: 1: {"qtd_neurons": 12, "activation": "relu"} 2: {"qtd_neurons": 8, "activation": "relu"} 3: {"qtd_neurons": 1, "activation": "sigmoid"}
+métricas: loss: 0.13; accuracy_model(%): 97.30; accuracy_detection(%): 96.35; mape: 25472528.00; rmse: 0.04; confusion_matrix: 3362-70-65-202;

@@ -6,7 +6,7 @@ from models.ModelLSTM import ModelLSTM
 from sklearn.model_selection import train_test_split
 
 
-def generateData():
+def generateData(csv_name):
     """
     Busca os dados e organiza para utilização nos modelos
 
@@ -14,7 +14,7 @@ def generateData():
     :rtype: dict
     """
     # realiza a leitura do CSV
-    df = pd.read_csv('dataset_converted.csv', index_col=0)
+    df = pd.read_csv(csv_name, index_col=0)
     print('Dataset: ')
     print(df.head())
 
@@ -54,7 +54,7 @@ def generateMLP(data):
     :type data: dict
     """
     model = {
-        'epochs': 6,
+        'epochs': 50,
         'batch_size': 1,
         'layers': [
             # camada de entrada
@@ -118,6 +118,11 @@ def generateLSTM(data):
     model_lstm.predict()
 
 
+TEXT_LENGTH = [50, 100, 150, 200]
+PATH_DATASETS_FORMATTED = 'datasets/formatted/'
+PATH_DATASETS_CONVERTED = 'datasets/converted/'
+
+
 def main():
     """
     Método main do script
@@ -125,8 +130,12 @@ def main():
     print('Iniciando a detecção de fake news')
     inicio = time.time()
 
-    data = generateData()
-    generateMLP(data)
+    # realiza um teste de um mesmo modelo nos 4 datasets com tamanho dos textos variados
+    for dataset_atual in TEXT_LENGTH:
+        dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % dataset_atual
+        print('\n\n' + dataset_nome)
+        data = generateData(dataset_nome)
+        generateMLP(data)
     # generateLSTM(data)
 
     fim = time.time()
