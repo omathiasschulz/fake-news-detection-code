@@ -1,7 +1,9 @@
+import json
 import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from datetime import datetime
 from pathlib import Path
 from keras import backend
 from sklearn.metrics import classification_report, confusion_matrix
@@ -122,31 +124,40 @@ class Model:
         :param metrics: Resultado obtido pelas métricas
         :type metrics: dict
         """
-        print('=> Modelo ' + self.model_name)
+        result = '\n# Teste ' + self.model_name + ' ' + str(datetime.now()) + '\n'
+        result += 'camadas:'
         for key, layer in enumerate(self.layers):
-            print('camada_%i: ' % (key + 1), end='')
-            print(layer)
+            result += ' %i: ' % (key + 1)
+            result += json.dumps(layer)
 
-        print('=> Métricas')
+        result += '\nmétricas: '
         # quanto menor a perda, mais próximas nossas previsões são dos rótulos verdadeiros.
-        print('loss: %.2f; ' % metrics['loss'], end='')
-        print('accuracy_model(%%): %.2f; ' % (metrics['accuracy_model'] * 100), end='')
-        print('accuracy_detection(%%): %.2f; ' % (metrics['accuracy_detection'] * 100), end='')
-        print('mape: %.2f; ' % metrics['mape'], end='')
-        print('rmse: %.2f; \n' % metrics['rmse'], end='')
-        print('confusion_matrix:')
+        result += 'loss: %.2f; ' % metrics['loss']
+        result += 'accuracy_model(%%): %.2f; ' % (metrics['accuracy_model'] * 100)
+        result += 'accuracy_detection(%%): %.2f; ' % (metrics['accuracy_detection'] * 100)
+        result += 'mape: %.2f; ' % metrics['mape']
+        result += 'rmse: %.2f; ' % metrics['rmse']
+
         cm = confusion_matrix(self.data['y'], self.predictRounded)
-        print(cm)
+        result += 'confusion_matrix: '
+        result += (str(cm[0, 0]) + '-' + str(cm[0, 1]) + '-' + str(cm[1, 0]) + '-' + str(cm[1, 1]) + ';')
+        result += '\n'
 
-        # Apresentação dos gráficos de treinamento e validação da rede
-        Path(self.path_graphics).mkdir(parents=True, exist_ok=True)
+        # apresenta os resultados e também salva no arquivo results.txt
+        print(result)
+        f = open('results/results.txt', 'a')
+        f.write(result)
+        f.close()
 
-        sns_plot = sns.heatmap(cm, annot=True)
-        sns_plot.set_title('Matriz de Confusão')
-        sns_plot.set_xlabel('Valores Preditos')
-        sns_plot.set_ylabel('Valores Reais')
-        plt.savefig(self.path_graphics + 'cm.png')
-        plt.close()
+        # # Apresentação dos gráficos de treinamento e validação da rede
+        # Path(self.path_graphics).mkdir(parents=True, exist_ok=True)
+        #
+        # sns_plot = sns.heatmap(cm, annot=True)
+        # sns_plot.set_title('Matriz de Confusão')
+        # sns_plot.set_xlabel('Valores Preditos')
+        # sns_plot.set_ylabel('Valores Reais')
+        # plt.savefig(self.path_graphics + 'cm.png')
+        # plt.close()
 
         # plt.plot(history.history['rmseMetric'])
         # plt.plot(history.history['val_rmseMetric'])
