@@ -1,197 +1,147 @@
-import time, matplotlib
-import numpy as np
+import time
 import pandas as pd
-import matplotlib.pyplot as plt
-from keras import backend
-from keras.models import Sequential
-from keras.layers import Dense
+from models.Model import Model
+from models.ModelMLP import ModelMLP
+from models.ModelLSTM import ModelLSTM
 from sklearn.model_selection import train_test_split
-from pathlib import Path
-matplotlib.use('Agg')
 
-VECTOR_DIMENSION = 300
-EPOCHS = 150
 
-def rmse(y_true, y_pred):
-    '''
-    Método responsável por realizar o cálculo do RMSE
-    '''
-    return backend.sqrt(backend.mean(backend.square(y_pred - y_true), axis = -1))
+def generateData(csv_name):
+    """
+    Busca os dados e organiza para utilização nos modelos
 
-def createModelMLP(vector_dimension = 300):
-    '''
-    Método responsável por realizar a criação do modelo MLP
-    '''
-    # Variável auxiliar - Quantidade de neurônio da camada de entrada
-    input_layer_quantity_neuron = 12
-    # Variável auxiliar - Quantidade de neurônio das camadas intermediárias
-    hidden_layer_quantity_neuron = 8
-    # Variável auxiliar - Quantidade de camadas intermediárias
-    hidden_layer_quantity = 1
-    # Variável auxiliar - Função de ativação da camada de entrada
-    activation_function_input = 'relu'
-    # Variável auxiliar - Função de ativação da camada intermediária 01
-    activation_function_intermediary_01 = 'relu'
-    # Variável auxiliar - Função de ativação da camada de saída
-    activation_function_output = 'sigmoid'
-
-    # Camada de entrada
-    model = Sequential()
-    model.add(Dense(
-        input_layer_quantity_neuron, 
-        input_dim = vector_dimension, 
-        kernel_initializer = 'uniform', 
-        activation = activation_function_input
-    ))
-
-    # Camada intermediária 01
-    model.add(Dense(
-        hidden_layer_quantity_neuron, 
-        kernel_initializer = 'uniform', 
-        activation = activation_function_intermediary_01
-    ))
-
-    # Camada de saída
-    model.add(Dense(
-        1, 
-        kernel_initializer = 'uniform', 
-        activation = activation_function_output
-    ))
-
-    # Compilação do modelo com as métricas: R2, RMSE e MAPE
-    model.compile(loss = 'binary_crossentropy', optimizer = 'adam', metrics = ['accuracy', rmse, 'mape'])
-
-    return {
-        'model': model,
-        'input_layer_quantity_neuron': input_layer_quantity_neuron,
-        'hidden_layer_quantity_neuron': hidden_layer_quantity_neuron,
-        'hidden_layer_quantity': hidden_layer_quantity,
-        'activation_function_input': activation_function_input,
-        'activation_function_intermediary_01': activation_function_intermediary_01,
-        'activation_function_output': activation_function_output,
-    }
-
-def train(model, x_train, y_train, x_val, y_val, epochs = 150):
-    '''
-    Método responsável por realizar o treinamento e validação do modelo
-    '''
-    history = model.fit(x_train, y_train, epochs = epochs, batch_size = 10, validation_data = (x_val, y_val))
-    return model, history
-
-def test(model, x_test, y_test, x_data, y_data):
-    '''
-    Método responsável por realizar o teste do modelo
-    '''
-    # Avalia o modelo com os dados de teste
-    loss, accuracy_model, rmse, mape = model.evaluate(x_test, y_test)
-    
-    # Gera as detecções se cada notícia é fake ou não
-    detections = model.predict(x_data)
-
-    # Ajusta as detecções
-    rounded = [round(x[0]) for x in detections]
-    accuracy_detection = np.mean(rounded == y_data)
-
-    return loss, accuracy_model, rmse, mape, accuracy_detection
-
-def mlp(x_train, x_val, x_test, y_train, y_val, y_test):
-    '''
-    Método responsável por realizar a detecção de fake news com o modelo MLP
-    '''
-    model_mlp = createModelMLP(VECTOR_DIMENSION)
-
-    # Treinamento e validação do modelo
-    model, history = train(model_mlp['model'], x_train, y_train, x_val, y_val, EPOCHS)
-    # Teste do modelo
-    loss, accuracy_model, rmse, mape, accuracy_detection = test(model, x_test, y_test, x, y)
-
-    print('\n\n# Resultados  modelo MLP ')
-    # Quanto menor a perda, mais próximas nossas previsões são dos rótulos verdadeiros.
-    print('## Métricas')
-    print('Loss: %.2f' % loss)
-    print('R2: %.2f%%' % (accuracy_model * 100))
-    print('R2 Detecções: %.2f%%' % (accuracy_detection * 100))
-    print('MAPE: %.2f' % mape)
-    print('RMSE: %.2f' % rmse)
-
-    print('## Quantidades')
-    print('QTD registros: %i ' % len(x))
-    print('QTD registros treino: %i ' % len(x_train))
-    print('QTD registros validação: %i ' % len(x_val))
-    print('QTD registros teste: %i ' % len(x_test))
-    print('QTD Épocas: %i' % EPOCHS)
-    print('QTD neurônios camada de entrada: %i' % model_mlp['input_layer_quantity_neuron'])
-    print('QTD neurônios camadas intermediárias: %i' % model_mlp['hidden_layer_quantity_neuron'])
-    print('QTD de camadas intermediárias: %i' % model_mlp['hidden_layer_quantity'])
-    print('QTD de camadas intermediárias: %i' % model_mlp['hidden_layer_quantity'])
-    
-    print('## Funções de ativação ')
-    print('Camada de entrada: %s' % model_mlp['activation_function_input'])
-    print('Camada intermediária 01: %s' %  model_mlp['activation_function_intermediary_01'])
-    print('Camada de saída: %s' %  model_mlp['activation_function_output'])
-
-    # Apresentação dos gráficos de treinamento e validação da rede
-    Path('graphics').mkdir(parents=True, exist_ok=True)
-
-    plt.plot(history.history['rmse'])
-    plt.plot(history.history['val_rmse'])
-    plt.title('RMSE - Treinamento e validação')
-    plt.xlabel('Épocas')
-    plt.ylabel('RMSE')
-    plt.legend(['Treinamento', 'Validação'], loc='upper left')
-    plt.savefig('graphics/mlp_rmse.png')
-    plt.close()
-
-    plt.plot(history.history['mape'])
-    plt.plot(history.history['val_mape'])
-    plt.title('MAPE')
-    plt.xlabel('Épocas')
-    plt.ylabel('MAPE')
-    plt.legend(['Treinamento', 'Validação'], loc='upper left')
-    plt.savefig('graphics/mlp_mape.png')
-    plt.close()
-
-    plt.plot(history.history['accuracy'])
-    plt.plot(history.history['val_accuracy'])
-    plt.title('R2 - Treinamento e validação')
-    plt.xlabel('Épocas')
-    plt.ylabel('R2')
-    plt.legend(['Treinamento', 'Validação'], loc='upper left')
-    plt.savefig('graphics/mlp_r2.png')
-    plt.close()
-
-def lstm():
-    # LSTM
-    # https://www.kaggle.com/atishadhikari/fake-news-cleaning-word2vec-lstm-99-accuracy
-    return True
-
-try:
-    print('Iniciando a construção dos modelos para detecção de fake news')
-    inicio = time.time()
-
-    # Realiza a leitura do CSV
-    df = pd.read_csv('dataset_converted.csv', index_col=0)
-
+    :return: Retorna um dict com os dados
+    :rtype: dict
+    """
+    # realiza a leitura do CSV
+    df = pd.read_csv(csv_name, index_col=0)
     print('Dataset: ')
     print(df.head())
 
-    # Realiza a separação do dataset entre X e Y
+    # realiza a separação do dataset entre X e Y
     y = df['fake_news'].to_numpy()
-    df = df.drop(columns=['ID', 'fake_news'])    
+    df = df.drop(columns=['ID', 'fake_news'])
     x = df.to_numpy()
- 
-    # Divisão dos dados
-    # Treinamento => 70%
-    # Validação => 20%
-    # Teste => 10%
-    x_train, x_val, y_train, y_val = train_test_split(x, y, test_size = 0.3)
-    x_val, x_test, y_val, y_test = train_test_split(x_val, y_val, test_size = 0.3)
 
-    # MLP
-    mlp(x_train, x_val, x_test, y_train, y_val, y_test)
+    # divisão dos dados
+    # treinamento => 70% | validação => 20% | teste => 10%
+    x_train, x_val, y_train, y_val = train_test_split(x, y, test_size=0.3)
+    x_val, x_test, y_val, y_test = train_test_split(x_val, y_val, test_size=0.3)
+
+    # agrupa os dados em um dicionário
+    data = {
+        'x': x,
+        'x_train': x_train,
+        'x_val': x_val,
+        'x_test': x_test,
+        'y': y,
+        'y_train': y_train,
+        'y_val': y_val,
+        'y_test': y_test,
+    }
+    print('Quantidade de registros: %i ' % len(x))
+    print('Quantidade de registros para treino: %i ' % len(x_train))
+    print('Quantidade de registros para validação: %i ' % len(x_val))
+    print('Quantidade de registros para teste: %i ' % len(x_test))
+    return data
+
+
+def generateMLP(data):
+    """
+    Realiza a detecção de fake news com o modelo MLP
+
+    :param data: Dados utilizados no modelo
+    :type data: dict
+    """
+    model = {
+        'epochs': 50,
+        'batch_size': 1,
+        'layers': [
+            # camada de entrada
+            {
+                'qtd_neurons': 12,
+                'activation': Model.ATIVACAO_RELU,
+            },
+            # camada intermediária 01
+            {
+                'qtd_neurons': 8,
+                'activation': Model.ATIVACAO_RELU,
+            },
+            # camada de saída
+            {
+                'qtd_neurons': 1,
+                'activation': Model.ATIVACAO_SIGMOID,
+            },
+        ]
+    }
+    model_mlp = ModelMLP(model, data)
+    model_mlp.predict()
+
+
+def generateLSTM(data):
+    """
+    Realiza a detecção de fake news com o modelo LSTM
+
+    :param data: Dados utilizados no modelo
+    :type data: dict
+    """
+    model = {
+        'epochs': 20,
+        'layers': [
+            # camada de entrada
+            {
+                # a primeira camada sempre é LSTM
+                'qtd_neurons': 12,
+                'activation': Model.ATIVACAO_RELU,
+                'return_sequences': True,
+            },
+            # camada intermediária 01
+            {
+                'type': Model.LAYER_DROPOUT,
+                'value': 0.2,
+            },
+            # camada intermediária 02
+            {
+                'type': Model.LAYER_LSTM,
+                'qtd_neurons': 8,
+                'activation': Model.ATIVACAO_RELU,
+            },
+            # camada de saída
+            {
+                'type': Model.LAYER_MLP,
+                'qtd_neurons': 1,
+                'activation': Model.ATIVACAO_SIGMOID,
+            },
+        ]
+    }
+    model_lstm = ModelLSTM(model, data)
+    model_lstm.predict()
+
+
+TEXT_LENGTH = [50, 100, 150, 200]
+PATH_DATASETS_FORMATTED = 'datasets/formatted/'
+PATH_DATASETS_CONVERTED = 'datasets/converted/'
+
+
+def main():
+    """
+    Método main do script
+    """
+    print('Iniciando a detecção de fake news')
+    inicio = time.time()
+
+    # realiza um teste de um mesmo modelo nos 4 datasets com tamanho dos textos variados
+    for dataset_atual in TEXT_LENGTH:
+        dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % dataset_atual
+        print('\n\n' + dataset_nome)
+        data = generateData(dataset_nome)
+        generateMLP(data)
+        generateLSTM(data)
 
     fim = time.time()
-    print('Modelos para detecção de fake news criados com sucesso! ')
-    print('Tempo de execução: %f minutos' %((fim - inicio) / 60))
-except Exception as e:
-    print('Falha ao gerar CSV: %s' %str(e))
+    print('Detecção de fake news realizada com sucesso! ')
+    print('Tempo de execução: %.2f minutos' % ((fim - inicio) / 60))
+
+
+if __name__ == '__main__':
+    main()
