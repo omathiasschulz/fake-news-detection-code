@@ -55,7 +55,7 @@ def generateMLP(data):
     """
     model = {
         'epochs': 50,
-        'batch_size': 1,
+        'batch_size': 10,
         'layers': [
             # camada de entrada
             {
@@ -118,7 +118,9 @@ def generateLSTM(data):
     model_lstm.predict()
 
 
-TEXT_LENGTH = [50, 100, 150, 200]
+# TEXT_LENGTH = [50, 100, 150, 200]
+# utilizando apenas um dataset para testes
+TEXT_LENGTH = [50]
 PATH_DATASETS_FORMATTED = 'datasets/formatted/'
 PATH_DATASETS_CONVERTED = 'datasets/converted/'
 
@@ -136,7 +138,7 @@ def main():
         print('\n\n' + dataset_nome)
         data = generateData(dataset_nome)
         generateMLP(data)
-        generateLSTM(data)
+        # generateLSTM(data)
 
     fim = time.time()
     print('Detecção de fake news realizada com sucesso! ')

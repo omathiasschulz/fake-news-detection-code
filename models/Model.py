@@ -1,12 +1,13 @@
 import json
 import matplotlib
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from datetime import datetime
 from pathlib import Path
 from keras import backend
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import confusion_matrix
 matplotlib.use('Agg')
 # setando um estilo padrão
 sns.set_style('darkgrid')
@@ -149,42 +150,60 @@ class Model:
         f.write(result)
         f.close()
 
-        # # Apresentação dos gráficos de treinamento e validação da rede
-        # Path(self.path_graphics).mkdir(parents=True, exist_ok=True)
-        #
-        # sns_plot = sns.heatmap(cm, annot=True)
-        # sns_plot.set_title('Matriz de Confusão')
-        # sns_plot.set_xlabel('Valores Preditos')
-        # sns_plot.set_ylabel('Valores Reais')
-        # plt.savefig(self.path_graphics + 'cm.png')
-        # plt.close()
+        # Apresentação dos gráficos de treinamento e validação da rede
+        Path(self.path_graphics).mkdir(parents=True, exist_ok=True)
 
-        # plt.plot(history.history['rmseMetric'])
-        # plt.plot(history.history['val_rmseMetric'])
-        # plt.title(self.model_name + ' - RMSE')
-        # plt.xlabel('Épocas')
-        # plt.ylabel('RMSE')
-        # plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        # plt.savefig(self.path_graphics + 'rmse.png')
-        # plt.close()
-        #
-        # plt.plot(history.history['mape'])
-        # plt.plot(history.history['val_mape'])
-        # plt.title(self.model_name + ' - MAPE')
-        # plt.xlabel('Épocas')
-        # plt.ylabel('MAPE')
-        # plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        # plt.savefig(self.path_graphics + 'mape.png')
-        # plt.close()
-        #
-        # plt.plot(history.history['accuracy'])
-        # plt.plot(history.history['val_accuracy'])
-        # plt.title(self.model_name + ' - Acurácia')
-        # plt.xlabel('Épocas')
-        # plt.ylabel('Acurácia')
-        # plt.legend(['Treinamento', 'Validação'], loc='upper left')
-        # plt.savefig(self.path_graphics + 'acuracia.png')
-        # plt.close()
+        # cm
+        cm = pd.DataFrame(cm, index=['Fake', 'Original'], columns=['Fake', 'Original'])
+        sns_plot = sns.heatmap(
+            cm, linecolor='black', linewidth=1, annot=True, fmt='',
+            xticklabels=['Fake', 'Original'], yticklabels=['Fake', 'Original']
+        )
+        sns_plot.set_title(self.model_name + ' - Matriz de Confusão')
+        sns_plot.set_xlabel('Valores Preditos')
+        sns_plot.set_ylabel('Valores Reais')
+        plt.savefig(self.path_graphics + 'cm.png', dpi=300)
+        plt.close()
+
+        # rmse
+        plt.plot(history.history['rmseMetric'], 'go-', markersize=3, label='Treinamento')
+        plt.plot(history.history['val_rmseMetric'], 'ro-', markersize=3, label='Validação')
+        plt.title(self.model_name + ' - RMSE')
+        plt.xlabel('Épocas')
+        plt.ylabel('RMSE')
+        plt.legend()
+        plt.savefig(self.path_graphics + 'rmse.png', dpi=300)
+        plt.close()
+
+        # mape
+        plt.plot(history.history['mape'], 'go-', markersize=3, label='Treinamento')
+        plt.plot(history.history['val_mape'], 'ro-', markersize=3, label='Validação')
+        plt.title(self.model_name + ' - MAPE')
+        plt.xlabel('Épocas')
+        plt.ylabel('MAPE')
+        plt.legend()
+        plt.savefig(self.path_graphics + 'mape.png', dpi=300)
+        plt.close()
+
+        # acurácia
+        plt.plot(history.history['accuracy'], 'go-', markersize=3, label='Treinamento')
+        plt.plot(history.history['val_accuracy'], 'ro-', markersize=3, label='Validação')
+        plt.title(self.model_name + ' - Acurácia')
+        plt.xlabel('Épocas')
+        plt.ylabel('Acurácia')
+        plt.legend()
+        plt.savefig(self.path_graphics + 'acuracia.png', dpi=300)
+        plt.close()
+
+        # loss
+        plt.plot(history.history['loss'], 'go-', markersize=3, label='Treinamento')
+        plt.plot(history.history['val_loss'], 'ro-', markersize=3, label='Validação')
+        plt.title(self.model_name + ' - Loss')
+        plt.xlabel('Épocas')
+        plt.ylabel('Loss')
+        plt.legend()
+        plt.savefig(self.path_graphics + 'loss.png', dpi=300)
+        plt.close()
 
     def predict(self):
         """
