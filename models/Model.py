@@ -13,7 +13,7 @@ matplotlib.use('Agg')
 sns.set_style('darkgrid')
 
 
-def rmseMetric(y_true, y_pred):
+def rmse(y_true, y_pred):
     """
     Método responsável por realizar o cálculo do RMSE
     """
@@ -77,7 +77,7 @@ class Model:
         self.model.compile(
             loss='binary_crossentropy',
             optimizer='adam',
-            metrics=['accuracy', rmseMetric, 'mape'],
+            metrics=['accuracy', rmse, 'mape'],
         )
 
     def __train(self):
@@ -149,7 +149,18 @@ class Model:
         f = open('results/results.txt', 'a')
         f.write(result)
         f.close()
+        # gera os gráficos
+        self.__graphics(history, cm)
 
+    def __graphics(self, history, cm):
+        """
+        Método responsável por gerar os gráficos
+
+        :param history: Histórico das métricas da detecção
+        :type history: Tuple[Any]
+        :param cm: Matriz de confusão
+        :type cm: list
+        """
         # Apresentação dos gráficos de treinamento e validação da rede
         Path(self.path_graphics).mkdir(parents=True, exist_ok=True)
 
@@ -166,8 +177,8 @@ class Model:
         plt.close()
 
         # rmse
-        plt.plot(history.history['rmseMetric'], 'go-', markersize=3, label='Treinamento')
-        plt.plot(history.history['val_rmseMetric'], 'ro-', markersize=3, label='Validação')
+        plt.plot(history.history['rmse'], 'go-', markersize=3, label='Treinamento')
+        plt.plot(history.history['val_rmse'], 'ro-', markersize=3, label='Validação')
         plt.title(self.model_name + ' - RMSE')
         plt.xlabel('Épocas')
         plt.ylabel('RMSE')

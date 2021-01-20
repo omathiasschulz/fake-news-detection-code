@@ -138,7 +138,7 @@ def main():
         print('\n\n' + dataset_nome)
         data = generateData(dataset_nome)
         generateMLP(data)
-        # generateLSTM(data)
+        generateLSTM(data)
 
     fim = time.time()
     print('Detecção de fake news realizada com sucesso! ')
