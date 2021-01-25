@@ -8,7 +8,7 @@ class ModelLSTM(Model):
     Classe que representa o modelo LSTM
     """
 
-    def __init__(self, info, data):
+    def __init__(self, info, data, dataset_name):
         """
         Construtor da classe
 
@@ -18,8 +18,10 @@ class ModelLSTM(Model):
         :type info: dict
         :param data: Dados utilizados na detecção
         :type data: dict
+        :param dataset_name: Nome do dataset utilizado
+        :type dataset_name: str
         """
-        super().__init__('LSTM', info, data, 'graphics/lstm/')
+        super().__init__('LSTM', info, data, dataset_name, 'graphics/lstm/')
 
     def _updateData(self):
         """

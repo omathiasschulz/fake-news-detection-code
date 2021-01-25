@@ -46,12 +46,14 @@ def generateData(csv_name):
     return data
 
 
-def generateMLP(data):
+def generateMLP(data, dataset_name):
     """
     Realiza a detecção de fake news com o modelo MLP
 
     :param data: Dados utilizados no modelo
     :type data: dict
+    :param dataset_name: Nome do dataset utilizado
+    :type dataset_name: str
     """
     model = {
         'epochs': 50,
@@ -74,16 +76,18 @@ def generateMLP(data):
             },
         ]
     }
-    model_mlp = ModelMLP(model, data)
+    model_mlp = ModelMLP(model, data, dataset_name)
     model_mlp.predict()
 
 
-def generateLSTM(data):
+def generateLSTM(data, dataset_name):
     """
     Realiza a detecção de fake news com o modelo LSTM
 
     :param data: Dados utilizados no modelo
     :type data: dict
+    :param dataset_name: Nome do dataset utilizado
+    :type dataset_name: str
     """
     model = {
         'epochs': 20,
@@ -114,13 +118,12 @@ def generateLSTM(data):
             },
         ]
     }
-    model_lstm = ModelLSTM(model, data)
+    model_lstm = ModelLSTM(model, data, dataset_name)
     model_lstm.predict()
 
 
-# TEXT_LENGTH = [50, 100, 150, 200]
-# utilizando apenas um dataset para testes
-TEXT_LENGTH = [50]
+# quantidade de datasets utilizados e seu numero de palavras
+TEXT_LENGTH = [50, 100]
 PATH_DATASETS_FORMATTED = 'datasets/formatted/'
 PATH_DATASETS_CONVERTED = 'datasets/converted/'
 
@@ -137,8 +140,8 @@ def main():
         dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % dataset_atual
         print('\n\n' + dataset_nome)
         data = generateData(dataset_nome)
-        generateMLP(data)
-        generateLSTM(data)
+        generateMLP(data, 'dataset_%i_palavras.csv' % dataset_atual)
+        generateLSTM(data, 'dataset_%i_palavras.csv' % dataset_atual)
 
     fim = time.time()
     print('Detecção de fake news realizada com sucesso! ')

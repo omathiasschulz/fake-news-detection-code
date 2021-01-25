@@ -37,7 +37,7 @@ class Model:
     ATIVACAO_LEAKY_RELU = 'leaky relu'
     ATIVACAO_ELU = 'elu'
 
-    def __init__(self, model_name, info, data, path_graphics):
+    def __init__(self, model_name, info, data, dataset_name, path_graphics):
         """
         Construtor da classe
 
@@ -47,15 +47,19 @@ class Model:
         :type info: dict
         :param data: Dados utilizados na detecção
         :type data: dict
+        :param dataset_name: Nome do dataset utilizado
+        :type dataset_name: str
         :param path_graphics: Diretório para salvar os gráficos gerados
         :type path_graphics: str
         """
         self.model = None
         self.model_name = model_name
+        self.info = info
         self.epochs = info['epochs']
         self.batch_size = info['batch_size'] if info.get('batch_size') else None
         self.layers = info['layers']
         self.data = data
+        self.dataset_name = dataset_name
         self.path_graphics = path_graphics
 
     def _updateData(self):
@@ -125,11 +129,8 @@ class Model:
         :param metrics: Resultado obtido pelas métricas
         :type metrics: dict
         """
-        result = '\n# Teste ' + self.model_name + ' ' + str(datetime.now()) + '\n'
-        result += 'camadas:'
-        for key, layer in enumerate(self.layers):
-            result += ' %i: ' % (key + 1)
-            result += json.dumps(layer)
+        result = '\n# Teste ' + self.model_name + ' - ' + str(datetime.now()) + ' - ' + self.dataset_name + '\n'
+        result += json.dumps(self.info)
 
         result += '\nmétricas: '
         # quanto menor a perda, mais próximas nossas previsões são dos rótulos verdadeiros.

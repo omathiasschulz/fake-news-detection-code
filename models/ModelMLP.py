@@ -8,7 +8,7 @@ class ModelMLP(Model):
     Classe que representa o modelo MLP
     """
 
-    def __init__(self, info, data):
+    def __init__(self, info, data, dataset_name):
         """
         Construtor da classe
 
@@ -18,8 +18,10 @@ class ModelMLP(Model):
         :type info: dict
         :param data: Dados utilizados na detecção
         :type data: dict
+        :param dataset_name: Nome do dataset utilizado
+        :type dataset_name: str
         """
-        super().__init__('MLP', info, data, 'graphics/mlp/')
+        super().__init__('MLP', info, data, dataset_name, 'graphics/mlp/')
 
     def _create_model(self):
         """
