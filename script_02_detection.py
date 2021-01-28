@@ -76,6 +76,25 @@ def generateMLP(data, dataset_name):
             },
         ]
     }
+
+    # TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS
+    funcoes = [
+        Model.ATIVACAO_SIGMOID,
+        Model.ATIVACAO_TANH,
+        Model.ATIVACAO_RELU,
+        Model.ATIVACAO_ELU,
+    ]
+    for ativacao_atual_entrada in funcoes:
+        model['layers'][0]['activation'] = ativacao_atual_entrada
+        for ativacao_atual_intermediaria in funcoes:
+            model['layers'][1]['activation'] = ativacao_atual_intermediaria
+            for ativacao_atual_saida in funcoes:
+                model['layers'][2]['activation'] = ativacao_atual_saida
+                print('\nmodel:')
+                print(model)
+                model_mlp = ModelMLP(model, data, dataset_name)
+                model_mlp.predict()
+
     model_mlp = ModelMLP(model, data, dataset_name)
     model_mlp.predict()
 
@@ -123,7 +142,8 @@ def generateLSTM(data, dataset_name):
 
 
 # quantidade de datasets utilizados e seu numero de palavras
-TEXT_LENGTH = [50, 100]
+# TEXT_LENGTH = [50, 100]
+TEXT_LENGTH = [50]
 PATH_DATASETS_FORMATTED = 'datasets/formatted/'
 PATH_DATASETS_CONVERTED = 'datasets/converted/'
 
@@ -141,7 +161,7 @@ def main():
         print('\n\n' + dataset_nome)
         data = generateData(dataset_nome)
         generateMLP(data, 'dataset_%i_palavras.csv' % dataset_atual)
-        generateLSTM(data, 'dataset_%i_palavras.csv' % dataset_atual)
+        # generateLSTM(data, 'dataset_%i_palavras.csv' % dataset_atual)
 
     fim = time.time()
     print('Detecção de fake news realizada com sucesso! ')

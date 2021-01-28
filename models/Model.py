@@ -34,7 +34,6 @@ class Model:
     ATIVACAO_SIGMOID = 'sigmoid'
     ATIVACAO_TANH = 'tanh'
     ATIVACAO_RELU = 'relu'
-    ATIVACAO_LEAKY_RELU = 'leaky relu'
     ATIVACAO_ELU = 'elu'
 
     def __init__(self, model_name, info, data, dataset_name, path_graphics):
@@ -151,7 +150,7 @@ class Model:
         f.write(result)
         f.close()
         # gera os gráficos
-        self.__graphics(history, cm)
+        # self.__graphics(history, cm)
 
     def __graphics(self, history, cm):
         """
