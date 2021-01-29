@@ -256,3 +256,5 @@ métricas: loss: 0.29; accuracy_model(%): 93.19; accuracy_detection(%): 93.52; m
 # Teste MLP - 2021-01-28 09:24:20.986755 - dataset_50_palavras.csv
 {"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "elu"}]}
 métricas: loss: 0.15; accuracy_model(%): 95.14; accuracy_detection(%): 76.89; mape: 228400096.00; rmse: 0.32; confusion_matrix: 0-0-1243-2176;
+
+# TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA
