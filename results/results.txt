@@ -255,3 +255,7 @@ métricas: loss: 7.9250; accuracy_model(%): 48.6224; accuracy_detection(%): 52.5
 # Teste MLP - 2021-02-18 10:28:33.358811 - dataset_50_palavras.csv
 {"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "elu"}]}
 métricas: loss: 0.2025; accuracy_model(%): 94.8136; accuracy_detection(%): 78.7246; rmse: 0.2882; precision: 0.6221; recall: 0.5302; f1-score: 0.5663; confusion_matrix: 0-0-1063-2291;
+
+
+
+# MODELO MLP - TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA
