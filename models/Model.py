@@ -75,12 +75,12 @@ class Model:
 
     def __compile(self):
         """
-        Método responsável por compilar o modelo com as métricas: Acurácia, RMSE e MAPE
+        Método responsável por compilar o modelo com as métricas: Acurácia e RMSE
         """
         self.model.compile(
             loss='binary_crossentropy',
             optimizer='adam',
-            metrics=['accuracy', rmse, 'mape'],
+            metrics=['accuracy', rmse],
         )
 
     def __train(self):
@@ -101,22 +101,21 @@ class Model:
         Método responsável por realizar o teste do modelo
         """
         # avalia o modelo com os dados de teste
-        loss, accuracy_model, rmse, mape = self.model.evaluate(self.data['x_test'], self.data['y_test'])
+        m_loss, m_accuracy_model, m_rmse = self.model.evaluate(self.data['x_test'], self.data['y_test'])
 
         # gera as detecções se cada notícia é fake ou não
         predict = self.model.predict(self.data['x'])
 
         # valida a acurácia das detecções
         self.predictRounded = [round(x[0]) for x in predict]
-        accuracy_detection = np.mean(self.predictRounded == self.data['y'])
+        m_accuracy_detection = np.mean(self.predictRounded == self.data['y'])
 
         # monta um dict das métricas e retorna
         return {
-            'loss': loss,
-            'accuracy_model': accuracy_model,
-            'accuracy_detection': accuracy_detection,
-            'rmse': rmse,
-            'mape': mape,
+            'loss': m_loss,
+            'accuracy_model': m_accuracy_model,
+            'accuracy_detection': m_accuracy_detection,
+            'rmse': m_rmse,
         }
 
     def __result(self, history, metrics):
@@ -136,7 +135,6 @@ class Model:
         result += 'loss: %.2f; ' % metrics['loss']
         result += 'accuracy_model(%%): %.2f; ' % (metrics['accuracy_model'] * 100)
         result += 'accuracy_detection(%%): %.2f; ' % (metrics['accuracy_detection'] * 100)
-        result += 'mape: %.2f; ' % metrics['mape']
         result += 'rmse: %.2f; ' % metrics['rmse']
 
         cm = confusion_matrix(self.data['y'], self.predictRounded)
@@ -184,16 +182,6 @@ class Model:
         plt.ylabel('RMSE')
         plt.legend()
         plt.savefig(self.path_graphics + 'rmse.png', dpi=300)
-        plt.close()
-
-        # mape
-        plt.plot(history.history['mape'], 'go-', markersize=3, label='Treinamento')
-        plt.plot(history.history['val_mape'], 'ro-', markersize=3, label='Validação')
-        plt.title(self.model_name + ' - MAPE')
-        plt.xlabel('Épocas')
-        plt.ylabel('MAPE')
-        plt.legend()
-        plt.savefig(self.path_graphics + 'mape.png', dpi=300)
         plt.close()
 
         # acurácia
