@@ -134,10 +134,16 @@ class Model:
 
         result += '\nmétricas: '
         # quanto menor a perda, mais próximas nossas previsões são dos rótulos verdadeiros.
-        result += 'loss: %.2f; ' % metrics['loss']
-        result += 'accuracy_model(%%): %.2f; ' % (metrics['accuracy_model'] * 100)
-        result += 'accuracy_detection(%%): %.2f; ' % (metrics['accuracy_detection'] * 100)
-        result += 'rmse: %.2f; ' % metrics['rmse']
+        result += 'loss: %.4f; ' % metrics['loss']
+        result += 'accuracy_model(%%): %.4f; ' % (metrics['accuracy_model'] * 100)
+        result += 'accuracy_detection(%%): %.4f; ' % (metrics['accuracy_detection'] * 100)
+        result += 'rmse: %.4f; ' % metrics['rmse']
+
+        report = classification_report(self.data['y'], self.predictRounded, output_dict=True)
+        # macro avg dá a cada previsão um peso semelhante ao calcular a perda
+        result += 'precision: %.4f; ' % report['macro avg']['precision']
+        result += 'recall: %.4f; ' % report['macro avg']['recall']
+        result += 'f1-score: %.4f; ' % report['macro avg']['f1-score']
 
         cm = confusion_matrix(self.data['y'], self.predictRounded)
         result += 'confusion_matrix: '
@@ -151,9 +157,6 @@ class Model:
         f.close()
         # gera os gráficos
         # self.__graphics(history, cm)
-
-        # a = classification_report(y_test, y_pred)
-        # print(a)
 
     def __graphics(self, history, cm):
         """
