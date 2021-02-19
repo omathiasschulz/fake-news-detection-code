@@ -77,28 +77,65 @@ def generateMLP(data, dataset_name):
     #             model_mlp = ModelMLP(model, data, dataset_name)
     #             model_mlp.predict()
 
-    # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA
+    # # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA
+    # model = {
+    #     "epochs": 50,
+    #     "batch_size": 10,
+    #     "layers": [
+    #         {"qtd_neurons": 12, "activation": "relu"},
+    #         {"qtd_neurons": 8, "activation": "tanh"},
+    #         {"qtd_neurons": 1, "activation": "sigmoid"}
+    #     ]
+    # }
+    # neuronios = [1, 2, 4, 8, 10, 25, 30, 50, 75, 90, 100, 128, 150, 200, 300]
+    # for neuronios_atual_entrada in neuronios:
+    #     model['layers'][0]['qtd_neurons'] = neuronios_atual_entrada
+    #     for neuronios_atual_intermediaria in neuronios:
+    #         model['layers'][1]['qtd_neurons'] = neuronios_atual_intermediaria
+    #         print('\nmodel:')
+    #         print(model)
+    #         model_mlp = ModelMLP(model, data, dataset_name)
+    #         model_mlp.predict()
+
+    # # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 02
+    # model = {
+    #     "epochs": 50,
+    #     "batch_size": 10,
+    #     "layers": [
+    #         {"qtd_neurons": 12, "activation": "elu"},
+    #         {"qtd_neurons": 8, "activation": "elu"},
+    #         {"qtd_neurons": 1, "activation": "sigmoid"}
+    #     ]
+    # }
+    # neuronios = [1, 2, 4, 8, 10, 25, 30, 50, 75, 90, 100, 128, 150, 200, 300]
+    # for neuronios_atual_entrada in neuronios:
+    #     model['layers'][0]['qtd_neurons'] = neuronios_atual_entrada
+    #     for neuronios_atual_intermediaria in neuronios:
+    #         model['layers'][1]['qtd_neurons'] = neuronios_atual_intermediaria
+    #         print('\nmodel:')
+    #         print(model)
+    #         model_mlp = ModelMLP(model, data, dataset_name)
+    #         model_mlp.predict()
+
+    # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 03
     model = {
         "epochs": 50,
         "batch_size": 10,
         "layers": [
             {"qtd_neurons": 12, "activation": "relu"},
-            {"qtd_neurons": 8, "activation": "tanh"},
+            {"qtd_neurons": 8, "activation": "elu"},
             {"qtd_neurons": 1, "activation": "sigmoid"}
         ]
     }
     neuronios = [1, 2, 4, 8, 10, 25, 30, 50, 75, 90, 100, 128, 150, 200, 300]
-    i = 0
     for neuronios_atual_entrada in neuronios:
         model['layers'][0]['qtd_neurons'] = neuronios_atual_entrada
         for neuronios_atual_intermediaria in neuronios:
             model['layers'][1]['qtd_neurons'] = neuronios_atual_intermediaria
             print('\nmodel:')
             print(model)
-            i += 1
-            # model_mlp = ModelMLP(model, data, dataset_name)
-            # model_mlp.predict()
-    print(i)
+            model_mlp = ModelMLP(model, data, dataset_name)
+            model_mlp.predict()
 
     # # TESTES COM BATCH SIZE VARIADO
     # model = {

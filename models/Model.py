@@ -105,11 +105,9 @@ class Model:
 
         # gera as detecções se cada notícia é fake ou não
         predict = self.model.predict(self.data['x'])
-        print(predict)
 
         # valida a acurácia das detecções
         self.predictRounded = [round(x[0]) for x in predict]
-        print(self.predictRounded)
         m_accuracy_detection = np.mean(self.predictRounded == self.data['y'])
 
         # monta um dict das métricas e retorna
