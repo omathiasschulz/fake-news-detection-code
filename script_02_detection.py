@@ -55,7 +55,7 @@ def generateMLP(data, dataset_name):
     :param dataset_name: Nome do dataset utilizado
     :type dataset_name: str
     """
-    # # TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS
+    # # TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS - 50 PALAVRAS
     # model = {
     #     'epochs': 50,
     #     'batch_size': 10,
@@ -77,7 +77,7 @@ def generateMLP(data, dataset_name):
     #             model_mlp = ModelMLP(model, data, dataset_name)
     #             model_mlp.predict()
 
-    # # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA
+    # # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - 50 PALAVRAS
     # model = {
     #     "epochs": 50,
     #     "batch_size": 10,
@@ -97,7 +97,7 @@ def generateMLP(data, dataset_name):
     #         model_mlp = ModelMLP(model, data, dataset_name)
     #         model_mlp.predict()
 
-    # # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 02
+    # # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 02 - 50 PALAVRAS
     # model = {
     #     "epochs": 50,
     #     "batch_size": 10,
@@ -117,7 +117,7 @@ def generateMLP(data, dataset_name):
     #         model_mlp = ModelMLP(model, data, dataset_name)
     #         model_mlp.predict()
 
-    # # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 03
+    # # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 03 - 50 PALAVRAS
     # model = {
     #     "epochs": 50,
     #     "batch_size": 10,
@@ -137,7 +137,7 @@ def generateMLP(data, dataset_name):
     #         model_mlp = ModelMLP(model, data, dataset_name)
     #         model_mlp.predict()
 
-    # # MODELO MLP - TESTES COM BATCH SIZE VARIADO
+    # # MODELO MLP - TESTES COM BATCH SIZE VARIADO - 50 PALAVRAS
     # model = {
     #     "epochs": 50,
     #     "batch_size": 10,
@@ -153,7 +153,7 @@ def generateMLP(data, dataset_name):
     #     model_mlp = ModelMLP(model, data, dataset_name)
     #     model_mlp.predict()
 
-    # # MODELO MLP - TESTES COM BATCH SIZE VARIADO - MODELO 02
+    # # MODELO MLP - TESTES COM BATCH SIZE VARIADO - MODELO 02 - 50 PALAVRAS
     # model = {
     #     "epochs": 50,
     #     "batch_size": 10,
@@ -169,21 +169,151 @@ def generateMLP(data, dataset_name):
     #     model_mlp = ModelMLP(model, data, dataset_name)
     #     model_mlp.predict()
 
-    # MODELO MLP - TESTES COM BATCH SIZE VARIADO - MODELO 03
+    # # MODELO MLP - TESTES COM BATCH SIZE VARIADO - MODELO 03 - 50 PALAVRAS
+    # model = {
+    #     "epochs": 50,
+    #     "batch_size": 10,
+    #     "layers": [
+    #         {"qtd_neurons": 75, "activation": "relu"},
+    #         {"qtd_neurons": 128, "activation": "elu"},
+    #         {"qtd_neurons": 1, "activation": "sigmoid"}
+    #     ]
+    # }
+    # batch_size = [1, 2, 5, 10, 25, 50]
+    # for batch_size_atual in batch_size:
+    #     model['batch_size'] = batch_size_atual
+    #     model_mlp = ModelMLP(model, data, dataset_name)
+    #     model_mlp.predict()
+
+    # TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS - 100 PALAVRAS
     model = {
-        "epochs": 50,
-        "batch_size": 10,
-        "layers": [
-            {"qtd_neurons": 75, "activation": "relu"},
-            {"qtd_neurons": 128, "activation": "elu"},
-            {"qtd_neurons": 1, "activation": "sigmoid"}
+        'epochs': 50,
+        'batch_size': 10,
+        'layers': [
+            {'qtd_neurons': 12, 'activation': ''},
+            {'qtd_neurons': 8, 'activation': ''},
+            {'qtd_neurons': 1, 'activation': ''},
         ]
     }
-    batch_size = [1, 2, 5, 10, 25, 50]
-    for batch_size_atual in batch_size:
-        model['batch_size'] = batch_size_atual
-        model_mlp = ModelMLP(model, data, dataset_name)
-        model_mlp.predict()
+    funcoes = [Model.ATIVACAO_SIGMOID, Model.ATIVACAO_TANH, Model.ATIVACAO_RELU, Model.ATIVACAO_ELU]
+    for ativacao_atual_entrada in funcoes:
+        model['layers'][0]['activation'] = ativacao_atual_entrada
+        for ativacao_atual_intermediaria in funcoes:
+            model['layers'][1]['activation'] = ativacao_atual_intermediaria
+            for ativacao_atual_saida in funcoes:
+                model['layers'][2]['activation'] = ativacao_atual_saida
+                print('\nmodel:')
+                print(model)
+                model_mlp = ModelMLP(model, data, dataset_name)
+                model_mlp.predict()
+
+    # # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - 100 PALAVRAS
+    # model = {
+    #     "epochs": 50,
+    #     "batch_size": 10,
+    #     "layers": [
+    #         {"qtd_neurons": 12, "activation": "relu"},
+    #         {"qtd_neurons": 8, "activation": "tanh"},
+    #         {"qtd_neurons": 1, "activation": "sigmoid"}
+    #     ]
+    # }
+    # neuronios = [1, 2, 4, 8, 10, 25, 30, 50, 75, 90, 100, 128, 150, 200, 300]
+    # for neuronios_atual_entrada in neuronios:
+    #     model['layers'][0]['qtd_neurons'] = neuronios_atual_entrada
+    #     for neuronios_atual_intermediaria in neuronios:
+    #         model['layers'][1]['qtd_neurons'] = neuronios_atual_intermediaria
+    #         print('\nmodel:')
+    #         print(model)
+    #         model_mlp = ModelMLP(model, data, dataset_name)
+    #         model_mlp.predict()
+
+    # # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 02 - 100 PALAVRAS
+    # model = {
+    #     "epochs": 50,
+    #     "batch_size": 10,
+    #     "layers": [
+    #         {"qtd_neurons": 12, "activation": "elu"},
+    #         {"qtd_neurons": 8, "activation": "elu"},
+    #         {"qtd_neurons": 1, "activation": "sigmoid"}
+    #     ]
+    # }
+    # neuronios = [1, 2, 4, 8, 10, 25, 30, 50, 75, 90, 100, 128, 150, 200, 300]
+    # for neuronios_atual_entrada in neuronios:
+    #     model['layers'][0]['qtd_neurons'] = neuronios_atual_entrada
+    #     for neuronios_atual_intermediaria in neuronios:
+    #         model['layers'][1]['qtd_neurons'] = neuronios_atual_intermediaria
+    #         print('\nmodel:')
+    #         print(model)
+    #         model_mlp = ModelMLP(model, data, dataset_name)
+    #         model_mlp.predict()
+
+    # # TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 03 - 100 PALAVRAS
+    # model = {
+    #     "epochs": 50,
+    #     "batch_size": 10,
+    #     "layers": [
+    #         {"qtd_neurons": 12, "activation": "relu"},
+    #         {"qtd_neurons": 8, "activation": "elu"},
+    #         {"qtd_neurons": 1, "activation": "sigmoid"}
+    #     ]
+    # }
+    # neuronios = [1, 2, 4, 8, 10, 25, 30, 50, 75, 90, 100, 128, 150, 200, 300]
+    # for neuronios_atual_entrada in neuronios:
+    #     model['layers'][0]['qtd_neurons'] = neuronios_atual_entrada
+    #     for neuronios_atual_intermediaria in neuronios:
+    #         model['layers'][1]['qtd_neurons'] = neuronios_atual_intermediaria
+    #         print('\nmodel:')
+    #         print(model)
+    #         model_mlp = ModelMLP(model, data, dataset_name)
+    #         model_mlp.predict()
+
+    # # MODELO MLP - TESTES COM BATCH SIZE VARIADO - 100 PALAVRAS
+    # model = {
+    #     "epochs": 50,
+    #     "batch_size": 10,
+    #     "layers": [
+    #         {"qtd_neurons": 300, "activation": "relu"},
+    #         {"qtd_neurons": 128, "activation": "tanh"},
+    #         {"qtd_neurons": 1, "activation": "sigmoid"}
+    #     ]
+    # }
+    # batch_size = [1, 2, 5, 10, 25, 50]
+    # for batch_size_atual in batch_size:
+    #     model['batch_size'] = batch_size_atual
+    #     model_mlp = ModelMLP(model, data, dataset_name)
+    #     model_mlp.predict()
+
+    # # MODELO MLP - TESTES COM BATCH SIZE VARIADO - MODELO 02 - 100 PALAVRAS
+    # model = {
+    #     "epochs": 50,
+    #     "batch_size": 10,
+    #     "layers": [
+    #         {"qtd_neurons": 200, "activation": "elu"},
+    #         {"qtd_neurons": 300, "activation": "elu"},
+    #         {"qtd_neurons": 1, "activation": "sigmoid"}
+    #     ]
+    # }
+    # batch_size = [1, 2, 5, 10, 25, 50]
+    # for batch_size_atual in batch_size:
+    #     model['batch_size'] = batch_size_atual
+    #     model_mlp = ModelMLP(model, data, dataset_name)
+    #     model_mlp.predict()
+
+    # # MODELO MLP - TESTES COM BATCH SIZE VARIADO - MODELO 03 - 100 PALAVRAS
+    # model = {
+    #     "epochs": 50,
+    #     "batch_size": 10,
+    #     "layers": [
+    #         {"qtd_neurons": 75, "activation": "relu"},
+    #         {"qtd_neurons": 128, "activation": "elu"},
+    #         {"qtd_neurons": 1, "activation": "sigmoid"}
+    #     ]
+    # }
+    # batch_size = [1, 2, 5, 10, 25, 50]
+    # for batch_size_atual in batch_size:
+    #     model['batch_size'] = batch_size_atual
+    #     model_mlp = ModelMLP(model, data, dataset_name)
+    #     model_mlp.predict()
 
 
 def generateLSTM(data, dataset_name):
@@ -238,9 +368,6 @@ def generateLSTM(data, dataset_name):
                 model_lstm.predict()
 
 
-# quantidade de datasets utilizados e seu numero de palavras
-# TEXT_LENGTH = [50, 100]
-TEXT_LENGTH = [50]
 PATH_DATASETS_FORMATTED = 'datasets/formatted/'
 PATH_DATASETS_CONVERTED = 'datasets/converted/'
 
@@ -252,13 +379,26 @@ def main():
     print('Iniciando a detecção de fake news')
     inicio = time.time()
 
-    # realiza um teste de um mesmo modelo nos 4 datasets com tamanho dos textos variados
-    for dataset_atual in TEXT_LENGTH:
-        dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % dataset_atual
-        print('\n\n' + dataset_nome)
-        data = generateData(dataset_nome)
-        generateMLP(data, 'dataset_%i_palavras.csv' % dataset_atual)
-        # generateLSTM(data, 'dataset_%i_palavras.csv' % dataset_atual)
+    # # testes com o dataset de 50 palavras no modelo MLP
+    # text_length = 50
+    # dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % text_length
+    # print('\n\n' + dataset_nome)
+    # data = generateData(dataset_nome)
+    # generateMLP(data, 'dataset_%i_palavras.csv' % text_length)
+
+    # testes com o dataset de 100 palavras no modelo MLP
+    text_length = 100
+    dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % text_length
+    print('\n\n' + dataset_nome)
+    data = generateData(dataset_nome)
+    generateMLP(data, 'dataset_%i_palavras.csv' % text_length)
+
+    # # testes com o dataset de 50 palavras no modelo LSTM
+    # text_length = 50
+    # dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % text_length
+    # print('\n\n' + dataset_nome)
+    # data = generateData(dataset_nome)
+    # generateLSTM(data, 'dataset_%i_palavras.csv' % text_length)
 
     fim = time.time()
     print('Detecção de fake news realizada com sucesso! ')
