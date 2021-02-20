@@ -3055,3 +3055,259 @@ métricas: loss: 0.2493; accuracy_model(%): 95.4619; accuracy_detection(%): 97.0
 
 
 # TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS - 100 PALAVRAS
+
+# Teste MLP - 2021-02-20 10:30:51.899244 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1653; accuracy_model(%): 92.0430; accuracy_detection(%): 93.2636; rmse: 0.1041; precision: 0.9166; recall: 0.9283; f1-score: 0.9221; confusion_matrix: 3360-216-132-1458;
+
+# Teste MLP - 2021-02-20 10:31:05.598557 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 0.1855; accuracy_model(%): 90.9677; accuracy_detection(%): 92.2571; rmse: 0.1449; precision: 0.9093; recall: 0.9090; f1-score: 0.9091; confusion_matrix: 3377-199-201-1389;
+
+# Teste MLP - 2021-02-20 10:31:19.133866 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.1832; accuracy_model(%): 90.9677; accuracy_detection(%): 92.0248; rmse: 0.1199; precision: 0.9040; recall: 0.9106; f1-score: 0.9072; confusion_matrix: 3346-230-182-1408;
+
+# Teste MLP - 2021-02-20 10:31:32.860947 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 4.5446; accuracy_model(%): 70.5376; accuracy_detection(%): 69.2218; rmse: 0.3355; precision: 0.3461; recall: 0.5000; f1-score: 0.4091; confusion_matrix: 3576-0-1590-0;
+
+# Teste MLP - 2021-02-20 10:31:46.336916 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1730; accuracy_model(%): 93.9785; accuracy_detection(%): 93.2443; rmse: 0.0979; precision: 0.9136; recall: 0.9343; f1-score: 0.9227; confusion_matrix: 3324-252-97-1493;
+
+# Teste MLP - 2021-02-20 10:32:00.024378 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 4.5446; accuracy_model(%): 70.5376; accuracy_detection(%): 69.2218; rmse: 0.3115; precision: 0.3461; recall: 0.5000; f1-score: 0.4091; confusion_matrix: 3576-0-1590-0;
+
+# Teste MLP - 2021-02-20 10:32:13.461713 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.2659; accuracy_model(%): 90.7527; accuracy_detection(%): 91.9861; rmse: 0.1383; precision: 0.9089; recall: 0.9016; f1-score: 0.9051; confusion_matrix: 3394-182-232-1358;
+
+# Teste MLP - 2021-02-20 10:32:27.318736 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 4.5446; accuracy_model(%): 70.5376; accuracy_detection(%): 69.2218; rmse: 0.2979; precision: 0.3461; recall: 0.5000; f1-score: 0.4091; confusion_matrix: 3576-0-1590-0;
+
+# Teste MLP - 2021-02-20 10:32:40.690826 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1628; accuracy_model(%): 92.0430; accuracy_detection(%): 93.1669; rmse: 0.1020; precision: 0.9164; recall: 0.9253; f1-score: 0.9207; confusion_matrix: 3368-208-145-1445;
+
+# Teste MLP - 2021-02-20 10:32:54.203320 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 4.5446; accuracy_model(%): 70.5376; accuracy_detection(%): 69.2218; rmse: 0.2972; precision: 0.3461; recall: 0.5000; f1-score: 0.4091; confusion_matrix: 3576-0-1590-0;
+
+# Teste MLP - 2021-02-20 10:33:07.776916 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.2703; accuracy_model(%): 90.5376; accuracy_detection(%): 91.0376; rmse: 0.1449; precision: 0.6036; recall: 0.5896; f1-score: 0.5961; confusion_matrix: 3404-169-272-1299;
+
+# Teste MLP - 2021-02-20 10:33:21.389440 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 4.5446; accuracy_model(%): 70.5376; accuracy_detection(%): 69.2218; rmse: 0.2957; precision: 0.3461; recall: 0.5000; f1-score: 0.4091; confusion_matrix: 3576-0-1590-0;
+
+# Teste MLP - 2021-02-20 10:33:34.983357 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1625; accuracy_model(%): 92.4731; accuracy_detection(%): 93.3411; rmse: 0.0972; precision: 0.9204; recall: 0.9241; f1-score: 0.9222; confusion_matrix: 3391-185-159-1431;
+
+# Teste MLP - 2021-02-20 10:33:48.740498 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 4.5446; accuracy_model(%): 70.5376; accuracy_detection(%): 69.2218; rmse: 0.2967; precision: 0.3461; recall: 0.5000; f1-score: 0.4091; confusion_matrix: 3576-0-1590-0;
+
+# Teste MLP - 2021-02-20 10:34:02.240432 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 4.5446; accuracy_model(%): 70.5376; accuracy_detection(%): 69.2218; rmse: 0.2946; precision: 0.3461; recall: 0.5000; f1-score: 0.4091; confusion_matrix: 3576-0-1590-0;
+
+# Teste MLP - 2021-02-20 10:34:15.753792 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 4.5446; accuracy_model(%): 70.5376; accuracy_detection(%): 69.2218; rmse: 0.3110; precision: 0.3461; recall: 0.5000; f1-score: 0.4091; confusion_matrix: 3576-0-1590-0;
+
+# Teste MLP - 2021-02-20 10:34:29.147532 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1589; accuracy_model(%): 93.7634; accuracy_detection(%): 93.8057; rmse: 0.0972; precision: 0.9220; recall: 0.9362; f1-score: 0.9286; confusion_matrix: 3365-211-109-1481;
+
+# Teste MLP - 2021-02-20 10:34:42.867565 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 0.1960; accuracy_model(%): 92.2581; accuracy_detection(%): 93.0507; rmse: 0.1441; precision: 0.9221; recall: 0.9135; f1-score: 0.9176; confusion_matrix: 3425-151-208-1382;
+
+# Teste MLP - 2021-02-20 10:34:56.417069 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.2515; accuracy_model(%): 93.7634; accuracy_detection(%): 93.5734; rmse: 0.1030; precision: 0.9221; recall: 0.9284; f1-score: 0.9252; confusion_matrix: 3388-188-144-1446;
+
+# Teste MLP - 2021-02-20 10:35:09.937574 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 4.5446; accuracy_model(%): 70.5376; accuracy_detection(%): 69.2218; rmse: 0.3227; precision: 0.3461; recall: 0.5000; f1-score: 0.4091; confusion_matrix: 3576-0-1590-0;
+
+# Teste MLP - 2021-02-20 10:35:23.462615 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1707; accuracy_model(%): 92.9032; accuracy_detection(%): 93.4766; rmse: 0.0989; precision: 0.9216; recall: 0.9263; f1-score: 0.9239; confusion_matrix: 3391-185-152-1438;
+
+# Teste MLP - 2021-02-20 10:35:37.014800 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 0.2079; accuracy_model(%): 92.9032; accuracy_detection(%): 51.4712; rmse: 0.4752; precision: 0.6000; recall: 0.4180; f1-score: 0.4647; confusion_matrix: 0-0-2198-1198;
+
+# Teste MLP - 2021-02-20 10:35:50.443179 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.2447; accuracy_model(%): 93.3333; accuracy_detection(%): 93.4379; rmse: 0.1177; precision: 0.9246; recall: 0.9208; f1-score: 0.9227; confusion_matrix: 3419-157-182-1408;
+
+# Teste MLP - 2021-02-20 10:36:04.037335 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 0.2791; accuracy_model(%): 90.7527; accuracy_detection(%): 90.2245; rmse: 0.2584; precision: 0.5962; recall: 0.5993; f1-score: 0.5974; confusion_matrix: 0-0-60-3245;
+
+# Teste MLP - 2021-02-20 10:36:17.391933 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1375; accuracy_model(%): 94.4086; accuracy_detection(%): 94.5025; rmse: 0.0803; precision: 0.9322; recall: 0.9404; f1-score: 0.9361; confusion_matrix: 3406-170-114-1476;
+
+# Teste MLP - 2021-02-20 10:36:30.905879 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 4.5446; accuracy_model(%): 70.5376; accuracy_detection(%): 69.2218; rmse: 0.3031; precision: 0.3461; recall: 0.5000; f1-score: 0.4091; confusion_matrix: 3576-0-1590-0;
+
+# Teste MLP - 2021-02-20 10:36:44.603009 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.3015; accuracy_model(%): 93.5484; accuracy_detection(%): 93.3217; rmse: 0.1125; precision: 0.9251; recall: 0.9170; f1-score: 0.9209; confusion_matrix: 3430-146-199-1391;
+
+# Teste MLP - 2021-02-20 10:36:57.824732 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 0.2643; accuracy_model(%): 93.9785; accuracy_detection(%): 92.1796; rmse: 0.1411; precision: 0.4622; recall: 0.4518; f1-score: 0.4569; confusion_matrix: 3400-171-141-1362;
+
+# Teste MLP - 2021-02-20 10:37:11.003490 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1648; accuracy_model(%): 92.6882; accuracy_detection(%): 93.8444; rmse: 0.0934; precision: 0.9283; recall: 0.9271; f1-score: 0.9277; confusion_matrix: 3421-155-163-1427;
+
+# Teste MLP - 2021-02-20 10:37:24.412293 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 0.2783; accuracy_model(%): 92.0430; accuracy_detection(%): 59.1947; rmse: 0.4463; precision: 0.5809; recall: 0.4522; f1-score: 0.4900; confusion_matrix: 0-0-1653-1622;
+
+# Teste MLP - 2021-02-20 10:37:37.842141 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.2753; accuracy_model(%): 95.0538; accuracy_detection(%): 91.9861; rmse: 0.1356; precision: 0.6156; recall: 0.6009; f1-score: 0.6082; confusion_matrix: 3395-179-129-1357;
+
+# Teste MLP - 2021-02-20 10:37:51.297592 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "tanh"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 0.2609; accuracy_model(%): 93.1183; accuracy_detection(%): 83.5269; rmse: 0.3273; precision: 0.4609; recall: 0.4221; f1-score: 0.4402; confusion_matrix: 0-0-467-2936;
+
+# Teste MLP - 2021-02-20 10:38:04.630029 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1839; accuracy_model(%): 92.0430; accuracy_detection(%): 92.3926; rmse: 0.1152; precision: 0.9099; recall: 0.9120; f1-score: 0.9110; confusion_matrix: 3372-204-189-1401;
+
+# Teste MLP - 2021-02-20 10:38:18.058071 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 0.1850; accuracy_model(%): 91.1828; accuracy_detection(%): 92.3732; rmse: 0.1230; precision: 0.9100; recall: 0.9114; f1-score: 0.9107; confusion_matrix: 3374-202-192-1398;
+
+# Teste MLP - 2021-02-20 10:38:31.754543 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.2274; accuracy_model(%): 92.9032; accuracy_detection(%): 93.5540; rmse: 0.1191; precision: 0.9239; recall: 0.9250; f1-score: 0.9245; confusion_matrix: 3406-170-163-1427;
+
+# Teste MLP - 2021-02-20 10:38:45.395617 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 0.2655; accuracy_model(%): 90.5376; accuracy_detection(%): 91.7151; rmse: 0.1592; precision: 0.9042; recall: 0.9005; f1-score: 0.9023; confusion_matrix: 3375-201-227-1363;
+
+# Teste MLP - 2021-02-20 10:38:58.807306 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1483; accuracy_model(%): 95.0538; accuracy_detection(%): 95.4123; rmse: 0.0696; precision: 0.9402; recall: 0.9550; f1-score: 0.9471; confusion_matrix: 3407-169-68-1522;
+
+# Teste MLP - 2021-02-20 10:39:12.168975 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 0.1466; accuracy_model(%): 94.8387; accuracy_detection(%): 80.6039; rmse: 0.2517; precision: 0.6176; recall: 0.5644; f1-score: 0.5853; confusion_matrix: 0-0-719-2650;
+
+# Teste MLP - 2021-02-20 10:39:25.457652 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.2155; accuracy_model(%): 93.1183; accuracy_detection(%): 93.0507; rmse: 0.1136; precision: 0.9231; recall: 0.9123; f1-score: 0.9174; confusion_matrix: 3432-144-215-1375;
+
+# Teste MLP - 2021-02-20 10:39:39.214058 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 0.2535; accuracy_model(%): 92.9032; accuracy_detection(%): 89.1212; rmse: 0.2463; precision: 0.6034; recall: 0.5951; f1-score: 0.5987; confusion_matrix: 0-0-164-3179;
+
+# Teste MLP - 2021-02-20 10:39:52.312337 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1409; accuracy_model(%): 94.4086; accuracy_detection(%): 94.8509; rmse: 0.0775; precision: 0.9338; recall: 0.9485; f1-score: 0.9406; confusion_matrix: 3392-184-82-1508;
+
+# Teste MLP - 2021-02-20 10:40:05.638622 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 0.2332; accuracy_model(%): 90.7527; accuracy_detection(%): 90.8827; rmse: 0.1534; precision: 0.8848; recall: 0.9219; f1-score: 0.8984; confusion_matrix: 3175-401-70-1520;
+
+# Teste MLP - 2021-02-20 10:40:19.109656 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.2718; accuracy_model(%): 91.1828; accuracy_detection(%): 91.6763; rmse: 0.1650; precision: 0.5996; recall: 0.6069; f1-score: 0.6030; confusion_matrix: 3315-261-160-1421;
+
+# Teste MLP - 2021-02-20 10:40:32.530963 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 0.2890; accuracy_model(%): 91.8280; accuracy_detection(%): 85.8111; rmse: 0.2871; precision: 0.4574; recall: 0.4287; f1-score: 0.4425; confusion_matrix: 0-0-343-3073;
+
+# Teste MLP - 2021-02-20 10:40:45.977257 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1444; accuracy_model(%): 94.6237; accuracy_detection(%): 95.4704; rmse: 0.0701; precision: 0.9434; recall: 0.9516; f1-score: 0.9473; confusion_matrix: 3432-144-90-1500;
+
+# Teste MLP - 2021-02-20 10:40:59.740064 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 0.1759; accuracy_model(%): 92.9032; accuracy_detection(%): 78.7069; rmse: 0.3135; precision: 0.6019; recall: 0.5520; f1-score: 0.5704; confusion_matrix: 0-0-720-2580;
+
+# Teste MLP - 2021-02-20 10:41:13.392364 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.2460; accuracy_model(%): 90.9677; accuracy_detection(%): 92.3732; rmse: 0.1406; precision: 0.9100; recall: 0.9114; f1-score: 0.9107; confusion_matrix: 3374-202-192-1398;
+
+# Teste MLP - 2021-02-20 10:41:26.737714 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "relu"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 0.2595; accuracy_model(%): 93.3333; accuracy_detection(%): 74.4870; rmse: 0.3331; precision: 0.6003; recall: 0.5332; f1-score: 0.5561; confusion_matrix: 0-0-936-2349;
+
+# Teste MLP - 2021-02-20 10:41:40.069934 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1861; accuracy_model(%): 91.6129; accuracy_detection(%): 92.5861; rmse: 0.1128; precision: 0.9125; recall: 0.9138; f1-score: 0.9131; confusion_matrix: 3380-196-187-1403;
+
+# Teste MLP - 2021-02-20 10:41:53.700578 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 0.1673; accuracy_model(%): 92.0430; accuracy_detection(%): 93.4959; rmse: 0.1158; precision: 0.9199; recall: 0.9298; f1-score: 0.9246; confusion_matrix: 3373-203-133-1457;
+
+# Teste MLP - 2021-02-20 10:42:07.238778 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.2383; accuracy_model(%): 93.3333; accuracy_detection(%): 93.4766; rmse: 0.1156; precision: 0.9223; recall: 0.9251; f1-score: 0.9237; confusion_matrix: 3398-178-159-1431;
+
+# Teste MLP - 2021-02-20 10:42:20.759561 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 0.2751; accuracy_model(%): 89.8925; accuracy_detection(%): 91.6957; rmse: 0.1615; precision: 0.9107; recall: 0.8916; f1-score: 0.9003; confusion_matrix: 3424-152-277-1313;
+
+# Teste MLP - 2021-02-20 10:42:34.168150 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1885; accuracy_model(%): 91.3979; accuracy_detection(%): 92.3926; rmse: 0.1139; precision: 0.9076; recall: 0.9162; f1-score: 0.9117; confusion_matrix: 3348-228-165-1425;
+
+# Teste MLP - 2021-02-20 10:42:47.702578 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 0.2455; accuracy_model(%): 92.9032; accuracy_detection(%): 67.7507; rmse: 0.3622; precision: 0.6057; recall: 0.4995; f1-score: 0.5353; confusion_matrix: 0-0-1329-2012;
+
+# Teste MLP - 2021-02-20 10:43:01.310076 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.2577; accuracy_model(%): 93.7634; accuracy_detection(%): 93.3217; rmse: 0.1127; precision: 0.9163; recall: 0.9310; f1-score: 0.9230; confusion_matrix: 3350-226-119-1471;
+
+# Teste MLP - 2021-02-20 10:43:14.881479 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 0.2448; accuracy_model(%): 94.1935; accuracy_detection(%): 65.4859; rmse: 0.3884; precision: 0.4565; recall: 0.3659; f1-score: 0.3962; confusion_matrix: 0-0-1464-1901;
+
+# Teste MLP - 2021-02-20 10:43:28.238162 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1743; accuracy_model(%): 93.1183; accuracy_detection(%): 93.2636; rmse: 0.1012; precision: 0.9149; recall: 0.9320; f1-score: 0.9226; confusion_matrix: 3339-237-111-1479;
+
+# Teste MLP - 2021-02-20 10:43:42.325117 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 0.2087; accuracy_model(%): 93.7634; accuracy_detection(%): 60.8014; rmse: 0.4091; precision: 0.5994; recall: 0.4688; f1-score: 0.5035; confusion_matrix: 0-0-1664-1629;
+
+# Teste MLP - 2021-02-20 10:43:56.259136 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.1785; accuracy_model(%): 93.9785; accuracy_detection(%): 93.4379; rmse: 0.1068; precision: 0.9225; recall: 0.9238; f1-score: 0.9231; confusion_matrix: 3402-174-165-1425;
+
+# Teste MLP - 2021-02-20 10:44:09.899208 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "relu"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 1.1160; accuracy_model(%): 82.3656; accuracy_detection(%): 29.9458; rmse: 0.6164; precision: 0.4898; recall: 0.2208; f1-score: 0.3039; confusion_matrix: 0-0-2671-889;
+
+# Teste MLP - 2021-02-20 10:44:23.251649 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1952; accuracy_model(%): 92.0430; accuracy_detection(%): 91.7925; rmse: 0.1183; precision: 0.8958; recall: 0.9233; f1-score: 0.9071; confusion_matrix: 3252-324-100-1490;
+
+# Teste MLP - 2021-02-20 10:44:36.648946 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "tanh"}]}
+métricas: loss: 0.1590; accuracy_model(%): 92.9032; accuracy_detection(%): 46.6705; rmse: 0.5586; precision: 0.5915; recall: 0.3939; f1-score: 0.4379; confusion_matrix: 0-0-2441-958;
+
+# Teste MLP - 2021-02-20 10:44:50.170196 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "relu"}]}
+métricas: loss: 0.2569; accuracy_model(%): 92.6882; accuracy_detection(%): 93.6702; rmse: 0.1121; precision: 0.6185; recall: 0.6164; f1-score: 0.6174; confusion_matrix: 3419-155-165-1420;
+
+# Teste MLP - 2021-02-20 10:45:03.529353 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "elu"}, {"qtd_neurons": 8, "activation": "elu"}, {"qtd_neurons": 1, "activation": "elu"}]}
+métricas: loss: 4.5446; accuracy_model(%): 70.5376; accuracy_detection(%): 69.2218; rmse: 0.3049; precision: 0.3461; recall: 0.5000; f1-score: 0.4091; confusion_matrix: 3576-0-1590-0;
