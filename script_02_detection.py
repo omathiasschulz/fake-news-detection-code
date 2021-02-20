@@ -185,27 +185,27 @@ def generateMLP(data, dataset_name):
     #     model_mlp = ModelMLP(model, data, dataset_name)
     #     model_mlp.predict()
 
-    # MODELO MLP - TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS - 100 PALAVRAS
-    model = {
-        'epochs': 50,
-        'batch_size': 10,
-        'layers': [
-            {'qtd_neurons': 12, 'activation': ''},
-            {'qtd_neurons': 8, 'activation': ''},
-            {'qtd_neurons': 1, 'activation': ''},
-        ]
-    }
-    funcoes = [Model.ATIVACAO_SIGMOID, Model.ATIVACAO_TANH, Model.ATIVACAO_RELU, Model.ATIVACAO_ELU]
-    for ativacao_atual_entrada in funcoes:
-        model['layers'][0]['activation'] = ativacao_atual_entrada
-        for ativacao_atual_intermediaria in funcoes:
-            model['layers'][1]['activation'] = ativacao_atual_intermediaria
-            for ativacao_atual_saida in funcoes:
-                model['layers'][2]['activation'] = ativacao_atual_saida
-                print('\nmodel:')
-                print(model)
-                model_mlp = ModelMLP(model, data, dataset_name)
-                model_mlp.predict()
+    # # MODELO MLP - TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS - 100 PALAVRAS
+    # model = {
+    #     'epochs': 50,
+    #     'batch_size': 10,
+    #     'layers': [
+    #         {'qtd_neurons': 12, 'activation': ''},
+    #         {'qtd_neurons': 8, 'activation': ''},
+    #         {'qtd_neurons': 1, 'activation': ''},
+    #     ]
+    # }
+    # funcoes = [Model.ATIVACAO_SIGMOID, Model.ATIVACAO_TANH, Model.ATIVACAO_RELU, Model.ATIVACAO_ELU]
+    # for ativacao_atual_entrada in funcoes:
+    #     model['layers'][0]['activation'] = ativacao_atual_entrada
+    #     for ativacao_atual_intermediaria in funcoes:
+    #         model['layers'][1]['activation'] = ativacao_atual_intermediaria
+    #         for ativacao_atual_saida in funcoes:
+    #             model['layers'][2]['activation'] = ativacao_atual_saida
+    #             print('\nmodel:')
+    #             print(model)
+    #             model_mlp = ModelMLP(model, data, dataset_name)
+    #             model_mlp.predict()
 
     # # MODELO MLP - TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - 100 PALAVRAS
     # model = {
@@ -227,25 +227,25 @@ def generateMLP(data, dataset_name):
     #         model_mlp = ModelMLP(model, data, dataset_name)
     #         model_mlp.predict()
 
-    # # MODELO MLP - TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 02 - 100 PALAVRAS
-    # model = {
-    #     "epochs": 50,
-    #     "batch_size": 10,
-    #     "layers": [
-    #         {"qtd_neurons": 12, "activation": "elu"},
-    #         {"qtd_neurons": 8, "activation": "elu"},
-    #         {"qtd_neurons": 1, "activation": "sigmoid"}
-    #     ]
-    # }
-    # neuronios = [1, 2, 4, 8, 10, 25, 30, 50, 75, 90, 100, 128, 150, 200, 300]
-    # for neuronios_atual_entrada in neuronios:
-    #     model['layers'][0]['qtd_neurons'] = neuronios_atual_entrada
-    #     for neuronios_atual_intermediaria in neuronios:
-    #         model['layers'][1]['qtd_neurons'] = neuronios_atual_intermediaria
-    #         print('\nmodel:')
-    #         print(model)
-    #         model_mlp = ModelMLP(model, data, dataset_name)
-    #         model_mlp.predict()
+    # MODELO MLP - TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 02 - 100 PALAVRAS
+    model = {
+        "epochs": 50,
+        "batch_size": 10,
+        "layers": [
+            {"qtd_neurons": 12, "activation": "elu"},
+            {"qtd_neurons": 8, "activation": "elu"},
+            {"qtd_neurons": 1, "activation": "sigmoid"}
+        ]
+    }
+    neuronios = [1, 2, 4, 8, 10, 25, 30, 50, 75, 90, 100, 128, 150, 200, 300]
+    for neuronios_atual_entrada in neuronios:
+        model['layers'][0]['qtd_neurons'] = neuronios_atual_entrada
+        for neuronios_atual_intermediaria in neuronios:
+            model['layers'][1]['qtd_neurons'] = neuronios_atual_intermediaria
+            print('\nmodel:')
+            print(model)
+            model_mlp = ModelMLP(model, data, dataset_name)
+            model_mlp.predict()
 
     # # MODELO MLP - TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 03 - 100 PALAVRAS
     # model = {
