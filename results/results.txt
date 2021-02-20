@@ -3054,7 +3054,7 @@ métricas: loss: 0.2493; accuracy_model(%): 95.4619; accuracy_detection(%): 97.0
 
 
 
-# TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS - 100 PALAVRAS
+# MODELO MLP - TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS - 100 PALAVRAS
 
 # Teste MLP - 2021-02-20 10:30:51.899244 - dataset_100_palavras.csv
 {"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 12, "activation": "sigmoid"}, {"qtd_neurons": 8, "activation": "sigmoid"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
