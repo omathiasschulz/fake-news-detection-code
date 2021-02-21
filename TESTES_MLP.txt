@@ -83,32 +83,28 @@ relu;tanh;sigmoid;0.1339;95.6240;96.3374;0.0581;0.9631;0.9635;0.9633;3456-143-10
 elu;elu;sigmoid;0.1234;95.7861;95.3159;0.0693;0.9528;0.9534;0.9531;3412-187-134-3120;
 relu;elu;sigmoid;0.1241;95.6240;96.2060;0.0605;0.9617;0.9624;0.9620;3439-160-100-3154;
 
-O segundo teste é realizado pegando os três melhores modelos do primeiro teste e utilizado a quantidade de neurônios variada.
+O segundo teste é realizado pegando os três melhores modelos do primeiro teste, com base no dataset com notícias com 50 palavras e utilizado a quantidade de neurônios variada, no qual a primeira e a segunda camada variam a quantidade de neurônios entre 1, 2, 4, 8, 10, 25, 30, 50, 75, 90, 100, 128, 150, 200 e 300. A terceira camada sempre possuirá 1 neurônio.
 
-# MODELO MLP - TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 01
+Dessa forma, para cada um dos três modelos, foram obtidas 225 configurações de modelos, totalizando 675 configurações.
 
-# Teste MLP - 2021-02-18 11:45:23.438448 - dataset_50_palavras.csv
+Para o primeiro modelo a melhor configuração obtida pode ser visualizada abaixo.
+
 {"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 128, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+
 métricas: loss: 0.4219; accuracy_model(%): 94.9757; accuracy_detection(%): 98.1322; rmse: 0.0550; precision: 0.9812; recall: 0.9813; f1-score: 0.9813; confusion_matrix: 3533-66-62-3192;
-Tem o menor RMSE
 
+Para o segundo modelo a melhor configuração obtida pode ser visualizada abaixo.
 
-
-# MODELO MLP - TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 02
-
-# Teste MLP - 2021-02-19 07:43:09.928320 - dataset_50_palavras.csv
 {"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 200, "activation": "elu"}, {"qtd_neurons": 300, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+
 métricas: loss: 0.1774; accuracy_model(%): 94.9757; accuracy_detection(%): 96.2644; rmse: 0.0608; precision: 0.9623; recall: 0.9631; f1-score: 0.9626; confusion_matrix: 3433-166-90-3164;
-Tem o menor RMSE
 
+Para o terceiro modelo a melhor configuração obtida pode ser visualizada abaixo.
 
-
-# MODELO MLP - TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 03
-
-# Teste MLP - 2021-02-19 08:35:47.029355 - dataset_50_palavras.csv
 {"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 75, "activation": "relu"}, {"qtd_neurons": 128, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+
 métricas: loss: 0.2686; accuracy_model(%): 95.6240; accuracy_detection(%): 98.0009; rmse: 0.0476; precision: 0.9800; recall: 0.9799; f1-score: 0.9800; confusion_matrix: 3533-66-71-3183;
-Tem o menor RMSE
+
 
 
 
