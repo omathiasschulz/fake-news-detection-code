@@ -55,6 +55,11 @@ def generateMLP(data, dataset_name):
     :param dataset_name: Nome do dataset utilizado
     :type dataset_name: str
     """
+    # ###
+    # ###
+    # ###
+    # ### DATASET COM 50 PALAVRAS
+    # MODELO INICIAL
     # # MODELO MLP - TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS - 50 PALAVRAS
     # model = {
     #     'epochs': 50,
@@ -185,6 +190,10 @@ def generateMLP(data, dataset_name):
     #     model_mlp = ModelMLP(model, data, dataset_name)
     #     model_mlp.predict()
 
+    # ###
+    # ###
+    # ###
+    # ### DATASET COM 100 PALAVRAS
     # # MODELO MLP - TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS - 100 PALAVRAS
     # model = {
     #     'epochs': 50,
