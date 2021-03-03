@@ -217,7 +217,7 @@ class Model:
         """
         Método responsável por salvar o modelo
         """
-        self.model.save('results/modelo_mlp.h5')
+        self.model.save('results/modelo_%s.h5' % self.model_name)
 
     def predict(self):
         """
