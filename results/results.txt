@@ -2978,7 +2978,7 @@ métricas: loss: 0.2314; accuracy_model(%): 95.2998; accuracy_detection(%): 97.9
 
 # Teste MLP - 2021-02-20 09:31:10.334016 - dataset_50_palavras.csv
 {"epochs": 50, "batch_size": 2, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 128, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
-métricas: loss: 0.2595; accuracy_model(%): 95.9481; accuracy_detection(%): 98.2198; rmse: 0.0429; precision: 0.9823; recall: 0.9820; f1-score: 0.9821; confusion_matrix: 3550-49-73-3181;
+métricas: loss: 0.2489; accuracy_model(%): 94.8136; accuracy_detection(%): 98.0884; rmse: 0.0568; precision: 0.9809; recall: 0.9808; f1-score: 0.9808; confusion_matrix: 3536-63-68-3186;
 
 # Teste MLP - 2021-02-20 09:31:50.357203 - dataset_50_palavras.csv
 {"epochs": 50, "batch_size": 5, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 128, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}

@@ -153,8 +153,11 @@ class Model:
         f = open('results/results.txt', 'a')
         f.write(result)
         f.close()
+
         # gera os gráficos
-        # self.__graphics(history, cm)
+        self.__graphics(history, cm)
+        # salva o modelo
+        self.__save_model()
 
     def __graphics(self, history, cm):
         """
@@ -209,6 +212,12 @@ class Model:
         plt.legend()
         plt.savefig(self.path_graphics + 'loss.png', dpi=300)
         plt.close()
+
+    def __save_model(self):
+        """
+        Método responsável por salvar o modelo
+        """
+        self.model.save('results/modelo_mlp.h5')
 
     def predict(self):
         """
