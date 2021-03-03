@@ -6030,3 +6030,7 @@ TESTE PARA MELHOR MODELO MLP
 # Teste MLP - 2021-03-03 18:31:53.152784 - dataset_50_palavras.csv
 {"epochs": 50, "batch_size": 2, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 128, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
 métricas: loss: 0.2143; accuracy_model(%): 94.9757; accuracy_detection(%): 98.1322; rmse: 0.0521; precision: 0.9811; recall: 0.9815; f1-score: 0.9813; confusion_matrix: 3521-78-50-3204;
+
+# Teste MLP - 2021-03-03 19:26:26.063565 - dataset_50_palavras.csv
+{"epochs": 50, "batch_size": 2, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 128, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1973; accuracy_model(%): 96.2723; accuracy_detection(%): 98.3219; rmse: 0.0439; precision: 0.9831; recall: 0.9833; f1-score: 0.9832; confusion_matrix: 3532-67-48-3206;
