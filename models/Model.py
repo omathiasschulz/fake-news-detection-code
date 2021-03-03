@@ -154,70 +154,14 @@ class Model:
         f.write(result)
         f.close()
 
-        # gera os gráficos
-        self.__graphics(history, cm)
         # salva o modelo
         self.__save_model()
-
-    def __graphics(self, history, cm):
-        """
-        Método responsável por gerar os gráficos
-
-        :param history: Histórico das métricas da detecção
-        :type history: Tuple[Any]
-        :param cm: Matriz de confusão
-        :type cm: list
-        """
-        # Apresentação dos gráficos de treinamento e validação da rede
-        Path(self.path_graphics).mkdir(parents=True, exist_ok=True)
-
-        # cm
-        cm = pd.DataFrame(cm, index=['Fake', 'Original'], columns=['Fake', 'Original'])
-        sns_plot = sns.heatmap(
-            cm, linecolor='black', linewidth=1, annot=True, fmt='',
-            xticklabels=['Fake', 'Original'], yticklabels=['Fake', 'Original']
-        )
-        sns_plot.set_title(self.model_name + ' - Matriz de Confusão')
-        sns_plot.set_xlabel('Valores Preditos')
-        sns_plot.set_ylabel('Valores Reais')
-        plt.savefig(self.path_graphics + 'cm.png', dpi=300)
-        plt.close()
-
-        # rmse
-        plt.plot(history.history['rmse'], 'go-', markersize=3, label='Treinamento')
-        plt.plot(history.history['val_rmse'], 'ro-', markersize=3, label='Validação')
-        plt.title(self.model_name + ' - RMSE')
-        plt.xlabel('Épocas')
-        plt.ylabel('RMSE')
-        plt.legend()
-        plt.savefig(self.path_graphics + 'rmse.png', dpi=300)
-        plt.close()
-
-        # acurácia
-        plt.plot(history.history['accuracy'], 'go-', markersize=3, label='Treinamento')
-        plt.plot(history.history['val_accuracy'], 'ro-', markersize=3, label='Validação')
-        plt.title(self.model_name + ' - Acurácia')
-        plt.xlabel('Épocas')
-        plt.ylabel('Acurácia')
-        plt.legend()
-        plt.savefig(self.path_graphics + 'acuracia.png', dpi=300)
-        plt.close()
-
-        # loss
-        plt.plot(history.history['loss'], 'go-', markersize=3, label='Treinamento')
-        plt.plot(history.history['val_loss'], 'ro-', markersize=3, label='Validação')
-        plt.title(self.model_name + ' - Loss')
-        plt.xlabel('Épocas')
-        plt.ylabel('Loss')
-        plt.legend()
-        plt.savefig(self.path_graphics + 'loss.png', dpi=300)
-        plt.close()
 
     def __save_model(self):
         """
         Método responsável por salvar o modelo
         """
-        self.model.save('results/modelo_%s.h5' % self.model_name)
+        self.model.save('results/modelo_%s_%s.h5' % (self.model_name, str(datetime.now())))
 
     def predict(self):
         """
