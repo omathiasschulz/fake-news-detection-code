@@ -6031,3 +6031,95 @@ métricas: loss: 0.4380; accuracy_model(%): 94.6237; accuracy_detection(%): 97.7
 # Teste MLP - 2021-02-20 17:27:12.483792 - dataset_100_palavras.csv
 {"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
 métricas: loss: 0.3435; accuracy_model(%): 94.1935; accuracy_detection(%): 98.0062; rmse: 0.0613; precision: 0.9748; recall: 0.9786; f1-score: 0.9767; confusion_matrix: 3513-63-40-1550;
+
+
+
+# MODELO MLP - TESTES COM BATCH SIZE VARIADO - 100 PALAVRAS
+
+# Teste MLP - 2021-03-04 09:44:24.125845 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 1, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 30, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.3230; accuracy_model(%): 92.4731; accuracy_detection(%): 97.6965; rmse: 0.0769; precision: 0.9757; recall: 0.9701; f1-score: 0.9728; confusion_matrix: 3533-43-76-1514;
+
+# Teste MLP - 2021-03-04 09:45:27.622772 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 2, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 30, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.3133; accuracy_model(%): 92.4731; accuracy_detection(%): 97.3093; rmse: 0.0747; precision: 0.9728; recall: 0.9638; f1-score: 0.9681; confusion_matrix: 3533-43-96-1494;
+
+# Teste MLP - 2021-03-04 09:45:55.077032 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 5, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 30, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.4839; accuracy_model(%): 91.6129; accuracy_detection(%): 97.5610; rmse: 0.0869; precision: 0.9731; recall: 0.9695; f1-score: 0.9713; confusion_matrix: 3524-52-74-1516;
+
+# Teste MLP - 2021-03-04 09:46:09.728992 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 30, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.4517; accuracy_model(%): 93.1183; accuracy_detection(%): 97.5997; rmse: 0.0736; precision: 0.9744; recall: 0.9690; f1-score: 0.9717; confusion_matrix: 3530-46-78-1512;
+
+# Teste MLP - 2021-03-04 09:46:16.627728 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 25, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 30, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.3001; accuracy_model(%): 93.3333; accuracy_detection(%): 97.6771; rmse: 0.0715; precision: 0.9720; recall: 0.9736; f1-score: 0.9728; confusion_matrix: 3511-65-55-1535;
+
+# Teste MLP - 2021-03-04 09:46:21.051271 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 50, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 30, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.2764; accuracy_model(%): 92.6882; accuracy_detection(%): 97.5029; rmse: 0.0809; precision: 0.9735; recall: 0.9676; f1-score: 0.9705; confusion_matrix: 3529-47-82-1508;
+
+
+
+# MODELO MLP - TESTES COM BATCH SIZE VARIADO - MODELO 02 - 100 PALAVRAS
+
+# Teste MLP - 2021-03-04 09:58:23.205443 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 1, "layers": [{"qtd_neurons": 150, "activation": "relu"}, {"qtd_neurons": 300, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.4938; accuracy_model(%): 92.6882; accuracy_detection(%): 96.9996; rmse: 0.0779; precision: 0.9586; recall: 0.9731; f1-score: 0.9654; confusion_matrix: 3451-125-30-1560;
+
+# Teste MLP - 2021-03-04 09:59:31.722976 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 2, "layers": [{"qtd_neurons": 150, "activation": "relu"}, {"qtd_neurons": 300, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.3968; accuracy_model(%): 93.9785; accuracy_detection(%): 97.5029; rmse: 0.0623; precision: 0.9676; recall: 0.9745; f1-score: 0.9709; confusion_matrix: 3490-86-43-1547;
+
+# Teste MLP - 2021-03-04 10:00:01.919535 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 5, "layers": [{"qtd_neurons": 150, "activation": "relu"}, {"qtd_neurons": 300, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.4219; accuracy_model(%): 93.9785; accuracy_detection(%): 97.6965; rmse: 0.0610; precision: 0.9691; recall: 0.9776; f1-score: 0.9732; confusion_matrix: 3490-86-33-1557;
+
+# Teste MLP - 2021-03-04 10:00:18.498641 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 150, "activation": "relu"}, {"qtd_neurons": 300, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.4564; accuracy_model(%): 93.9785; accuracy_detection(%): 97.9868; rmse: 0.0628; precision: 0.9762; recall: 0.9766; f1-score: 0.9764; confusion_matrix: 3523-53-51-1539;
+
+# Teste MLP - 2021-03-04 10:00:26.542315 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 25, "layers": [{"qtd_neurons": 150, "activation": "relu"}, {"qtd_neurons": 300, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.4363; accuracy_model(%): 93.7634; accuracy_detection(%): 97.9868; rmse: 0.0692; precision: 0.9737; recall: 0.9795; f1-score: 0.9765; confusion_matrix: 3506-70-34-1556;
+
+# Teste MLP - 2021-03-04 10:00:31.543213 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 50, "layers": [{"qtd_neurons": 150, "activation": "relu"}, {"qtd_neurons": 300, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.3372; accuracy_model(%): 93.9785; accuracy_detection(%): 97.7158; rmse: 0.0678; precision: 0.9717; recall: 0.9749; f1-score: 0.9733; confusion_matrix: 3507-69-49-1541;
+
+
+
+# MODELO MLP - TESTES COM BATCH SIZE VARIADO - MODELO 03 - 100 PALAVRAS
+
+# Teste MLP - 2021-03-04 10:31:08.674149 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 1, "layers": [{"qtd_neurons": 200, "activation": "relu"}, {"qtd_neurons": 90, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.5682; accuracy_model(%): 91.8280; accuracy_detection(%): 97.7933; rmse: 0.0856; precision: 0.9730; recall: 0.9753; f1-score: 0.9742; confusion_matrix: 3512-64-50-1540;
+
+# Teste MLP - 2021-03-04 10:32:11.008893 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 2, "layers": [{"qtd_neurons": 200, "activation": "relu"}, {"qtd_neurons": 90, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.7405; accuracy_model(%): 92.0430; accuracy_detection(%): 98.0062; rmse: 0.0825; precision: 0.9750; recall: 0.9784; f1-score: 0.9767; confusion_matrix: 3514-62-41-1549;
+
+# Teste MLP - 2021-03-04 10:32:38.507376 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 5, "layers": [{"qtd_neurons": 200, "activation": "relu"}, {"qtd_neurons": 90, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.5036; accuracy_model(%): 92.4731; accuracy_detection(%): 97.8126; rmse: 0.0748; precision: 0.9759; recall: 0.9727; f1-score: 0.9742; confusion_matrix: 3529-47-66-1524;
+
+# Teste MLP - 2021-03-04 10:32:53.249380 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 200, "activation": "relu"}, {"qtd_neurons": 90, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.5704; accuracy_model(%): 90.9677; accuracy_detection(%): 97.5223; rmse: 0.0934; precision: 0.9725; recall: 0.9692; f1-score: 0.9708; confusion_matrix: 3522-54-74-1516;
+
+# Teste MLP - 2021-03-04 10:33:00.212682 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 25, "layers": [{"qtd_neurons": 200, "activation": "relu"}, {"qtd_neurons": 90, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.4810; accuracy_model(%): 92.6882; accuracy_detection(%): 97.4061; rmse: 0.0782; precision: 0.9651; recall: 0.9752; f1-score: 0.9699; confusion_matrix: 3477-99-35-1555;
+
+# Teste MLP - 2021-03-04 10:33:04.623093 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 50, "layers": [{"qtd_neurons": 200, "activation": "relu"}, {"qtd_neurons": 90, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.4387; accuracy_model(%): 92.0430; accuracy_detection(%): 97.5223; rmse: 0.0831; precision: 0.9700; recall: 0.9720; f1-score: 0.9710; confusion_matrix: 3506-70-58-1532;
+
+
+
+# MELHOR MODELO MLP NO DATASET DE 50 PALAVRAS
+
+# Teste MLP - 2021-03-04 10:00:01.919535 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 5, "layers": [{"qtd_neurons": 150, "activation": "relu"}, {"qtd_neurons": 300, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.4219; accuracy_model(%): 93.9785; accuracy_detection(%): 97.6965; rmse: 0.0610; precision: 0.9691; recall: 0.9776; f1-score: 0.9732; confusion_matrix: 3490-86-33-1557;

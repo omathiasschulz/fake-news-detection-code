@@ -190,18 +190,18 @@ def generateMLP(data, dataset_name):
     #     model_mlp = ModelMLP(model, data, dataset_name)
     #     model_mlp.predict()
 
-    # MELHOR MODELO MLP NO DATASET DE 50 PALAVRAS
-    model = {
-        "epochs": 50,
-        "batch_size": 2,
-        "layers": [
-            {"qtd_neurons": 300, "activation": "relu"},
-            {"qtd_neurons": 128, "activation": "tanh"},
-            {"qtd_neurons": 1, "activation": "sigmoid"}
-        ]
-    }
-    model_mlp = ModelMLP(model, data, dataset_name)
-    model_mlp.predict()
+    # # MELHOR MODELO MLP NO DATASET DE 50 PALAVRAS
+    # model = {
+    #     "epochs": 50,
+    #     "batch_size": 2,
+    #     "layers": [
+    #         {"qtd_neurons": 300, "activation": "relu"},
+    #         {"qtd_neurons": 128, "activation": "tanh"},
+    #         {"qtd_neurons": 1, "activation": "sigmoid"}
+    #     ]
+    # }
+    # model_mlp = ModelMLP(model, data, dataset_name)
+    # model_mlp.predict()
 
     # ###
     # ###
@@ -295,7 +295,7 @@ def generateMLP(data, dataset_name):
     #     "batch_size": 10,
     #     "layers": [
     #         {"qtd_neurons": 300, "activation": "relu"},
-    #         {"qtd_neurons": 128, "activation": "tanh"},
+    #         {"qtd_neurons": 30, "activation": "tanh"},
     #         {"qtd_neurons": 1, "activation": "sigmoid"}
     #     ]
     # }
@@ -310,7 +310,7 @@ def generateMLP(data, dataset_name):
     #     "epochs": 50,
     #     "batch_size": 10,
     #     "layers": [
-    #         {"qtd_neurons": 200, "activation": "elu"},
+    #         {"qtd_neurons": 150, "activation": "relu"},
     #         {"qtd_neurons": 300, "activation": "elu"},
     #         {"qtd_neurons": 1, "activation": "sigmoid"}
     #     ]
@@ -326,8 +326,8 @@ def generateMLP(data, dataset_name):
     #     "epochs": 50,
     #     "batch_size": 10,
     #     "layers": [
-    #         {"qtd_neurons": 75, "activation": "relu"},
-    #         {"qtd_neurons": 128, "activation": "elu"},
+    #         {"qtd_neurons": 200, "activation": "relu"},
+    #         {"qtd_neurons": 90, "activation": "elu"},
     #         {"qtd_neurons": 1, "activation": "sigmoid"}
     #     ]
     # }
@@ -336,6 +336,19 @@ def generateMLP(data, dataset_name):
     #     model['batch_size'] = batch_size_atual
     #     model_mlp = ModelMLP(model, data, dataset_name)
     #     model_mlp.predict()
+
+    # MELHOR MODELO MLP NO DATASET DE 100 PALAVRAS
+    model = {
+        "epochs": 50,
+        "batch_size": 5,
+        "layers": [
+            {"qtd_neurons": 150, "activation": "relu"},
+            {"qtd_neurons": 300, "activation": "elu"},
+            {"qtd_neurons": 1, "activation": "sigmoid"}
+        ]
+    }
+    model_mlp = ModelMLP(model, data, dataset_name)
+    model_mlp.predict()
 
 
 def generateLSTM(data, dataset_name):
@@ -401,19 +414,19 @@ def main():
     print('Iniciando a detecção de fake news')
     inicio = time.time()
 
-    # testes com o dataset de 50 palavras no modelo MLP
-    text_length = 50
-    dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % text_length
-    print('\n\n' + dataset_nome)
-    data = generateData(dataset_nome)
-    generateMLP(data, 'dataset_%i_palavras.csv' % text_length)
-
-    # # testes com o dataset de 100 palavras no modelo MLP
-    # text_length = 100
+    # # testes com o dataset de 50 palavras no modelo MLP
+    # text_length = 50
     # dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % text_length
     # print('\n\n' + dataset_nome)
     # data = generateData(dataset_nome)
     # generateMLP(data, 'dataset_%i_palavras.csv' % text_length)
+
+    # testes com o dataset de 100 palavras no modelo MLP
+    text_length = 100
+    dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % text_length
+    print('\n\n' + dataset_nome)
+    data = generateData(dataset_nome)
+    generateMLP(data, 'dataset_%i_palavras.csv' % text_length)
 
     # # testes com o dataset de 50 palavras no modelo LSTM
     # text_length = 50

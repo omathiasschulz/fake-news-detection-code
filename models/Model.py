@@ -154,10 +154,10 @@ class Model:
         f.write(result)
         f.close()
 
-        # gera os gráficos
-        self.__graphics(history, cm)
-        # salva o modelo
-        self.__save_model()
+        # # gera os gráficos
+        # self.__graphics(history, cm)
+        # # salva o modelo
+        # self.__save_model()
 
     def __graphics(self, history, cm):
         """
