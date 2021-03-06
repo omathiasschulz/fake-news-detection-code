@@ -47,9 +47,6 @@ class ModelLSTM(Model):
         """
         # passa as camadas para uma nova variável sem ser por referência
         layers = self.layers[:]
-        # valida se foram informados pelo menos 3 camadas: entrada, intermediária 01 e saída
-        # if len(layers) < 3:
-        #     raise Exception('Informe pelo menos três camadas! ')
         # instacia o modelo
         self.model = Sequential()
 

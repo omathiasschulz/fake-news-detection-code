@@ -55,7 +55,7 @@ class Model:
         self.model_name = model_name
         self.info = info
         self.epochs = info['epochs']
-        self.batch_size = info['batch_size'] if info.get('batch_size') else None
+        self.batch_size = info['batch_size']
         self.layers = info['layers']
         self.data = data
         self.dataset_name = dataset_name

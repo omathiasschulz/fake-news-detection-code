@@ -360,45 +360,29 @@ def generateLSTM(data, dataset_name):
     :param dataset_name: Nome do dataset utilizado
     :type dataset_name: str
     """
-    # TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS
+    ###
+    ###
+    ###
+    # MODELO LSTM - TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS - 50 PALAVRAS
     model = {
         'epochs': 20,
+        'batch_size': 32,
         'layers': [
-            # camada de entrada
-            {
-                # a primeira camada sempre é LSTM
-                'qtd_neurons': 12,
-                'activation': Model.ATIVACAO_RELU,
-                'return_sequences': True,
-            },
+            # camada de entrada - a primeira camada sempre é LSTM
+            {'qtd_neurons': 12, 'activation': Model.ATIVACAO_RELU, 'return_sequences': True},
             # camada intermediária 01
-            {
-                'type': Model.LAYER_DROPOUT,
-                'value': 0.2,
-            },
-            # camada intermediária 02
-            {
-                'type': Model.LAYER_LSTM,
-                'qtd_neurons': 8,
-                'activation': Model.ATIVACAO_RELU,
-            },
+            {'type': Model.LAYER_LSTM, 'qtd_neurons': 8, 'activation': Model.ATIVACAO_RELU},
             # camada de saída
-            {
-                'type': Model.LAYER_MLP,
-                'qtd_neurons': 1,
-                'activation': Model.ATIVACAO_SIGMOID,
-            },
+            {'type': Model.LAYER_MLP, 'qtd_neurons': 1, 'activation': Model.ATIVACAO_SIGMOID},
         ]
     }
     funcoes = [Model.ATIVACAO_SIGMOID, Model.ATIVACAO_TANH, Model.ATIVACAO_RELU, Model.ATIVACAO_ELU]
     for ativacao_atual_entrada in funcoes:
         model['layers'][0]['activation'] = ativacao_atual_entrada
         for ativacao_atual_intermediaria in funcoes:
-            model['layers'][2]['activation'] = ativacao_atual_intermediaria
+            model['layers'][1]['activation'] = ativacao_atual_intermediaria
             for ativacao_atual_saida in funcoes:
-                model['layers'][3]['activation'] = ativacao_atual_saida
-                print('\nmodel:')
-                print(model)
+                model['layers'][2]['activation'] = ativacao_atual_saida
                 model_lstm = ModelLSTM(model, data, dataset_name)
                 model_lstm.predict()
 
@@ -421,19 +405,19 @@ def main():
     # data = generateData(dataset_nome)
     # generateMLP(data, 'dataset_%i_palavras.csv' % text_length)
 
-    # testes com o dataset de 100 palavras no modelo MLP
-    text_length = 100
-    dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % text_length
-    print('\n\n' + dataset_nome)
-    data = generateData(dataset_nome)
-    generateMLP(data, 'dataset_%i_palavras.csv' % text_length)
-
-    # # testes com o dataset de 50 palavras no modelo LSTM
-    # text_length = 50
+    # # testes com o dataset de 100 palavras no modelo MLP
+    # text_length = 100
     # dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % text_length
     # print('\n\n' + dataset_nome)
     # data = generateData(dataset_nome)
-    # generateLSTM(data, 'dataset_%i_palavras.csv' % text_length)
+    # generateMLP(data, 'dataset_%i_palavras.csv' % text_length)
+
+    # testes com o dataset de 50 palavras no modelo LSTM
+    text_length = 50
+    dataset_nome = PATH_DATASETS_CONVERTED + 'dataset_%i_palavras.csv' % text_length
+    print('\n\n' + dataset_nome)
+    data = generateData(dataset_nome)
+    generateLSTM(data, 'dataset_%i_palavras.csv' % text_length)
 
     fim = time.time()
     print('Detecção de fake news realizada com sucesso! ')

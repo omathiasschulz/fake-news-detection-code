@@ -108,3 +108,27 @@ MELHOR MODELO - MODELO 06
 métricas: loss: 0.3015; accuracy_model(%): 96.3441; accuracy_detection(%): 98.3353; rmse: 0.0436; precision: 0.9792; recall: 0.9819; f1-score: 0.9805; confusion_matrix: 3525-51-35-1555;
 
 
+
+MELHORES MODELOS - RNA LSTM - DATASET 50 PALAVRAS
+
+Os testes com o modelo LSTM são realizados com base na dataset de 50 palavras devido ao fato do modelo MLP utilizando os datasets de 50 e 100 palavras não resultar uma diferença de desempenho muito grande. Além disso, utilizar textos com 50 palavras se torna mais eficiente e mais amplo para a utilização com pequenos textos ou apenas uma parte dos textos.
+
+
+
+
+1º Teste com funções de ativação variada
+
+2º Teste com a quantidade de neurônios variada
+
+3º Teste com o batch size variado
+
+
+Ultimo teste aumentar o número de épocas
+
+return_sequences
+As redes LSTM podem ser empilhadas em Keras da mesma maneira que outros tipos de camada podem ser empilhados. Uma adição à configuração necessária é que uma camada LSTM antes de cada camada LSTM subsequente deve retornar a sequência. Isso pode ser feito definindo o parâmetro return_sequences na camada como True .
+
+dropout
+O dropout é utilizado para evitar problemas de sobreajuste.
+{'type': Model.LAYER_DROPOUT, 'value': 0.2},
+Overfitting (sobre-ajuste) é um termo usado em estatística para descrever quando um modelo estatístico se ajusta muito bem ao conjunto de dados anteriormente observado, mas se mostra ineficaz para prever novos resultados.
