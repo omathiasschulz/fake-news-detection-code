@@ -36,7 +36,7 @@ métricas: loss: 0.2686; accuracy_model(%): 95.6240; accuracy_detection(%): 98.0
 MODELO 07
 # Teste MLP - 2021-02-20 09:31:10.334016 - dataset_50_palavras.csv
 {"epochs": 50, "batch_size": 2, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 128, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
-métricas: loss: 0.2489; accuracy_model(%): 94.8136; accuracy_detection(%): 98.0884; rmse: 0.0568; precision: 0.9809; recall: 0.9808; f1-score: 0.9808; confusion_matrix: 3536-63-68-3186;
+métricas: loss: 0.2595; accuracy_model(%): 95.9481; accuracy_detection(%): 98.2198; rmse: 0.0429; precision: 0.9823; recall: 0.9820; f1-score: 0.9821; confusion_matrix: 3550-49-73-3181;
 
 MODELO 08
 # Teste MLP - 2021-02-20 09:38:47.421948 - dataset_50_palavras.csv
@@ -49,9 +49,9 @@ MODELO 09
 métricas: loss: 0.3366; accuracy_model(%): 94.9757; accuracy_detection(%): 97.7966; rmse: 0.0528; precision: 0.9778; recall: 0.9781; f1-score: 0.9779; confusion_matrix: 3511-88-63-3191;
 
 MELHOR MODELO - MODELO 07
-# Teste MLP - 2021-03-03 19:26:26.063565 - dataset_50_palavras.csv
+# Teste MLP - 2021-02-20 09:31:10.334016 - dataset_50_palavras.csv
 {"epochs": 50, "batch_size": 2, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 128, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
-métricas: loss: 0.1973; accuracy_model(%): 96.2723; accuracy_detection(%): 98.3219; rmse: 0.0439; precision: 0.9831; recall: 0.9833; f1-score: 0.9832; confusion_matrix: 3532-67-48-3206;
+métricas: loss: 0.2595; accuracy_model(%): 95.9481; accuracy_detection(%): 98.2198; rmse: 0.0429; precision: 0.9823; recall: 0.9820; f1-score: 0.9821; confusion_matrix: 3550-49-73-3181;
 
 
 
@@ -102,35 +102,9 @@ MODELO 09 - Melhor RMSE
 {"epochs": 50, "batch_size": 5, "layers": [{"qtd_neurons": 200, "activation": "relu"}, {"qtd_neurons": 90, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
 métricas: loss: 0.5036; accuracy_model(%): 92.4731; accuracy_detection(%): 97.8126; rmse: 0.0748; precision: 0.9759; recall: 0.9727; f1-score: 0.9742; confusion_matrix: 3529-47-66-1524;
 
-MELHOR MODELO - MODELO 08
-# Teste MLP - 2021-03-04 10:00:01.919535 - dataset_100_palavras.csv
-{"epochs": 50, "batch_size": 5, "layers": [{"qtd_neurons": 150, "activation": "relu"}, {"qtd_neurons": 300, "activation": "elu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
-métricas: loss: 0.4219; accuracy_model(%): 93.9785; accuracy_detection(%): 97.6965; rmse: 0.0610; precision: 0.9691; recall: 0.9776; f1-score: 0.9732; confusion_matrix: 3490-86-33-1557;
+MELHOR MODELO - MODELO 06
+# Teste MLP - 2021-02-20 17:21:59.825503 - dataset_100_palavras.csv
+{"epochs": 50, "batch_size": 10, "layers": [{"qtd_neurons": 200, "activation": "relu"}, {"qtd_neurons": 90, "activation": "relu"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.3015; accuracy_model(%): 96.3441; accuracy_detection(%): 98.3353; rmse: 0.0436; precision: 0.9792; recall: 0.9819; f1-score: 0.9805; confusion_matrix: 3525-51-35-1555;
 
 
-
-
-
-
-
-
-
-# METRICAS - Acurracy, Precision, Recall e F1 Score
-https://medium.com/@vilsonrodrigues/machine-learning-o-que-s%C3%A3o-acurracy-precision-recall-e-f1-score-f16762f165b0
-
-# BATCH SIZE
-Neste experimento, vamos investigar o efeito do tamanho do lote (Batch Size) na dinâmica de treinamento. Tamanho do lote (Batch Size) é um termo usado em aprendizado de máquina e refere-se ao número de exemplos de treinamento usados em uma iteração. O Batch Size pode ser uma das três opções:
-
-batch mode: onde o tamanho do lote é igual ao conjunto de dados total, tornando os valores de iteração e épocas equivalentes.
-mini-batch mode: onde o tamanho do lote é maior que um, mas menor que o tamanho total do conjunto de dados. Geralmente, um número que pode ser dividido no tamanho total do conjunto de dados.
-stochastic mode: onde o tamanho do lote é igual a um. Portanto, o gradiente e os parâmetros da rede neural são atualizados após cada amostra.
-
-http://deeplearningbook.com.br/o-efeito-do-batch-size-no-treinamento-de-redes-neurais-artificiais/
-
-# 5.2  MODELO LSTM
-Esse capítulo apresenta o treinamento e resultado das diferentes configurações realizadas com o modelo LSTM (Long Short Term Memory).
-
-MODELO LSTM
-A camada de Dropout serve para mitigar problemas de sobreajuste
-Uma camada LSTM antes de cada camada LSTM subsequente deve retornar a sequência
-O que pode ser feito definindo o parâmetro "return_sequences = True" na(s) camada(s) anterior(es)
