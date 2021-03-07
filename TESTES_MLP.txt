@@ -126,6 +126,22 @@ MODELO 03
 {"epochs": 20, "batch_size": 32, "layers": [{"qtd_neurons": 12, "activation": "tanh", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 8, "activation": "elu"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
 métricas: loss: 0.1636; accuracy_model(%): 94.0032; accuracy_detection(%): 92.9228; rmse: 0.0945; precision: 0.9292; recall: 0.9288; f1-score: 0.9290; confusion_matrix: 3372-227-258-2996;
 
+MODELO 04 - Um dos melhores RMSE e F1 Score
+# Teste LSTM - 2021-03-06 21:15:01.879701 - dataset_50_palavras.csv
+{"epochs": 20, "batch_size": 32, "layers": [{"qtd_neurons": 150, "activation": "elu", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 2, "activation": "relu"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1706; accuracy_model(%): 94.8136; accuracy_detection(%): 94.0902; rmse: 0.0932; precision: 0.9409; recall: 0.9405; f1-score: 0.9407; confusion_matrix: 3411-188-217-3037;
+
+MODELO 05 - Segundo melhor RMSE, um dos melhores F1 Score e o melhor Loss
+# Teste LSTM - 2021-03-07 06:58:24.219357 - dataset_50_palavras.csv
+{"epochs": 20, "batch_size": 32, "layers": [{"qtd_neurons": 300, "activation": "elu", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 90, "activation": "tanh"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1489; accuracy_model(%): 95.1378; accuracy_detection(%): 94.5425; rmse: 0.0737; precision: 0.9461; recall: 0.9447; f1-score: 0.9452; confusion_matrix: 3455-144-230-3024;
+
+MODELO 06 - Melhor F1 Score e um dos melhores RMSE
+# Teste LSTM - 2021-03-07 14:16:46.582306 - dataset_50_palavras.csv
+{"epochs": 20, "batch_size": 32, "layers": [{"qtd_neurons": 300, "activation": "tanh", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 50, "activation": "elu"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1443; accuracy_model(%): 94.3274; accuracy_detection(%): 95.0533; rmse: 0.0746; precision: 0.9505; recall: 0.9503; f1-score: 0.9504; confusion_matrix: 3437-162-177-3077;
+
+
 
 
 Etapas
