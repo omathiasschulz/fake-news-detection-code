@@ -363,28 +363,82 @@ def generateLSTM(data, dataset_name):
     ###
     ###
     ###
-    # MODELO LSTM - TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS - 50 PALAVRAS
+    # # MODELO LSTM - TESTES COM FUNÇÕES DE ATIVAÇÃO VARIADAS - 50 PALAVRAS
+    # model = {
+    #     'epochs': 20,
+    #     'batch_size': 32,
+    #     'layers': [
+    #         # camada de entrada - a primeira camada sempre é LSTM
+    #         {'qtd_neurons': 12, 'activation': Model.ATIVACAO_RELU, 'return_sequences': True},
+    #         # camada intermediária 01
+    #         {'type': Model.LAYER_LSTM, 'qtd_neurons': 8, 'activation': Model.ATIVACAO_RELU},
+    #         # camada de saída
+    #         {'type': Model.LAYER_MLP, 'qtd_neurons': 1, 'activation': Model.ATIVACAO_SIGMOID},
+    #     ]
+    # }
+    # funcoes = [Model.ATIVACAO_SIGMOID, Model.ATIVACAO_TANH, Model.ATIVACAO_RELU, Model.ATIVACAO_ELU]
+    # for ativacao_atual_entrada in funcoes:
+    #     model['layers'][0]['activation'] = ativacao_atual_entrada
+    #     for ativacao_atual_intermediaria in funcoes:
+    #         model['layers'][1]['activation'] = ativacao_atual_intermediaria
+    #         for ativacao_atual_saida in funcoes:
+    #             model['layers'][2]['activation'] = ativacao_atual_saida
+    #             model_lstm = ModelLSTM(model, data, dataset_name)
+    #             model_lstm.predict()
+
+    # # MODELO LSTM - TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - 50 PALAVRAS
+    # model = {
+    #     "epochs": 20,
+    #     "batch_size": 32,
+    #     "layers": [
+    #         {"qtd_neurons": 12, "activation": "elu", "return_sequences": True},
+    #         {"type": "lstm", "qtd_neurons": 8, "activation": "relu"},
+    #         {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}
+    #     ]
+    # }
+    # neuronios = [1, 2, 4, 8, 10, 25, 30, 50, 75, 90, 100, 128, 150, 200, 300]
+    # for neuronios_atual_entrada in neuronios:
+    #     model['layers'][0]['qtd_neurons'] = neuronios_atual_entrada
+    #     for neuronios_atual_intermediaria in neuronios:
+    #         model['layers'][1]['qtd_neurons'] = neuronios_atual_intermediaria
+    #         model_lstm = ModelLSTM(model, data, dataset_name)
+    #         model_lstm.predict()
+
+    # # MODELO LSTM - TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 02 - 50 PALAVRAS
+    # model = {
+    #     "epochs": 20,
+    #     "batch_size": 32,
+    #     "layers": [
+    #         {"qtd_neurons": 12, "activation": "elu", "return_sequences": True},
+    #         {"type": "lstm", "qtd_neurons": 8, "activation": "tanh"},
+    #         {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}
+    #     ]
+    # }
+    # neuronios = [1, 2, 4, 8, 10, 25, 30, 50, 75, 90, 100, 128, 150, 200, 300]
+    # for neuronios_atual_entrada in neuronios:
+    #     model['layers'][0]['qtd_neurons'] = neuronios_atual_entrada
+    #     for neuronios_atual_intermediaria in neuronios:
+    #         model['layers'][1]['qtd_neurons'] = neuronios_atual_intermediaria
+    #         model_lstm = ModelLSTM(model, data, dataset_name)
+    #         model_lstm.predict()
+
+    # MODELO LSTM - TESTES COM QUANTIDADE DE NEURÔNIOS VARIADA - MODELO 03 - 50 PALAVRAS
     model = {
-        'epochs': 20,
-        'batch_size': 32,
-        'layers': [
-            # camada de entrada - a primeira camada sempre é LSTM
-            {'qtd_neurons': 12, 'activation': Model.ATIVACAO_RELU, 'return_sequences': True},
-            # camada intermediária 01
-            {'type': Model.LAYER_LSTM, 'qtd_neurons': 8, 'activation': Model.ATIVACAO_RELU},
-            # camada de saída
-            {'type': Model.LAYER_MLP, 'qtd_neurons': 1, 'activation': Model.ATIVACAO_SIGMOID},
+        "epochs": 20,
+        "batch_size": 32,
+        "layers": [
+            {"qtd_neurons": 12, "activation": "tanh", "return_sequences": True},
+            {"type": "lstm", "qtd_neurons": 8, "activation": "elu"},
+            {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}
         ]
     }
-    funcoes = [Model.ATIVACAO_SIGMOID, Model.ATIVACAO_TANH, Model.ATIVACAO_RELU, Model.ATIVACAO_ELU]
-    for ativacao_atual_entrada in funcoes:
-        model['layers'][0]['activation'] = ativacao_atual_entrada
-        for ativacao_atual_intermediaria in funcoes:
-            model['layers'][1]['activation'] = ativacao_atual_intermediaria
-            for ativacao_atual_saida in funcoes:
-                model['layers'][2]['activation'] = ativacao_atual_saida
-                model_lstm = ModelLSTM(model, data, dataset_name)
-                model_lstm.predict()
+    neuronios = [1, 2, 4, 8, 10, 25, 30, 50, 75, 90, 100, 128, 150, 200, 300]
+    for neuronios_atual_entrada in neuronios:
+        model['layers'][0]['qtd_neurons'] = neuronios_atual_entrada
+        for neuronios_atual_intermediaria in neuronios:
+            model['layers'][1]['qtd_neurons'] = neuronios_atual_intermediaria
+            model_lstm = ModelLSTM(model, data, dataset_name)
+            model_lstm.predict()
 
 
 PATH_DATASETS_FORMATTED = 'datasets/formatted/'
