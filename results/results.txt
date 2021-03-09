@@ -9178,4 +9178,20 @@ métricas: loss: 0.1645; accuracy_model(%): 94.4895; accuracy_detection(%): 94.6
 
 
 
-# MODELO LSTM - TESTES COM MAIS CAMADAS INTERMEDIÁRIAS - 50 PALAVRAS
+# MODELO LSTM - TESTES COM MAIS CAMADAS INTERMEDIÁRIAS - 50 PALAVRAS (TESTE NÃO APRESENTADO NO ARTIGO POIS NÃO TEVE BONS RESULTADOS)
+
+# Teste LSTM - 2021-03-09 09:33:36.776649 - dataset_50_palavras.csv
+{"epochs": 20, "batch_size": 5, "layers": [{"qtd_neurons": 150, "activation": "elu", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 2, "activation": "relu", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 2, "activation": "relu"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.6929; accuracy_model(%): 51.3776; accuracy_detection(%): 52.5171; rmse: 0.4994; precision: 0.2626; recall: 0.5000; f1-score: 0.3443; confusion_matrix: 3599-0-3254-0;
+
+# Teste LSTM - 2021-03-09 09:38:05.424534 - dataset_50_palavras.csv
+{"epochs": 20, "batch_size": 32, "layers": [{"qtd_neurons": 300, "activation": "elu", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 90, "activation": "tanh", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 90, "activation": "tanh"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1440; accuracy_model(%): 93.6791; accuracy_detection(%): 95.0679; rmse: 0.0789; precision: 0.9506; recall: 0.9505; f1-score: 0.9505; confusion_matrix: 3436-163-175-3079;
+
+# Teste LSTM - 2021-03-09 10:54:20.055783 - dataset_50_palavras.csv
+{"epochs": 20, "batch_size": 1, "layers": [{"qtd_neurons": 300, "activation": "tanh", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 50, "activation": "elu", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 50, "activation": "elu"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 219.0004; accuracy_model(%): 51.3776; accuracy_detection(%): 52.5026; rmse: 0.4862; precision: 0.2626; recall: 0.4999; f1-score: 0.3443; confusion_matrix: 3598-1-3254-0;
+
+
+
+# MODELO LSTM - TESTES COM MAIS ÉPOCAS - 50 PALAVRAS
