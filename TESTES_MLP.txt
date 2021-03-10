@@ -166,7 +166,25 @@ MODELO 09
 {"epochs": 20, "batch_size": 1, "layers": [{"qtd_neurons": 300, "activation": "tanh", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 50, "activation": "elu"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
 métricas: loss: 0.1483; accuracy_model(%): 94.4895; accuracy_detection(%): 95.2430; rmse: 0.0735; precision: 0.9521; recall: 0.9528; f1-score: 0.9523; confusion_matrix: 3404-195-131-3123;
 
+MODELO 10
+# Teste LSTM - 2021-03-09 11:34:01.680860 - dataset_50_palavras.csv
+{"epochs": 50, "batch_size": 5, "layers": [{"qtd_neurons": 150, "activation": "elu", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 2, "activation": "relu"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1253; accuracy_model(%): 96.2723; accuracy_detection(%): 95.2430; rmse: 0.0671; precision: 0.9525; recall: 0.9536; f1-score: 0.9524; confusion_matrix: 3347-252-74-3180;
 
+MODELO 11
+# Teste LSTM - 2021-03-09 11:42:46.351336 - dataset_50_palavras.csv
+{"epochs": 50, "batch_size": 32, "layers": [{"qtd_neurons": 300, "activation": "elu", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 90, "activation": "tanh"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1444; accuracy_model(%): 95.2998; accuracy_detection(%): 96.6292; rmse: 0.0635; precision: 0.9660; recall: 0.9666; f1-score: 0.9662; confusion_matrix: 3455-144-87-3167;
+
+MODELO 12
+# Teste LSTM - 2021-03-09 22:36:06.306735 - dataset_50_palavras.csv
+{"epochs": 50, "batch_size": 1, "layers": [{"qtd_neurons": 300, "activation": "tanh", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 50, "activation": "elu"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.4160; accuracy_model(%): 87.0340; accuracy_detection(%): 85.3787; rmse: 0.1482; precision: 0.8537; recall: 0.8546; f1-score: 0.8537; confusion_matrix: 3017-582-420-2834;
+
+MELHOR MODELO - MODELO 11 - possui o melhor F1 Score e o melhor RMSE
+# Teste LSTM - 2021-03-09 11:42:46.351336 - dataset_50_palavras.csv
+{"epochs": 50, "batch_size": 32, "layers": [{"qtd_neurons": 300, "activation": "elu", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 90, "activation": "tanh"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1444; accuracy_model(%): 95.2998; accuracy_detection(%): 96.6292; rmse: 0.0635; precision: 0.9660; recall: 0.9666; f1-score: 0.9662; confusion_matrix: 3455-144-87-3167;
 
 
 
@@ -176,5 +194,6 @@ métricas: loss: 0.1483; accuracy_model(%): 94.4895; accuracy_detection(%): 95.2
  - Construir o tópico de Conclusão;
  - Ler o artigo;
  - Ajustar o abstract;
+ - Agradecimentos;
 
  - Ta faltando ainda a Folha de aprovação, eu sei se já posso colocar ou só é colocado depois da apresentação do TCC. Porque eu também não sei quem serão os avaliadores
