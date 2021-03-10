@@ -9207,3 +9207,7 @@ métricas: loss: 0.1444; accuracy_model(%): 95.2998; accuracy_detection(%): 96.6
 # Teste LSTM - 2021-03-09 22:36:06.306735 - dataset_50_palavras.csv
 {"epochs": 50, "batch_size": 1, "layers": [{"qtd_neurons": 300, "activation": "tanh", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 50, "activation": "elu"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
 métricas: loss: 0.4160; accuracy_model(%): 87.0340; accuracy_detection(%): 85.3787; rmse: 0.1482; precision: 0.8537; recall: 0.8546; f1-score: 0.8537; confusion_matrix: 3017-582-420-2834;
+
+
+
+TESTES
