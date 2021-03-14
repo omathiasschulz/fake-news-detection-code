@@ -188,12 +188,44 @@ métricas: loss: 0.1444; accuracy_model(%): 95.2998; accuracy_detection(%): 96.6
 
 
 
-[TODO]
- - Finalizar o Resumo do artigo apresentando a melhor configuração LSTM;
- - Finalizar os testes com o modelo LSTM;
- - Construir o tópico de Conclusão;
- - Ler o artigo;
- - Ajustar o abstract;
- - Agradecimentos;
+MELHOR MODELO MLP - 50 palavras
 
- - Ta faltando ainda a Folha de aprovação, eu sei se já posso colocar ou só é colocado depois da apresentação do TCC. Porque eu também não sei quem serão os avaliadores
+MODELO 07
+# Teste MLP - 2021-02-20 09:31:10.334016 - dataset_50_palavras.csv
+{"epochs": 50, "batch_size": 2, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 128, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.2595; accuracy_model(%): 95.9481; accuracy_detection(%): 98.2198; rmse: 0.0429; precision: 0.9823; recall: 0.9820; f1-score: 0.9821; confusion_matrix: 3550-49-73-3181;
+
+MODELO 07 - NOVA EXECUCAO PARA GERAR OS GRAFICOS
+# Teste MLP - 2021-03-03 19:26:26.063565 - dataset_50_palavras.csv
+{"epochs": 50, "batch_size": 2, "layers": [{"qtd_neurons": 300, "activation": "relu"}, {"qtd_neurons": 128, "activation": "tanh"}, {"qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1973; accuracy_model(%): 96.2723; accuracy_detection(%): 98.3219; rmse: 0.0439; precision: 0.9831; recall: 0.9833; f1-score: 0.9832; confusion_matrix: 3532-67-48-3206;
+
+
+
+MELHOR MODELO LSTM - 50 palavras
+
+MODELO 11
+# Teste LSTM - 2021-03-09 11:42:46.351336 - dataset_50_palavras.csv
+{"epochs": 50, "batch_size": 32, "layers": [{"qtd_neurons": 300, "activation": "elu", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 90, "activation": "tanh"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1444; accuracy_model(%): 95.2998; accuracy_detection(%): 96.6292; rmse: 0.0635; precision: 0.9660; recall: 0.9666; f1-score: 0.9662; confusion_matrix: 3455-144-87-3167;
+
+MODELO 11 - NOVA EXECUCAO PARA GERAR OS GRAFICOS
+# Teste LSTM - 2021-03-12 08:10:21.741140 - dataset_50_palavras.csv
+{"epochs": 50, "batch_size": 32, "layers": [{"qtd_neurons": 300, "activation": "elu", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 90, "activation": "tanh"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
+métricas: loss: 0.1107; accuracy_model(%): 95.2998; accuracy_detection(%): 96.2790; rmse: 0.0551; precision: 0.9625; recall: 0.9630; f1-score: 0.9627; confusion_matrix: 3453-146-109-3145;
+
+
+
+[TODO]
+ - [x] Agradecimentos;
+ - [] Finalizar o Resumo do artigo apresentando a melhor configuração LSTM;
+ - [] Finalizar os testes com o modelo LSTM;
+ - [] Construir o tópico de Conclusão;
+ - [] Ler o artigo;
+ - [] Ajustar o abstract;
+ - [] Colocar no google docs para verificar erros de ortográfia;
+ - [] Utilizar o spyder para ver se tem cópia;
+ - [] Colocar as métricas do melhor modelo LSTM e gráficos;
+ - [] DEFINIÇÃO DA MELHOR CONFIGURAÇÃO DE RNA;
+ - [] Ta faltando ainda a Folha de aprovação, eu sei se já posso colocar ou só é colocado depois da apresentação do TCC. Porque eu também não sei quem serão os avaliadores;
+ - [] Verificar os valores de acurácia;
