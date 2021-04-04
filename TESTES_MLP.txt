@@ -213,19 +213,3 @@ MODELO 11 - NOVA EXECUCAO PARA GERAR OS GRAFICOS
 # Teste LSTM - 2021-03-12 08:10:21.741140 - dataset_50_palavras.csv
 {"epochs": 50, "batch_size": 32, "layers": [{"qtd_neurons": 300, "activation": "elu", "return_sequences": true}, {"type": "lstm", "qtd_neurons": 90, "activation": "tanh"}, {"type": "dense", "qtd_neurons": 1, "activation": "sigmoid"}]}
 métricas: loss: 0.1107; accuracy_model(%): 95.2998; accuracy_detection(%): 96.2790; rmse: 0.0551; precision: 0.9625; recall: 0.9630; f1-score: 0.9627; confusion_matrix: 3453-146-109-3145;
-
-
-
-[TODO]
- - [x] Agradecimentos;
- - [] Finalizar o Resumo do artigo apresentando a melhor configuração LSTM;
- - [] Finalizar os testes com o modelo LSTM;
- - [] Construir o tópico de Conclusão;
- - [] Ler o artigo;
- - [] Ajustar o abstract;
- - [] Colocar no google docs para verificar erros de ortográfia;
- - [] Utilizar o spyder para ver se tem cópia;
- - [] Colocar as métricas do melhor modelo LSTM e gráficos;
- - [] DEFINIÇÃO DA MELHOR CONFIGURAÇÃO DE RNA;
- - [] Ta faltando ainda a Folha de aprovação, eu sei se já posso colocar ou só é colocado depois da apresentação do TCC. Porque eu também não sei quem serão os avaliadores;
- - [] Verificar os valores de acurácia;
